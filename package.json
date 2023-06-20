@@ -4,6 +4,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
+    "build": "babel app --out-dir dist",
+    "start": "node index.js",
+    "install": "npm i -D @babel/plugin-transform-runtime",
     "dev": "nodemon app/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -22,5 +25,8 @@
     "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7"
   },
-  "description": ""
+  "description": "",
+  "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.22.5"
+  }
 }
