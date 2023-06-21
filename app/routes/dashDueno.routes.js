@@ -120,9 +120,9 @@ dash.get("/MisPerros", (req, res)=>{
                 "nombre": nombre,
                 "foto": foto,
                 "mnu":0
-
             });
         } catch (error){
+            console.log(error+"becerra");
             res.redirect("/Ingresa")
         }
     }else{

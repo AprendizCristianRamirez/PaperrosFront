@@ -1,7 +1,7 @@
 import {Router} from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
-import 'node-fetch';
+// import fetch from 'node-fetch';
 
 const dash = Router();
 
@@ -18,7 +18,7 @@ dash.get("/MisPaseos", (req, res)=>{
                 res.render("dashViews/MisPaseos",{
                 "rol": "paseador",
                 "nombre": nombre,
-                "foto": foto,
+                "foto": "foto",
                 "mnu":0
 
             });
@@ -118,7 +118,7 @@ dash.get("/Perfil", (req, res)=>{
                 res.render("dashViews/Perfil",{
                 "rol": "paseador",
                 "nombre": nombre,
-                "foto": foto,
+                "foto": "foto",
                 "mnu":0
 
             });
