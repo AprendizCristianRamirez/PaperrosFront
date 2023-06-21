@@ -1,10 +1,11 @@
 import { Router } from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
-import 'node-fetch';
+import fetch from 'node-fetch';
 
 const dash = Router();
 
+//MISPASEOS
 dash.get("/MisPaseos", async(req, res) => {
     if (req.cookies.token) {
         try {
@@ -17,10 +18,15 @@ dash.get("/MisPaseos", async(req, res) => {
             let id = token.id;
             let email = token.email;
 
-            let ruta = process.env.API + "usuarios/" + "ejemplo@gmail.com";
+            let ruta = process.env.API + "usuarios/" + email;
             const result = await fetch(ruta)
             const data = await result.json();
+            console.log(ruta);
+            console.log(data);
 
+            if(data == false){
+                res.redirect("Configuracion");
+            } else {
             res.render("dashViews/MisPaseos", {
                 "rol": "dueno",
                 "nombre": nombre,
@@ -28,14 +34,16 @@ dash.get("/MisPaseos", async(req, res) => {
                 "mnu": 0,
                 "usuario": data
             });
+            }
         } catch (error) {
-            res.redirect("Configuracion")
+            res.redirect("/Ingresa")
         }
     } else {
         res.redirect("/Ingresa")
     }
 });
 
+//CREARPASEO
 dash.get("/CrearPaseo", (req, res) => {
     if (req.cookies.token) {
         try {
@@ -54,7 +62,7 @@ dash.get("/CrearPaseo", (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("Configuracion")
+            res.redirect("/Ingresa")
         }
     } else {
         res.redirect("/Ingresa")
@@ -79,13 +87,14 @@ dash.get("/RutasPaseadores", (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("Configuracion")
+            res.redirect("/Ingresa")
         }
     } else {
         res.redirect("/Ingresa")
     }
 });
 
+//AÑADIRPERRO
 dash.get("/AnadirPerro", (req, res) => {
     if (req.cookies.token) {
         try {
@@ -104,13 +113,14 @@ dash.get("/AnadirPerro", (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("Configuracion")
+            res.redirect("/Ingresa")
         }
     } else {
         res.redirect("/Ingresa")
     }
 });
 
+//MISPERROS
 dash.get("/MisPerros", (req, res) => {
     if (req.cookies.token) {
         try {
@@ -129,14 +139,16 @@ dash.get("/MisPerros", (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("Configuracion")
+            res.redirect("/Ingresa")
         }
     } else {
         res.redirect("/Ingresa")
     }
 });
 
-dash.get("/Configuracion", (req, res) => {
+//CONFIGURACIÓN
+//Vista para que el usuario cree o actualize su perfil
+dash.get("/Configuracion", async(req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -145,22 +157,103 @@ dash.get("/Configuracion", (req, res) => {
             )
             let nombre = token.nombre;
             let foto = token.foto;
+            let email = token.email;
+
+            let ruta = process.env.API + "usuarios/" + email;
+            const result = await fetch(ruta)
+            const data = await result.json();
+            //console.log(data);
 
             res.render("dashViews/Configuracion", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu": 0
+                "mnu": 0,
+                "email": email,
+                "usuario": data
 
             });
         } catch (error) {
-            res.redirect("Configuracion")
+            res.redirect("/Ingresa")
         }
     } else {
         res.redirect("/Ingresa")
     }
 });
 
+//Creación y actualización del perfil del usuario
+dash.post("/Configuracion", async (req, res)=>{
+    //Campos del usuario
+    let user = {
+        //Asignar los campos de los inputs al objeto user
+        nombre: req.body.nombre,
+        //apellidos: req.body.apellidos,
+        municipio: req.body.municipio,
+        direccion: req.body.direccion,
+        telefono: req.body.telefono,
+        edad: req.body.edad,
+        pais: req.body.pais,
+        email: req.body.email
+    }
+    try {
+        const url = process.env.API + "usuarios";
+        let metodo = "post";
+        let datos = {
+            nombre: user.nombre,
+            //apellidos: user.apellidos,
+            municipio: user.municipio,
+            direccion: user.direccion,
+            telefono: user.telefono,
+            edad: user.edad,
+            pais: user.pais,
+            id: user.email
+        };
+    //Si el campo tiene un id, será metodo put (actualizar)
+        if (req.body.id){
+            const id = req.body.id;
+            metodo = "put";
+            datos = {
+                nombre: user.nombre,
+                apellidos: user.apellidos,
+                municipio: user.municipio,
+                direccion: user.direccion,
+                telefono: user.telefono,
+                edad: user.edad,
+                pais: user.pais,
+                id: user.email
+            }
+        }
+        //Configuración del fetch
+        const option = {
+            method : metodo, //En metodo iria post si no tiene id y post en el caso contrario
+            body : JSON.stringify(datos),
+            headers : {
+                'Content-Type':'application/json'
+            }
+        }
+        //Fetch
+        const result = await fetch(url, option)
+        .then(response=>response.json())
+        .then(data=>{
+            console.log(data);
+            if (data[0].affectedRows>0){
+                console.log("Los datos fueron insertados");
+                //console.log("Metodo: " + option.method);
+            }else{
+                console.log("No se inserto");
+                //console.log("Metodo: " + option.method);
+            }
+        })
+        .then(error=>{console.log("Ha habido un error: "+ error);})
+    } catch (error) {
+        console.log("Informacion no insertada: "+error);
+        //console.log("Metodo: " + option.method);
+    }
+    
+    res.redirect("MisPaseos")
+});
+
+//PERFIL
 dash.get("/Perfil", (req, res) => {
     if (req.cookies.token) {
         try {
@@ -179,18 +272,20 @@ dash.get("/Perfil", (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("Configuracion")
+            res.redirect("/Ingresa")
         }
     } else {
         res.redirect("/Ingresa")
     }
 });
 
+//SALIR
 dash.get("/salir", (req, res) => {
     res.clearCookie("token");
     res.redirect("/")
 })
 
+//Esto hay que bananearlo cuando acabemos xd
 dash.get("/users", async(req, res) => {
     if (req.cookies.token) {
         try {
@@ -216,7 +311,7 @@ dash.get("/users", async(req, res) => {
                 "mnu": 2
             });
         } catch (error) {
-            res.redirect("Configuracion")
+            res.redirect("/Ingresa")
         }
     } else {
         res.redirect("/Ingresa")

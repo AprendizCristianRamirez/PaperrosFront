@@ -4,7 +4,7 @@
     <p class="fs-4 text-parrafo text-center">
         Digita la informacion solicitada para actualizar tu perfil
     </p>
-    <form action="">
+    <form action="/v1/dueno/Configuracion" method="post">
         <div class="container ContainerAñadirPerro">
             <div class="row">
                 <div class="col-lg-6">
@@ -17,13 +17,38 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
+                    <!--id-->
+                    <% if ( usuario  != false ) { %>
+                        <input class="InputsAñadirPerro" type="hidden" id="id"
+                            name="id" class="form-control" value="<%= usuario.id %>">
+                    <% } %>
+                    <!--email-->
+                    <input class="InputsAñadirPerro" type="hidden" id="email"
+                        name="email" class="form-control" value="<%= email %>">
+                    <!--Campo de nombre-->
                     <div class="form-group">
-                        <input class="InputsAñadirPerro" type="text" id="NombreUsuario" name="NombreUsuario"
+                        <input class="InputsAñadirPerro" type="text" id="nombre" name="nombre"
                             class="form-control" placeholder="Nombre Completo">
                     </div>
+                    <!--Campo de dirección-->
                     <div class="form-group ">
-                        <input class="InputsAñadirPerro" type="text" id="DireccionUsuario "
-                            name="DireccionUsuario" class="form-control " placeholder="Direccion">
+                        <input class="InputsAñadirPerro" type="text" id="direccion"
+                            name="direccion" class="form-control " placeholder="Dirección">
+                    </div>
+                    <!--Campo de edad-->
+                    <div class="form-group ">
+                        <input class="InputsAñadirPerro" type="text" id="edad"
+                            name="edad" class="form-control " placeholder="Edad">
+                    </div>
+                    <!--Campo de Municipio-->
+                    <div class="form-group ">
+                        <input class="InputsAñadirPerro" type="text" id="municipio"
+                            name="municipio" class="form-control " placeholder="Municipio">
+                    </div>
+                    <!--Campo de País-->
+                    <div class="form-group ">
+                        <input class="InputsAñadirPerro" type="text" id="pais"
+                            name="pais" class="form-control " placeholder="País">
                     </div>
                     <div class="row ">
                         <div class="col-lg-12">
