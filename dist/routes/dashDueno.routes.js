@@ -12,25 +12,69 @@ var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 require("node-fetch");
 var dash = (0, _express.Router)();
-dash.get("/MisPaseos", function (req, res) {
-  if (req.cookies.token) {
-    try {
-      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
-      var nombre = token.nombre;
-      var foto = token.foto;
-      res.render("dashViews/MisPaseos", {
-        "rol": "dueno",
-        "nombre": nombre,
-        "foto": foto,
-        "mnu": 0
-      });
-    } catch (error) {
-      res.redirect("/Ingresa");
-    }
-  } else {
-    res.redirect("/Ingresa");
-  }
-});
+
+//MISPASEOS
+dash.get("/MisPaseos", /*#__PURE__*/function () {
+  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
+    var token, nombre, foto, id, email, ruta, result, data;
+    return _regenerator["default"].wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          if (!req.cookies.token) {
+            _context.next = 24;
+            break;
+          }
+          _context.prev = 1;
+          token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+          nombre = token.nombre;
+          foto = token.foto;
+          id = token.id;
+          email = token.email;
+          ruta = process.env.API + "usuarios/" + email;
+          _context.next = 10;
+          return fetch(ruta);
+        case 10:
+          result = _context.sent;
+          _context.next = 13;
+          return result.json();
+        case 13:
+          data = _context.sent;
+          console.log(ruta);
+          console.log(data);
+          if (data == false) {
+            res.redirect("Configuracion");
+          } else {
+            res.render("dashViews/MisPaseos", {
+              "rol": "dueno",
+              "nombre": nombre,
+              "foto": foto,
+              "mnu": 0,
+              "usuario": data
+            });
+          }
+          _context.next = 22;
+          break;
+        case 19:
+          _context.prev = 19;
+          _context.t0 = _context["catch"](1);
+          res.redirect("/Ingresa");
+        case 22:
+          _context.next = 25;
+          break;
+        case 24:
+          res.redirect("/Ingresa");
+        case 25:
+        case "end":
+          return _context.stop();
+      }
+    }, _callee, null, [[1, 19]]);
+  }));
+  return function (_x, _x2) {
+    return _ref.apply(this, arguments);
+  };
+}());
+
+//CREARPASEO
 dash.get("/CrearPaseo", function (req, res) {
   if (req.cookies.token) {
     try {
@@ -69,6 +113,8 @@ dash.get("/RutasPaseadores", function (req, res) {
     res.redirect("/Ingresa");
   }
 });
+
+//AÑADIRPERRO
 dash.get("/AnadirPerro", function (req, res) {
   if (req.cookies.token) {
     try {
@@ -88,6 +134,8 @@ dash.get("/AnadirPerro", function (req, res) {
     res.redirect("/Ingresa");
   }
 });
+
+//MISPERROS
 dash.get("/MisPerros", function (req, res) {
   if (req.cookies.token) {
     try {
@@ -107,25 +155,158 @@ dash.get("/MisPerros", function (req, res) {
     res.redirect("/Ingresa");
   }
 });
-dash.get("/Configuracion", function (req, res) {
-  if (req.cookies.token) {
-    try {
-      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
-      var nombre = token.nombre;
-      var foto = token.foto;
-      res.render("dashViews/Configuracion", {
-        "rol": "dueno",
-        "nombre": nombre,
-        "foto": foto,
-        "mnu": 0
-      });
-    } catch (error) {
-      res.redirect("/Ingresa");
-    }
-  } else {
-    res.redirect("/Ingresa");
-  }
-});
+
+//CONFIGURACIÓN
+//Vista para que el usuario cree o actualize su perfil
+dash.get("/Configuracion", /*#__PURE__*/function () {
+  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
+    var token, nombre, foto, email, ruta, result, data;
+    return _regenerator["default"].wrap(function _callee2$(_context2) {
+      while (1) switch (_context2.prev = _context2.next) {
+        case 0:
+          if (!req.cookies.token) {
+            _context2.next = 21;
+            break;
+          }
+          _context2.prev = 1;
+          token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+          nombre = token.nombre;
+          foto = token.foto;
+          email = token.email;
+          ruta = process.env.API + "usuarios/" + email;
+          _context2.next = 9;
+          return fetch(ruta);
+        case 9:
+          result = _context2.sent;
+          _context2.next = 12;
+          return result.json();
+        case 12:
+          data = _context2.sent;
+          //console.log(data);
+
+          res.render("dashViews/Configuracion", {
+            "rol": "dueno",
+            "nombre": nombre,
+            "foto": foto,
+            "mnu": 0,
+            "email": email,
+            "usuario": data
+          });
+          _context2.next = 19;
+          break;
+        case 16:
+          _context2.prev = 16;
+          _context2.t0 = _context2["catch"](1);
+          res.redirect("/Ingresa");
+        case 19:
+          _context2.next = 22;
+          break;
+        case 21:
+          res.redirect("/Ingresa");
+        case 22:
+        case "end":
+          return _context2.stop();
+      }
+    }, _callee2, null, [[1, 16]]);
+  }));
+  return function (_x3, _x4) {
+    return _ref2.apply(this, arguments);
+  };
+}());
+
+//Creación y actualización del perfil del usuario
+dash.post("/Configuracion", /*#__PURE__*/function () {
+  var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
+    var user, url, metodo, datos, id, option, result;
+    return _regenerator["default"].wrap(function _callee3$(_context3) {
+      while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          //Campos del usuario
+          user = {
+            //Asignar los campos de los inputs al objeto user
+            nombre: req.body.nombre,
+            //apellidos: req.body.apellidos,
+            municipio: req.body.municipio,
+            direccion: req.body.direccion,
+            telefono: req.body.telefono,
+            edad: req.body.edad,
+            pais: req.body.pais,
+            email: req.body.email
+          };
+          _context3.prev = 1;
+          url = process.env.API + "usuarios";
+          metodo = "post";
+          datos = {
+            nombre: user.nombre,
+            //apellidos: user.apellidos,
+            municipio: user.municipio,
+            direccion: user.direccion,
+            telefono: user.telefono,
+            edad: user.edad,
+            pais: user.pais,
+            id: user.email
+          }; //Si el campo tiene un id, será metodo put (actualizar)
+          if (req.body.id) {
+            id = req.body.id;
+            metodo = "put";
+            datos = {
+              nombre: user.nombre,
+              apellidos: user.apellidos,
+              municipio: user.municipio,
+              direccion: user.direccion,
+              telefono: user.telefono,
+              edad: user.edad,
+              pais: user.pais,
+              id: user.email
+            };
+          }
+          //Configuración del fetch
+          option = {
+            method: metodo,
+            //En metodo iria post si no tiene id y post en el caso contrario
+            body: JSON.stringify(datos),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          }; //Fetch
+          _context3.next = 9;
+          return fetch(url, option).then(function (response) {
+            return response.json();
+          }).then(function (data) {
+            console.log(data);
+            if (data[0].affectedRows > 0) {
+              console.log("Los datos fueron insertados");
+              //console.log("Metodo: " + option.method);
+            } else {
+              console.log("No se inserto");
+              //console.log("Metodo: " + option.method);
+            }
+          }).then(function (error) {
+            console.log("Ha habido un error: " + error);
+          });
+        case 9:
+          result = _context3.sent;
+          _context3.next = 15;
+          break;
+        case 12:
+          _context3.prev = 12;
+          _context3.t0 = _context3["catch"](1);
+          console.log("Informacion no insertada: " + _context3.t0);
+          //console.log("Metodo: " + option.method);
+        case 15:
+          res.redirect("MisPaseos");
+        case 16:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[1, 12]]);
+  }));
+  return function (_x5, _x6) {
+    return _ref3.apply(this, arguments);
+  };
+}());
+
+//PERFIL
 dash.get("/Perfil", function (req, res) {
   if (req.cookies.token) {
     try {
@@ -145,15 +326,19 @@ dash.get("/Perfil", function (req, res) {
     res.redirect("/Ingresa");
   }
 });
+
+//SALIR
 dash.get("/salir", function (req, res) {
   res.clearCookie("token");
   res.redirect("/");
 });
+
+//Esto hay que bananearlo cuando acabemos xd
 dash.get("/users", /*#__PURE__*/function () {
-  var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
+  var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
     var token, nombre, foto;
-    return _regenerator["default"].wrap(function _callee$(_context) {
-      while (1) switch (_context.prev = _context.next) {
+    return _regenerator["default"].wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
         case 0:
           if (req.cookies.token) {
             try {
@@ -181,12 +366,12 @@ dash.get("/users", /*#__PURE__*/function () {
           }
         case 1:
         case "end":
-          return _context.stop();
+          return _context4.stop();
       }
-    }, _callee);
+    }, _callee4);
   }));
-  return function (_x, _x2) {
-    return _ref.apply(this, arguments);
+  return function (_x7, _x8) {
+    return _ref4.apply(this, arguments);
   };
 }());
 

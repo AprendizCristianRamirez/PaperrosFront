@@ -6,7 +6,6 @@ import path from "path";
 import { fileURLToPath } from 'url';
 import { loginRouter } from "./routes/login.routes.js";
 import passport from "passport";
-import bodyParser from "body-parser";
 import cookieparser from "cookie-parser";
 import bodyParser from "body-parser";
 import "./config/middlewares/google.js"
