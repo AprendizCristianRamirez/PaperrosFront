@@ -8,6 +8,7 @@ import { loginRouter } from "./routes/login.routes.js";
 import passport from "passport";
 import bodyParser from "body-parser";
 import cookieparser from "cookie-parser";
+import bodyParser from "body-parser";
 import "./config/middlewares/google.js"
 //RUTAS
 import dashPaseador from "./routes/dashPaseador.routes.js";
@@ -23,8 +24,9 @@ const __dirname = path.resolve();
 
 //CONFIGURACION
 app.set("port",process.env.PORT);
-app.set("view engine", "ejs")
+app.set("view engine", "ejs");
 app.set("views",path.resolve(path.join(__dirname, "views")));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 //middleware
 app.use(express.static("./public"));

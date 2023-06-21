@@ -1,4 +1,4 @@
-import {Router} from "express";
+import { Router } from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import fetch from "node-fetch";
@@ -6,214 +6,315 @@ import fetch from "node-fetch";
 
 const dash = Router();
 
-dash.get("/MisPaseos", (req, res)=>{
-    if(req.cookies.token){
-        try{
+//MISPASEOS
+dash.get("/MisPaseos", async(req, res) => {
+    if (req.cookies.token) {
+        try {
             const token = jwt.verify(
                 req.cookies.token,
                 process.env.SECRET_KEY
-                )
-                let nombre = token.nombre;
-                let foto = token.foto;
-                
-                res.render("dashViews/MisPaseos",{
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
+            let id = token.id;
+            let email = token.email;
+
+            let ruta = process.env.API + "usuarios/" + email;
+            const result = await fetch(ruta)
+            const data = await result.json();
+            console.log(ruta);
+            console.log(data);
+
+            if(data == false){
+                res.redirect("Configuracion");
+            } else {
+            res.render("dashViews/MisPaseos", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu":0
-
+                "mnu": 0,
+                "usuario": data
             });
-        } catch (error){
+            }
+        } catch (error) {
             res.redirect("/Ingresa")
         }
-    }else{
+    } else {
         res.redirect("/Ingresa")
     }
 });
 
-dash.get("/CrearPaseo", (req, res)=>{
-    if(req.cookies.token){
-        try{
+//CREARPASEO
+dash.get("/CrearPaseo", (req, res) => {
+    if (req.cookies.token) {
+        try {
             const token = jwt.verify(
                 req.cookies.token,
                 process.env.SECRET_KEY
-                )
-                let nombre = token.nombre;
-                let foto = token.foto;
-                
-                res.render("dashViews/CrearPaseo",{
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
+
+            res.render("dashViews/CrearPaseo", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu":0
+                "mnu": 0
 
             });
-        } catch (error){
+        } catch (error) {
             res.redirect("/Ingresa")
         }
-    }else{
-        res.redirect("/Ingresa")
-    }
-});  
-
-dash.get("/RutasPaseadores", (req, res)=>{
-    if(req.cookies.token){
-        try{
-            const token = jwt.verify(
-                req.cookies.token,
-                process.env.SECRET_KEY
-                )
-                let nombre = token.nombre;
-                let foto = token.foto;
-                
-                res.render("dashViews/RutasPaseadores",{
-                "rol": "dueno",
-                "nombre": nombre,
-                "foto": foto,
-                "mnu":0
-
-            });
-        } catch (error){
-            res.redirect("/Ingresa")
-        }
-    }else{
-        res.redirect("/Ingresa")
-    }
-}); 
-
-dash.get("/AnadirPerro", (req, res)=>{
-    if(req.cookies.token){
-        try{
-            const token = jwt.verify(
-                req.cookies.token,
-                process.env.SECRET_KEY
-                )
-                let nombre = token.nombre;
-                let foto = token.foto;
-                
-                res.render("dashViews/AnadirPerro",{
-                "rol": "dueno",
-                "nombre": nombre,
-                "foto": foto,
-                "mnu":0
-
-            });
-        } catch (error){
-            res.redirect("/Ingresa")
-        }
-    }else{
-        res.redirect("/Ingresa")
-    }
-});  
-
-dash.get("/MisPerros", (req, res)=>{
-    if(req.cookies.token){
-        try{
-            const token = jwt.verify(
-                req.cookies.token,
-                process.env.SECRET_KEY
-                )
-                let nombre = token.nombre;
-                let foto = token.foto;
-                
-                res.render("dashViews/MisPerros",{
-                "rol": "dueno",
-                "nombre": nombre,
-                "foto": foto,
-                "mnu":0
-            });
-        } catch (error){
-            console.log(error+"becerra");
-            res.redirect("/Ingresa")
-        }
-    }else{
+    } else {
         res.redirect("/Ingresa")
     }
 });
 
-dash.get("/Configuracion", (req, res)=>{
-    if(req.cookies.token){
-        try{
+dash.get("/RutasPaseadores", (req, res) => {
+    if (req.cookies.token) {
+        try {
             const token = jwt.verify(
                 req.cookies.token,
                 process.env.SECRET_KEY
-                )
-                let nombre = token.nombre;
-                let foto = token.foto;
-                
-                res.render("dashViews/Configuracion",{
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
+
+            res.render("dashViews/RutasPaseadores", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu":0
+                "mnu": 0
 
             });
-        } catch (error){
+        } catch (error) {
             res.redirect("/Ingresa")
         }
-    }else{
+    } else {
         res.redirect("/Ingresa")
     }
 });
 
-dash.get("/Perfil", (req, res)=>{
-    if(req.cookies.token){
-        try{
+//AÑADIRPERRO
+dash.get("/AnadirPerro", (req, res) => {
+    if (req.cookies.token) {
+        try {
             const token = jwt.verify(
                 req.cookies.token,
                 process.env.SECRET_KEY
-                )
-                let nombre = token.nombre;
-                let foto = token.foto;
-                
-                res.render("dashViews/Perfil",{
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
+
+            res.render("dashViews/AnadirPerro", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu":0
+                "mnu": 0
 
             });
-        } catch (error){
+        } catch (error) {
             res.redirect("/Ingresa")
         }
-    }else{
+    } else {
         res.redirect("/Ingresa")
     }
-}); 
+});
 
-dash.get("/salir", (req, res)=>{
+//MISPERROS
+dash.get("/MisPerros", (req, res) => {
+    if (req.cookies.token) {
+        try {
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
+
+            res.render("dashViews/MisPerros", {
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": foto,
+                "mnu": 0
+
+            });
+        } catch (error) {
+            res.redirect("/Ingresa")
+        }
+    } else {
+        res.redirect("/Ingresa")
+    }
+});
+
+//CONFIGURACIÓN
+//Vista para que el usuario cree o actualize su perfil
+dash.get("/Configuracion", async(req, res) => {
+    if (req.cookies.token) {
+        try {
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
+            let email = token.email;
+
+            let ruta = process.env.API + "usuarios/" + email;
+            const result = await fetch(ruta)
+            const data = await result.json();
+            //console.log(data);
+
+            res.render("dashViews/Configuracion", {
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": foto,
+                "mnu": 0,
+                "email": email,
+                "usuario": data
+
+            });
+        } catch (error) {
+            res.redirect("/Ingresa")
+        }
+    } else {
+        res.redirect("/Ingresa")
+    }
+});
+
+//Creación y actualización del perfil del usuario
+dash.post("/Configuracion", async (req, res)=>{
+    //Campos del usuario
+    let user = {
+        //Asignar los campos de los inputs al objeto user
+        nombre: req.body.nombre,
+        //apellidos: req.body.apellidos,
+        municipio: req.body.municipio,
+        direccion: req.body.direccion,
+        telefono: req.body.telefono,
+        edad: req.body.edad,
+        pais: req.body.pais,
+        email: req.body.email
+    }
+    try {
+        const url = process.env.API + "usuarios";
+        let metodo = "post";
+        let datos = {
+            nombre: user.nombre,
+            //apellidos: user.apellidos,
+            municipio: user.municipio,
+            direccion: user.direccion,
+            telefono: user.telefono,
+            edad: user.edad,
+            pais: user.pais,
+            id: user.email
+        };
+    //Si el campo tiene un id, será metodo put (actualizar)
+        if (req.body.id){
+            const id = req.body.id;
+            metodo = "put";
+            datos = {
+                nombre: user.nombre,
+                apellidos: user.apellidos,
+                municipio: user.municipio,
+                direccion: user.direccion,
+                telefono: user.telefono,
+                edad: user.edad,
+                pais: user.pais,
+                id: user.email
+            }
+        }
+        //Configuración del fetch
+        const option = {
+            method : metodo, //En metodo iria post si no tiene id y post en el caso contrario
+            body : JSON.stringify(datos),
+            headers : {
+                'Content-Type':'application/json'
+            }
+        }
+        //Fetch
+        const result = await fetch(url, option)
+        .then(response=>response.json())
+        .then(data=>{
+            console.log(data);
+            if (data[0].affectedRows>0){
+                console.log("Los datos fueron insertados");
+                //console.log("Metodo: " + option.method);
+            }else{
+                console.log("No se inserto");
+                //console.log("Metodo: " + option.method);
+            }
+        })
+        .then(error=>{console.log("Ha habido un error: "+ error);})
+    } catch (error) {
+        console.log("Informacion no insertada: "+error);
+        //console.log("Metodo: " + option.method);
+    }
+    
+    res.redirect("MisPaseos")
+});
+
+//PERFIL
+dash.get("/Perfil", (req, res) => {
+    if (req.cookies.token) {
+        try {
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
+
+            res.render("dashViews/Perfil", {
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": foto,
+                "mnu": 0
+
+            });
+        } catch (error) {
+            res.redirect("/Ingresa")
+        }
+    } else {
+        res.redirect("/Ingresa")
+    }
+});
+
+//SALIR
+dash.get("/salir", (req, res) => {
     res.clearCookie("token");
     res.redirect("/")
 })
 
-dash.get("/users", async (req, res)=>{
-    if(req.cookies.token){
-        try{
+//Esto hay que bananearlo cuando acabemos xd
+dash.get("/users", async(req, res) => {
+    if (req.cookies.token) {
+        try {
             const token = jwt.verify(
                 req.cookies.token,
                 process.env.SECRET_KEY
-                )
-                let nombre = token.nombre;
-                let foto = token.foto;
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
 
-                /*let ruta = process.env.API + "users";
-                let info;
-                const result = await fetch(ruta)
-                .then(resp => resp.json())
-                .then(data =>{
-                    info = data
-                })
+            /*let ruta = process.env.API + "users";
+            let info;
+            const result = await fetch(ruta)
+            .then(resp => resp.json())
+            .then(data =>{
+                info = data
+            })
 
-                console.log(info);*/
-                res.render("dashboard",{
+            console.log(info);*/
+            res.render("dashboard", {
                 "nombre": nombre,
                 "foto": foto,
-                "mnu":2
+                "mnu": 2
             });
-        } catch (error){
+        } catch (error) {
             res.redirect("/Ingresa")
         }
-    }else{
+    } else {
         res.redirect("/Ingresa")
     }
 });
