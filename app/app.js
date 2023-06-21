@@ -11,7 +11,7 @@ import cookieparser from "cookie-parser";
 import "./config/middlewares/google.js"
 //RUTAS
 import dashPaseador from "./routes/dashPaseador.routes.js";
-// import dashDueno from "./routes/dashDueno.routes.js";
+import dashDueno from "./routes/dashDueno.routes.js";
 import home from "./routes/homepage.routes.js";
 
 
@@ -33,7 +33,7 @@ app.use(passport.initialize());
 app.use(cookieparser());
 
 //RUTAS
-// app.use("/v1/dueno", dashDueno);
+app.use("/v1/dueno", dashDueno);
 app.use("/v1/paseador", dashPaseador);
 app.get("/", (req, res)=>{
     res.render("home");

@@ -10,7 +10,8 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _express = require("express");
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
-require("node-fetch");
+// import fetch from 'node-fetch';
+
 var dash = (0, _express.Router)();
 dash.get("/MisPaseos", function (req, res) {
   if (req.cookies.token) {
@@ -21,7 +22,7 @@ dash.get("/MisPaseos", function (req, res) {
       res.render("dashViews/MisPaseos", {
         "rol": "paseador",
         "nombre": nombre,
-        "foto": foto,
+        "foto": "foto",
         "mnu": 0
       });
     } catch (error) {
@@ -97,7 +98,7 @@ dash.get("/Perfil", function (req, res) {
       res.render("dashViews/Perfil", {
         "rol": "paseador",
         "nombre": nombre,
-        "foto": foto,
+        "foto": "foto",
         "mnu": 0
       });
     } catch (error) {

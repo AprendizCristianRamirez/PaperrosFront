@@ -1,7 +1,8 @@
 import {Router} from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
-import 'node-fetch';
+import fetch from "node-fetch";
+// SI EL NODE FETCH NO SIRVE INSTALAR EL NODE FECTH @2//
 
 const dash = Router();
 
