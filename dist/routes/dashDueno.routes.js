@@ -10,7 +10,7 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _express = require("express");
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
-var _nodeFetch = _interopRequireDefault(require("node-fetch"));
+require("node-fetch");
 var dash = (0, _express.Router)();
 dash.get("/MisPaseos", function (req, res) {
   if (req.cookies.token) {
@@ -101,7 +101,6 @@ dash.get("/MisPerros", function (req, res) {
         "mnu": 0
       });
     } catch (error) {
-      console.log(error + "becerra");
       res.redirect("/Ingresa");
     }
   } else {
