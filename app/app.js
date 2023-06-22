@@ -11,7 +11,7 @@ import bodyParser from "body-parser";
 import "./config/middlewares/google.js"
 //RUTAS
 import dashPaseador from "./routes/dashPaseador.routes.js";
-// import dashDueno from "./routes/dashDueno.routes.js";
+import dashDueno from "./routes/dashDueno.routes.js";
 import home from "./routes/homepage.routes.js";
 
 
@@ -24,7 +24,8 @@ const __dirname = path.resolve();
 //CONFIGURACION
 app.set("port",process.env.PORT);
 app.set("view engine", "ejs");
-app.set("views",path.resolve(path.join(__dirname, "views")));
+app.set("views",path.resolve(path.join(__dirname, "app", "views")));
+console.log(path.resolve(path.join(__dirname, "app", "views")));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //middleware
@@ -34,7 +35,7 @@ app.use(passport.initialize());
 app.use(cookieparser());
 
 //RUTAS
-// app.use("/v1/dueno", dashDueno);
+app.use("/v1/dueno", dashDueno);
 app.use("/v1/paseador", dashPaseador);
 app.get("/", (req, res)=>{
     res.render("home");

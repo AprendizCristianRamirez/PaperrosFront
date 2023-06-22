@@ -10,7 +10,7 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _express = require("express");
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
-require("node-fetch");
+var _nodeFetch = _interopRequireDefault(require("node-fetch"));
 var dash = (0, _express.Router)();
 
 //MISPASEOS
@@ -32,7 +32,7 @@ dash.get("/MisPaseos", /*#__PURE__*/function () {
           email = token.email;
           ruta = process.env.API + "usuarios/" + email;
           _context.next = 10;
-          return fetch(ruta);
+          return (0, _nodeFetch["default"])(ruta);
         case 10:
           result = _context.sent;
           _context.next = 13;
@@ -175,7 +175,7 @@ dash.get("/Configuracion", /*#__PURE__*/function () {
           email = token.email;
           ruta = process.env.API + "usuarios/" + email;
           _context2.next = 9;
-          return fetch(ruta);
+          return (0, _nodeFetch["default"])(ruta);
         case 9:
           result = _context2.sent;
           _context2.next = 12;
@@ -270,7 +270,7 @@ dash.post("/Configuracion", /*#__PURE__*/function () {
             }
           }; //Fetch
           _context3.next = 9;
-          return fetch(url, option).then(function (response) {
+          return (0, _nodeFetch["default"])(url, option).then(function (response) {
             return response.json();
           }).then(function (data) {
             console.log(data);

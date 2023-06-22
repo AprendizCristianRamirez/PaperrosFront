@@ -3,12 +3,12 @@ import { Router } from "express";
 const home = Router();
 
 home.get("/", (req, res)=>{
-    res.render("homeViews/inicio", {
+    res.render("homeViews/Inicio.ejs", {
         "titulo":"Paperros", "activo":1
     });
 });
 home.get("/Acerca", (req, res)=>{
-    res.render("homeViews/acerca", {
+    res.render("homeViews/Acerca", {
         "titulo":"Paperros","activo":2
     });
 });

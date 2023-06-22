@@ -16,12 +16,11 @@ var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 var _bodyParser = _interopRequireDefault(require("body-parser"));
 require("./config/middlewares/google.js");
 var _dashPaseadorRoutes = _interopRequireDefault(require("./routes/dashPaseador.routes.js"));
+var _dashDuenoRoutes = _interopRequireDefault(require("./routes/dashDueno.routes.js"));
 var _homepageRoutes = _interopRequireDefault(require("./routes/homepage.routes.js"));
 //IMPORTAR LIBRERIAS
 
 //RUTAS
-
-// import dashDueno from "./routes/dashDueno.routes.js";
 
 //INICIALIZACION
 _dotenv["default"].config();
@@ -32,7 +31,8 @@ var _dirname = _path["default"].resolve();
 //CONFIGURACION
 app.set("port", process.env.PORT);
 app.set("view engine", "ejs");
-app.set("views", _path["default"].resolve(_path["default"].join(_dirname, "views")));
+app.set("views", _path["default"].resolve(_path["default"].join(_dirname, "app", "views")));
+console.log(_path["default"].resolve(_path["default"].join(_dirname, "app", "views")));
 app.use(_bodyParser["default"].urlencoded({
   extended: false
 }));
@@ -44,7 +44,7 @@ app.use(_passport["default"].initialize());
 app.use((0, _cookieParser["default"])());
 
 //RUTAS
-// app.use("/v1/dueno", dashDueno);
+app.use("/v1/dueno", _dashDuenoRoutes["default"]);
 app.use("/v1/paseador", _dashPaseadorRoutes["default"]);
 app.get("/", function (req, res) {
   res.render("home");
