@@ -7,13 +7,13 @@ exports["default"] = void 0;
 var _express = require("express");
 var home = (0, _express.Router)();
 home.get("/", function (req, res) {
-  res.render("homeViews/inicio", {
+  res.render("homeViews/Inicio.ejs", {
     "titulo": "Paperros",
     "activo": 1
   });
 });
 home.get("/Acerca", function (req, res) {
-  res.render("homeViews/acerca", {
+  res.render("homeViews/Acerca", {
     "titulo": "Paperros",
     "activo": 2
   });

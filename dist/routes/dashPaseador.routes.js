@@ -10,8 +10,7 @@ var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/
 var _express = require("express");
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
-// import fetch from 'node-fetch';
-
+var _nodeFetch = _interopRequireDefault(require("node-fetch"));
 var dash = (0, _express.Router)();
 dash.get("/MisPaseos", function (req, res) {
   if (req.cookies.token) {

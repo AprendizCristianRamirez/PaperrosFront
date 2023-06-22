@@ -1,7 +1,7 @@
 import {Router} from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
-// import fetch from 'node-fetch';
+import fetch from 'node-fetch';
 
 const dash = Router();
 
