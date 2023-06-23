@@ -1,77 +1,104 @@
-<% if ( rol == "dueno" ) { %>
+    <%# Variable para generar IDs en los mapas %>
+    <% let mapa = 0; %>
+    <% if ( rol == "dueno" ) { %>
     <%# Mis paseos del dueño %>
     <h1 class="display-1 text-titulo text-center">MIS PASEOS</h1>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card">
-                <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
-                <img class="card-img-top" src="/v1/img/husky.jpg" height="300px" alt="Imagen 1">
-                <div class="card-body">
-                    <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
-                    <p class="card-text">TITULO DEL SERVICIO</p>
-                    <!--MOSTRAR UN MODAL O UNA ALERTA CON TODA LA INFORMACION, TRAER LOS DATOS DE LA BASE DE DATOS
-                    Y MOSTRARLOS CON ALGUN FRAMEWORK-->
-                    <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
-                    <p class="card-text">Precio del servicio:</p>
-                    <!--ACA VA A IR UN INCLUDE DEL ESTADO DEL SERVICIO-->
-                    <p class="card-text">Estado del servicio:</p>
-                    <a href="#" class="btn btn-primary aBotonCarta1">Detalles</a>
+
+    <div class="container">
+        <div class="row">
+        <%# Renderizar las tarjetas de los paseos %>
+        <% paseo.forEach((element)=>{ %>
+            
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card">
+                    <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
+                    <div id="map<%= mapa %>" class="mapaPaseo" alt="Mapa de paseo"></div>
+                    <div class="card-body">
+                        <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
+                        <p class="card-text">TITULO DEL SERVICIO</p>
+                        <p class="card-text"><%= element.descripcion %></p>
+                        <!--MOSTRAR UN MODAL O UNA ALERTA CON TODA LA INFORMACION, TRAER LOS DATOS DE LA BASE DE DATOS
+                        Y MOSTRARLOS CON ALGUN FRAMEWORK-->
+                        <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
+                        <p class="card-text">Precio del servicio: $<%= element.precio %></p>
+                        <!--ACA VA A IR UN INCLUDE DEL ESTADO DEL SERVICIO-->
+                        <p class="card-text">Estado del servicio:</p>
+                        <a href="#" class="btn btn-primary aBotonCarta1">Detalles</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card">
-                <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
-                <img class="card-img-top" src="/v1/img/bulldog2.jpg" height="300px" alt="Imagen 1">
-                <div class="card-body">
-                    <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
-                    <p class="card-text">TITULO</p>
-                    <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
-                    <p class="card-text">Precio del servicio:</p>
-                    <!--ACA VA A IR UN INCLUDE DEL ESTADO DEL SERVICIO-->
-                    <p class="card-text">Estado del servicio:</p>
-                    <a href="#" class="btn btn-primary aBotonCarta1">Detalles</a>
-                    <a href="#" class="btn btn-primary aBotonCartaCancelar1">Cancelar</a>
+            <% mapa ++ %>
+        <% }); %>
+
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card">
+                    <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
+                    <img class="card-img-top" src="/v1/img/husky.jpg" height="300px" alt="Imagen 1">
+                    <div class="card-body">
+                        <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
+                        <p class="card-text">TITULO DEL SERVICIO</p>
+                        <!--MOSTRAR UN MODAL O UNA ALERTA CON TODA LA INFORMACION, TRAER LOS DATOS DE LA BASE DE DATOS
+                        Y MOSTRARLOS CON ALGUN FRAMEWORK-->
+                        <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
+                        <p class="card-text">Precio del servicio:</p>
+                        <!--ACA VA A IR UN INCLUDE DEL ESTADO DEL SERVICIO-->
+                        <p class="card-text">Estado del servicio:</p>
+                        <a href="#" class="btn btn-primary aBotonCarta1">Detalles</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card">
-                <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
-                <img class="card-img-top" src="/v1/img/PerritoBesos.jpg" height="300px" alt="Imagen 1">
-                <div class="card-body">
-                    <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
-                    <p class="card-text">TITULO</p>
-                    <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
-                    <p class="card-text">Precio del servicio:</p>
-                    <!--ACA VA A IR UN INCLUDE DEL ESTADO DEL SERVICIO-->
-                    <p class="card-text">Estado del servicio:</p>
-                    <a href="#" class="btn btn-primary aBotonCarta1">Detalles</a>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card">
+                    <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
+                    <img class="card-img-top" src="/v1/img/bulldog2.jpg" height="300px" alt="Imagen 1">
+                    <div class="card-body">
+                        <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
+                        <p class="card-text">TITULO</p>
+                        <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
+                        <p class="card-text">Precio del servicio:</p>
+                        <!--ACA VA A IR UN INCLUDE DEL ESTADO DEL SERVICIO-->
+                        <p class="card-text">Estado del servicio:</p>
+                        <a href="#" class="btn btn-primary aBotonCarta1">Detalles</a>
+                        <a href="#" class="btn btn-primary aBotonCartaCancelar1">Cancelar</a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card">
-                <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
-                <img class="card-img-top" src="/v1/img/bulldog1.jpeg" height="300px" alt="Imagen 1">
-                <div class="card-body">
-                    <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
-                    <p class="card-text">TITULO</p>
-                    <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
-                    <p class="card-text">Precio del servicio:</p>
-                    <!--ACA VA A IR UN INCLUDE DEL ESTADO DEL SERVICIO-->
-                    <p class="card-text">Estado del servicio:</p>
-                    <a href="#" class="btn btn-primary aBotonCarta1">Detalles</a>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card">
+                    <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
+                    <img class="card-img-top" src="/v1/img/PerritoBesos.jpg" height="300px" alt="Imagen 1">
+                    <div class="card-body">
+                        <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
+                        <p class="card-text">TITULO</p>
+                        <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
+                        <p class="card-text">Precio del servicio:</p>
+                        <!--ACA VA A IR UN INCLUDE DEL ESTADO DEL SERVICIO-->
+                        <p class="card-text">Estado del servicio:</p>
+                        <a href="#" class="btn btn-primary aBotonCarta1">Detalles</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 col-sm-12">
+                <div class="card">
+                    <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
+                    <img class="card-img-top" src="/v1/img/bulldog1.jpeg" height="300px" alt="Imagen 1">
+                    <div class="card-body">
+                        <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
+                        <p class="card-text">TITULO</p>
+                        <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
+                        <p class="card-text">Precio del servicio:</p>
+                        <!--ACA VA A IR UN INCLUDE DEL ESTADO DEL SERVICIO-->
+                        <p class="card-text">Estado del servicio:</p>
+                        <a href="#" class="btn btn-primary aBotonCarta1">Detalles</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 <% } else { %>
     <%# Mis paseos del paseador %>
     <h1 class="display-1 text-titulo-paseador text-center">MIS PASEOS</h1>
-<div class="container">
+    <div class="container">
     <div class="row">
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card">
@@ -137,5 +164,13 @@
             </div>
         </div>
     </div>
-</div>
-    <% } %>
+    </div>
+<% } %>
+
+<script>
+    // Llevar "mapa" de EJS a Js Leaflet
+    const mapa = "<%= mapa %>";
+    //Esto saca error pero está melo, aunque me dé mucha ansiedad que esté rojito
+    // Llevar el objeto "paseo" de EJS a Js Leaflet
+    const mapaData = <%- JSON.stringify(paseo) %>;
+</script>

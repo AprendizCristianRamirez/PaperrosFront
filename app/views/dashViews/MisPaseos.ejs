@@ -4,15 +4,20 @@
 <%- include("./partials/head.ejs"); %>
 
     <body>
-
+        <%# Partial del menú %>
         <%- include("./partials/menu.ejs"); %>
 
+        <%# Partial del aside %>
         <%- include("./partials/aside.ejs"); %>
 
+        <%# Partial de mis paseos (Renderización de tarjetas) %>
         <%- include("./partials/MisPaseos.ejs"); %>
-
+    
+        <%# Partial del footer %>
         <%- include("./partials/footer.ejs"); %>
 
+        <%# Leaflet %>
+        <script src="/v1/js/leafletDueno.js"></script>
     </body>
 
 </html>

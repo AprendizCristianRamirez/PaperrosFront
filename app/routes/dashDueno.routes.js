@@ -9,22 +9,29 @@ const dash = Router();
 dash.get("/MisPaseos", async(req, res) => {
     if (req.cookies.token) {
         try {
+            //Verificación del token
             const token = jwt.verify(
                 req.cookies.token,
                 process.env.SECRET_KEY
             )
+            // Datos de las cookies
             let nombre = token.nombre;
             let foto = token.foto;
             let id = token.id;
             let email = token.email;
 
-            let ruta = process.env.API + "usuarios/" + email;
-            const result = await fetch(ruta)
-            const data = await result.json();
-            console.log(ruta);
-            console.log(data);
+            // Fetch del usuario
+            let rutaUsuario = process.env.API + "usuarios/" + email;
+            const resultUsuario = await fetch(rutaUsuario)
+            const usuario = await resultUsuario.json();
 
-            if(data == false){
+            // Fetch de los paseos
+            let rutaPaseo = process.env.API + "paseo/";
+            const resultPaseo = await fetch(rutaPaseo)
+            const paseo = await resultPaseo.json();
+
+            //Si no tiene cuenta, será redirigido para crear una
+            if(usuario == false){
                 res.redirect("Configuracion");
             } else {
             res.render("dashViews/MisPaseos", {
@@ -32,13 +39,16 @@ dash.get("/MisPaseos", async(req, res) => {
                 "nombre": nombre,
                 "foto": foto,
                 "mnu": 0,
-                "usuario": data
+                "usuario": usuario,
+                "paseo": paseo
             });
             }
         } catch (error) {
+            console.log(error + "Error de cookies/fetch")
             res.redirect("/Ingresa")
         }
     } else {
+        console.log("Error de token")
         res.redirect("/Ingresa")
     }
 });
