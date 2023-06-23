@@ -167,6 +167,31 @@ dash.get("/users", async (req, res)=>{
     }
 });
 
+dash.get("/Terminos", (req, res)=>{
+    if(req.cookies.token){
+        try{
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+                )
+                let nombre = token.nombre;
+                let foto = token.foto;
+                
+                res.render("dashViews/Terminos",{
+                "rol": "paseador",
+                "nombre": nombre,
+                "foto": foto,
+                "mnu":0
+
+            });
+        } catch (error){
+            res.redirect("/Ingresa")
+        }
+    }else{
+        res.redirect("/Ingresa")
+    }
+});
+
 /*Ejemplo de rutas del crud
 dash.post("/save",async (req, res)=>{
     const name = req.body.name;
