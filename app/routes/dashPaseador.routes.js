@@ -5,7 +5,7 @@ import fetch from 'node-fetch';
 
 const dash = Router();
 
-dash.get("/MisPaseos", (req, res)=>{
+dash.get("/MisPaseos", async(req, res)=>{
     if(req.cookies.token){
         try{
             const token = jwt.verify(
@@ -14,12 +14,25 @@ dash.get("/MisPaseos", (req, res)=>{
                 )
                 let nombre = token.nombre;
                 let foto = token.foto;
+                let email = token.email;
+
+                // Fetch del usuario
+                let rutaUsuario = process.env.API + "usuarios/" + email;
+                const resultUsuario = await fetch(rutaUsuario)
+                const usuario = await resultUsuario.json();
+
+                // Fetch de los paseos
+                let rutaPaseo = process.env.API + "paseo/";
+                const resultPaseo = await fetch(rutaPaseo)
+                const paseo = await resultPaseo.json();
                 
                 res.render("dashViews/MisPaseos",{
                 "rol": "paseador",
                 "nombre": nombre,
                 "foto": "foto",
-                "mnu":0
+                "mnu":0,
+                "usuario": usuario,
+                "paseo": paseo
 
             });
         } catch (error){

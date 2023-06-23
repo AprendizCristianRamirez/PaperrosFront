@@ -16,32 +16,42 @@ var dash = (0, _express.Router)();
 //MISPASEOS
 dash.get("/MisPaseos", /*#__PURE__*/function () {
   var _ref = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(req, res) {
-    var token, nombre, foto, id, email, ruta, result, data;
+    var token, nombre, foto, id, email, rutaUsuario, resultUsuario, usuario, rutaPaseo, resultPaseo, paseo;
     return _regenerator["default"].wrap(function _callee$(_context) {
       while (1) switch (_context.prev = _context.next) {
         case 0:
           if (!req.cookies.token) {
-            _context.next = 24;
+            _context.next = 30;
             break;
           }
           _context.prev = 1;
-          token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+          //Verificación del token
+          token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY); // Datos de las cookies
           nombre = token.nombre;
           foto = token.foto;
           id = token.id;
-          email = token.email;
-          ruta = process.env.API + "usuarios/" + email;
+          email = token.email; // Fetch del usuario
+          rutaUsuario = process.env.API + "usuarios/" + email;
           _context.next = 10;
-          return (0, _nodeFetch["default"])(ruta);
+          return (0, _nodeFetch["default"])(rutaUsuario);
         case 10:
-          result = _context.sent;
+          resultUsuario = _context.sent;
           _context.next = 13;
-          return result.json();
+          return resultUsuario.json();
         case 13:
-          data = _context.sent;
-          console.log(ruta);
-          console.log(data);
-          if (data == false) {
+          usuario = _context.sent;
+          // Fetch de los paseos
+          rutaPaseo = process.env.API + "paseo/";
+          _context.next = 17;
+          return (0, _nodeFetch["default"])(rutaPaseo);
+        case 17:
+          resultPaseo = _context.sent;
+          _context.next = 20;
+          return resultPaseo.json();
+        case 20:
+          paseo = _context.sent;
+          //Si no tiene cuenta, será redirigido para crear una
+          if (usuario == false) {
             res.redirect("Configuracion");
           } else {
             res.render("dashViews/MisPaseos", {
@@ -49,25 +59,28 @@ dash.get("/MisPaseos", /*#__PURE__*/function () {
               "nombre": nombre,
               "foto": foto,
               "mnu": 0,
-              "usuario": data
+              "usuario": usuario,
+              "paseo": paseo
             });
           }
-          _context.next = 22;
-          break;
-        case 19:
-          _context.prev = 19;
-          _context.t0 = _context["catch"](1);
-          res.redirect("/Ingresa");
-        case 22:
-          _context.next = 25;
+          _context.next = 28;
           break;
         case 24:
+          _context.prev = 24;
+          _context.t0 = _context["catch"](1);
+          console.log(_context.t0 + "Error de cookies/fetch");
           res.redirect("/Ingresa");
-        case 25:
+        case 28:
+          _context.next = 32;
+          break;
+        case 30:
+          console.log("Error de token");
+          res.redirect("/Ingresa");
+        case 32:
         case "end":
           return _context.stop();
       }
-    }, _callee, null, [[1, 19]]);
+    }, _callee, null, [[1, 24]]);
   }));
   return function (_x, _x2) {
     return _ref.apply(this, arguments);
@@ -305,6 +318,25 @@ dash.post("/Configuracion", /*#__PURE__*/function () {
     return _ref3.apply(this, arguments);
   };
 }());
+dash.get("/Terminos", function (req, res) {
+  if (req.cookies.token) {
+    try {
+      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+      var nombre = token.nombre;
+      var foto = token.foto;
+      res.render("dashViews/Terminos", {
+        "rol": "dueno",
+        "nombre": nombre,
+        "foto": foto,
+        "mnu": 0
+      });
+    } catch (error) {
+      res.redirect("/Ingresa");
+    }
+  } else {
+    res.redirect("/Ingresa");
+  }
+});
 
 //PERFIL
 dash.get("/Perfil", function (req, res) {
@@ -317,6 +349,25 @@ dash.get("/Perfil", function (req, res) {
         "rol": "dueno",
         "nombre": nombre,
         "foto": foto,
+        "mnu": 0
+      });
+    } catch (error) {
+      res.redirect("/Ingresa");
+    }
+  } else {
+    res.redirect("/Ingresa");
+  }
+});
+dash.get("/Chat", function (req, res) {
+  if (req.cookies.token) {
+    try {
+      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+      var nombre = token.nombre;
+      var foto = token.foto;
+      res.render("dashViews/chat", {
+        "rol": "dueno",
+        "nombre": nombre,
+        "foto": "foto",
         "mnu": 0
       });
     } catch (error) {
@@ -374,6 +425,25 @@ dash.get("/users", /*#__PURE__*/function () {
     return _ref4.apply(this, arguments);
   };
 }());
+dash.get("/Terminos", function (req, res) {
+  if (req.cookies.token) {
+    try {
+      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+      var nombre = token.nombre;
+      var foto = token.foto;
+      res.render("dashViews/Terminos", {
+        "rol": "dueno",
+        "nombre": nombre,
+        "foto": foto,
+        "mnu": 0
+      });
+    } catch (error) {
+      res.redirect("/Ingresa");
+    }
+  } else {
+    res.redirect("/Ingresa");
+  }
+});
 
 /*Ejemplo de rutas del crud
 dash.post("/save",async (req, res)=>{
