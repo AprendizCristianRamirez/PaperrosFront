@@ -253,6 +253,31 @@ dash.post("/Configuracion", async (req, res)=>{
     res.redirect("MisPaseos")
 });
 
+dash.get("/Terminos", (req, res)=>{
+    if(req.cookies.token){
+        try{
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+                )
+                let nombre = token.nombre;
+                let foto = token.foto;
+
+                res.render("dashViews/Terminos",{
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": foto,
+                "mnu":0
+
+            });
+        } catch (error){
+            res.redirect("/Ingresa")
+        }
+    }else{
+        res.redirect("/Ingresa")
+    }
+});
+
 //PERFIL
 dash.get("/Perfil", (req, res) => {
     if (req.cookies.token) {
@@ -275,6 +300,31 @@ dash.get("/Perfil", (req, res) => {
             res.redirect("/Ingresa")
         }
     } else {
+        res.redirect("/Ingresa")
+    }
+});
+
+dash.get("/Chat", (req, res)=>{
+    if(req.cookies.token){
+        try{
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+                )
+                let nombre = token.nombre;
+                let foto = token.foto;
+                
+                res.render("dashViews/chat",{
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": "foto",
+                "mnu":0
+
+            });
+        } catch (error){
+            res.redirect("/Ingresa")
+        }
+    }else{
         res.redirect("/Ingresa")
     }
 });

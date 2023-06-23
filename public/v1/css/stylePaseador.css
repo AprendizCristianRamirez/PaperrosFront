@@ -869,74 +869,222 @@ CODIGO OPCIONAL POR SI HAY PROBLEMAS DE DISEÑO O SE PREFIERE ESTE DISEÑO
 .blog-item a:hover i::after {
     width: 50px;
 }
-.text-parrafo-p{
-    color:#b5c8ad !important
-
+.text-parrafo-p {
+    color: #b5c8ad !important
 }
-.display-1-paseador{
+
+.display-1-paseador {
     color: #b5c8ad !important;
-    font-size:calc(1.625rem + 4.5vw);
-    font-weight:700;
-    line-height:1.2
+    font-size: calc(1.625rem + 4.5vw);
+    font-weight: 700;
+    line-height: 1.2
 }
 
-.historialtitle-paseador{
+.text-titulo-paseador {
+    color: #b5c8ad !important
+}
+
+.historialtitle-paseador {
     color: #b5c8ad !important;
     font-family: "CormorantMedium";
     font-size: 25px;
     display: grid;
 }
-.menupaseador{
+
+.menupaseador {
     background-color: #e2e9e0;
 }
-.tab-container{
+
+.tab-container {
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     flex-direction: column;
 }
+
 .tab-content {
     max-width: 500px;
     padding: 20px;
-    background-color: #f5f5f5;
-    border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-.profile-details img {
-    width: 150px;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 50%;
-    margin-bottom: 10px;
-}
-
-.profile-details-p {
-    flex: 1;
-    margin-right: 20px;
     text-align: center;
     margin: 20px;
 }
-.titulosperfilpaseador-title{
+
+.titulosperfilpaseador-title {
     font-family: "CormorantMedium";
     font-size: 40px;
     display: grid;
-    color:  #b5c8ad !important;
+    color: #b5c8ad !important;
 }
-.titulosperfilpaseador{
+
+.titulosperfilpaseador {
     font-family: "CormorantLight";
     font-size: 25px;
-    color:  #323232 !important;
+    color: #221c1c !important;
     justify-content: flex-start;
 }
 
-.text-parrafo-paseador{
-    color:#b5c8ad
+.text-parrafo-paseador {
+    color: #b5c8ad
 }
 
-.text-titulo-paseador{
-    color:#b5c8ad
+.text-titulo-paseador {
+    color: #b5c8ad
 }
 
+.contenedorterminos {
+    margin-left: 90px;
+    width: 70%;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    /* Agrega esta línea para distribuir los contenedores a la izquierda y derecha */
+
+}
+
+.contenedorterminosizq {
+    width: 70%;
+}
+
+.contenedorterminosder {
+    width: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.textocontenedorterminos {
+    margin: 30px;
+    text-align: justify;
+    font-size: 35px;
+}
+
+.imagenterminos {
+    margin: 70px;
+    width: 100%;
+}
+
+.imagenterminos img {
+    width: 600px;
+    height: 600px;
+}
+
+/*CHAT*/
+
+.chat-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.sidebar {
+    width: auto;
+    background-color: #f2f2f2;
+    padding: 20px;
+}
+
+.user-list {
+    overflow-y: scroll;
+    height: 365px;
+}
+
+.user-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-bottom: 10px;
+}
+
+.user-avatar img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.chat-window {
+    width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.chat {
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.message {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.message-sender img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.input-container {
+    display: flex;
+    margin-top: 20px;
+}
+
+.input-container input {
+    flex-grow: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+
+.input-container button {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+/* Estilos del modal */
+.modal {
+    display: none;
+    /* Ocultar el modal por defecto */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+    /* Fondo semitransparente */
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+/* Estilos para mostrar la ventana emergente debajo del input */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    padding: 12px 16px;
+    z-index: 1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
