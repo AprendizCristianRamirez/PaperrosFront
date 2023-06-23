@@ -105,6 +105,31 @@ dash.get("/Configuracion", (req, res)=>{
     }
 });
 
+dash.get("/Terminos", (req, res)=>{
+    if(req.cookies.token){
+        try{
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+                )
+                let nombre = token.nombre;
+                let foto = token.foto;
+
+                res.render("dashViews/Terminos",{
+                "rol": "paseador",
+                "nombre": nombre,
+                "foto": foto,
+                "mnu":0
+
+            });
+        } catch (error){
+            res.redirect("/Ingresa")
+        }
+    }else{
+        res.redirect("/Ingresa")
+    }
+});
+
 dash.get("/Perfil", (req, res)=>{
     if(req.cookies.token){
         try{
@@ -129,6 +154,31 @@ dash.get("/Perfil", (req, res)=>{
         res.redirect("/Ingresa")
     }
 }); 
+
+dash.get("/Chat", (req, res)=>{
+    if(req.cookies.token){
+        try{
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+                )
+                let nombre = token.nombre;
+                let foto = token.foto;
+                
+                res.render("dashViews/chat",{
+                "rol": "paseador",
+                "nombre": nombre,
+                "foto": "foto",
+                "mnu":0
+
+            });
+        } catch (error){
+            res.redirect("/Ingresa")
+        }
+    }else{
+        res.redirect("/Ingresa")
+    }
+});
 
 dash.get("/salir", (req, res)=>{
     res.clearCookie("token");
@@ -158,6 +208,31 @@ dash.get("/users", async (req, res)=>{
                 "nombre": nombre,
                 "foto": foto,
                 "mnu":2
+            });
+        } catch (error){
+            res.redirect("/Ingresa")
+        }
+    }else{
+        res.redirect("/Ingresa")
+    }
+});
+
+dash.get("/Terminos", (req, res)=>{
+    if(req.cookies.token){
+        try{
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+                )
+                let nombre = token.nombre;
+                let foto = token.foto;
+                
+                res.render("dashViews/Terminos",{
+                "rol": "paseador",
+                "nombre": nombre,
+                "foto": foto,
+                "mnu":0
+
             });
         } catch (error){
             res.redirect("/Ingresa")
