@@ -46,21 +46,21 @@ p {
     font-style: normal;
 }
 
-#map{
+#map {
     height: 200px;
 }
 
-.ImagenPerfil{
+.ImagenPerfil {
     border-radius: 40px;
     margin-right: 10px;
 }
 
-.TextoImagen{
+.TextoImagen {
     margin-top: 10px;
     margin-left: 1px;
 }
 
-.InputDescripcionPaseo{
+.InputDescripcionPaseo {
     margin-top: 10px;
     width: auto;
     height: 44px;
@@ -72,7 +72,7 @@ p {
     text-align: center;
 }
 
-.SeleccionPerros{
+.SeleccionPerros {
     margin-top: 10px;
     width: auto;
     height: 44px;
@@ -84,7 +84,7 @@ p {
     text-align: center;
 }
 
-.TextoMapa{
+.TextoMapa {
     margin-top: 28px;
     margin-left: 1px;
 }
@@ -95,7 +95,7 @@ p {
     flex-direction: column;
 }
 
-.InputFile{
+.InputFile {
     width: 94%;
     height: auto;
     background-color: #dcbca9;
@@ -125,17 +125,17 @@ p {
     font-family: 'CormorantLight';
     color: #927167;
     font-size: 20px;
-    
+
 }
 
-.ContainerAñadirPerro{
+.ContainerAñadirPerro {
     background-color: #e2e9e0;
     max-width: 800px;
     height: auto;
     border-radius: 20px;
 }
 
-.a-center{
+.a-center {
 
     display: flex;
     align-items: center;
@@ -157,25 +157,25 @@ p {
     width: 100px;
 }
 
-.BotonSubirPerro:hover{
+.BotonSubirPerro:hover {
     color: #000000;
 }
 
-.aBotonHref{
+.aBotonHref {
     text-decoration: none;
     color: #FFFFFF;
 }
 
-.aBotonHref:hover{
+.aBotonHref:hover {
     color: #000000;
 }
 
-.imgAñadirPerro{
+.imgAñadirPerro {
     max-width: 94%;
     height: auto;
 }
 
-.imgPerfilConfig{
+.imgPerfilConfig {
     max-width: 94%;
     margin-bottom: 10px;
     height: auto;
@@ -195,7 +195,7 @@ p {
     width: 100px;
 }
 
-.BotonCancelarPerro:hover{
+.BotonCancelarPerro:hover {
     color: #000000;
 }
 
@@ -260,14 +260,16 @@ p {
     /*Color*/
     background: #e2e9e0;
 }
-.barra:hover h2{
+
+.barra:hover h2 {
     /*posicion dentro de barra del h2*/
-    padding:15px;
+    padding: 15px;
     font-size: 35px;
 
 }
-.barra:hover a{ 
-    font-size:20px ;
+
+.barra:hover a {
+    font-size: 20px;
     color: rgb(0, 0, 0);
     /*Se usa el display block para que el enlace respete el margin*/
     display: block;
@@ -289,13 +291,13 @@ p {
     border-bottom: 1px solid #03121b;
 }
 
-.barra:hover a:hover{ 
+.barra:hover a:hover {
     font-size: 25px;
-    padding: 30px 0px; 
-    background: #c5c5c5;  
+    padding: 30px 0px;
+    background: #c5c5c5;
 }
 
-@media (min-width: 768px){
+@media (min-width: 768px) {
     .barra:hover {
         width: 20%;
     }
@@ -512,11 +514,13 @@ CODIGO OPCIONAL POR SI HAY PROBLEMAS DE DISEÑO O SE PREFIERE ESTE DISEÑO
         background: var(--primary);
         transition: .5s;
     }
+
     .navbar-light .navbar-nav .nav-link:hover::before,
     .navbar-light .navbar-nav .nav-link.active::before {
         width: 100%;
         left: 0;
     }
+
     .navbar-light .navbar-nav .nav-link.nav-contact::before {
         width: 100%;
         height: 1px;
@@ -596,6 +600,7 @@ CODIGO OPCIONAL POR SI HAY PROBLEMAS DE DISEÑO O SE PREFIERE ESTE DISEÑO
         transform: translateX(-50%) translateY(-50%) translateZ(0) scale(1);
         opacity: 1;
     }
+
     100% {
         transform: translateX(-50%) translateY(-50%) translateZ(0) scale(2);
         opacity: 0;
@@ -869,6 +874,7 @@ CODIGO OPCIONAL POR SI HAY PROBLEMAS DE DISEÑO O SE PREFIERE ESTE DISEÑO
 .blog-item a:hover i::after {
     width: 50px;
 }
+
 .text-parrafo-p {
     color: #b5c8ad !important
 }
