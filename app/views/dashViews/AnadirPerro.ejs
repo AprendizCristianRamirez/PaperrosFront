@@ -3,66 +3,87 @@
 
 <%- include("./partials/head.ejs"); %>
 
-    <body>
+<body>
 
-        <%- include("./partials/menu.ejs"); %>
+    <%- include("./partials/menu.ejs"); %>
 
-            <%- include("./partials/aside.ejs"); %>
+    <%- include("./partials/aside.ejs"); %>
 
-                <h1 class="text-uppercase text-titulo text-center">AÑADIR PERRO</h1>
-                <p class="fs-4 text-parrafo text-center">
-                    Adjunta la informacion de tu mascota para poder registrarla en Paperros
-                </p>
-                <form action="">
-                <div class="container ContainerAñadirPerro">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <label class="TextoImagen">Añade una imagen de tu mascota:</label>
-                                <!-- PENDIENTE POR HACER EL FORMULARIO PARA SUBIR LA IMAGEN A LA DB-->
-                                <input type="file" id="imagenPerro" name="img" class="form-control" placeholder="Elegir imagen">
-                                <img src="/v1/img/añadirImagenIcono2.png" alt="Imagen" class="imgAñadirPerro">
-                            </div>
-                            <div class="form-group">
-                                <input class="InputVacuna" type="text" id="vacunas" name="vacunas" class="form-control"
-                                    placeholder="Vacunas">
-                            </div>
-                        </div>
-                        <div class="col-lg-6">
-                            <div class="form-group">
-                                <input class="InputsAñadirPerro" type="text" id="Nombre" name="Nombre"
-                                    class="form-control" placeholder="Nombre">
-                            </div>
-                            <div class="form-group ">
-                                <input class="InputsAñadirPerro" type="text " id="Raza " name="Raza "
-                                    class="form-control " placeholder="Raza">
-                            </div>
-                            <div class="form-group">
-                                <input class="InputsAñadirPerro" type="text" id="Comportamiento" name="Comportamiento"
-                                    class="form-control" placeholder="Comportamiento">
-                            </div>
-                            <div class="form-group ">
-                                <input class="InputsAñadirPerro" type="text " id="Estatura " name="Estatura "
-                                    class="form-control " placeholder="Estatura">
-                            </div>
-                            <div class="form-group">
-                                <input class="InputsAñadirPerro" type="text" id="Peso" name="Peso" class="form-control"
-                                    placeholder="Peso">
-                            </div>
-                        </div>
+    <h1 class="text-uppercase text-titulo text-center">AÑADIR PERRO</h1>
+    <p class="fs-4 text-parrafo text-center">
+        Adjunta la informacion de tu mascota para poder registrarla en Paperros
+    </p>
+    <%# Formulario %>
+    <form action="" id="anadirPerro">
+        <%# Email (ID) %>
+        <input type="hidden" id="id" name="id" class="form-control" value="<%= email %>">
+        <div class="container ContainerAñadirPerro">
+            <div class="row">
+                <div class="col-lg-6">
+                    <%# Imagen %>
+                    <div class="form-group">
+                        <label class="TextoImagen">Añade una imagen de tu mascota:</label>
+                        <!-- PENDIENTE POR HACER EL FORMULARIO PARA SUBIR LA IMAGEN A LA DB-->
+                        <input type="file" id="imagenPerro" name="img" class="form-control" placeholder="Elegir imagen">
+                        <img src="/v1/img/añadirImagenIcono2.png" alt="Imagen" class="imgAñadirPerro">
                     </div>
-                    <div class="row ">
-                        <div class="col-lg-12">
-                            <div class="form-group a-center">
-                                <button class="BotonCancelarPerro"><a class="aBotonHref" href="/v1/dueno/MisPerros">Cancelar</a></button>
-                                <button class="BotonSubirPerro">Subir</button>
-                            </div>
-                        </div>
+                    <%# Vacunas %>
+                    <div class="form-group">
+                        <input class="InputVacuna" type="text" id="vacunas" name="vacunas" class="form-control"
+                            placeholder="Vacunas">
                     </div>
                 </div>
-            </form>
-                <%- include("./partials/footer.ejs"); %>
+                <div class="col-lg-6">
+                    <%# Nombre %>
+                    <div class="form-group">
+                        <input class="InputsAñadirPerro" type="text" id="nombre" name="nombre"
+                            class="form-control" placeholder="Nombre">
+                    </div>
+                    <%# Raza %>
+                    <div class="form-group">
+                        <input class="InputsAñadirPerro" type="text " id="raza" name="raza"
+                            class="form-control " placeholder="Raza">
+                    </div>
+                    <%# Comportamiento %>
+                    <div class="form-group">
+                        <input class="InputsAñadirPerro" type="text" id="comportamiento" name="comportamiento"
+                            class="form-control" placeholder="Comportamiento">
+                    </div>
+                    <%# Estatura %>
+                    <div class="form-group">
+                        <input class="InputsAñadirPerro" type="text " id="estatura" name="estatura"
+                            class="form-control " placeholder="Estatura">
+                    </div>
+                    <%# Peso %>
+                    <div class="form-group">
+                        <input class="InputsAñadirPerro" type="text" id="peso" name="peso" class="form-control"
+                            placeholder="Peso">
+                    </div>
+                </div>
+            </div>
+            <div class="row ">
+                <div class="col-lg-12">
+                    <div class="form-group a-center">
+                        <button class="BotonCancelarPerro"><a class="aBotonHref" href="/v1/dueno/MisPerros">Cancelar</a></button>
+                        <%# Submit %>
+                        <button class="BotonSubirPerro">Subir</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 
-    </body>
+    <%# Firebase %>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+    <script>
+        <%# Configuración de firebase %>
+        <%- include("./js/firebase.js"); %>
+        <%# Codigo a ejecutar %>
+        <%- include("./js/anadirPerros.js"); %>
+    </script>
+    <%- include("./partials/footer.ejs"); %>
+</body>
 
 </html>

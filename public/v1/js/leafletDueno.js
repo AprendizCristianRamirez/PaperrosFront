@@ -25,6 +25,21 @@ for (i = 0; i < mapa; i++){
     
     //Asignar popups
     circle.bindPopup(mapaData[i].nombre_destino);
+
+    //Crear función de clic
+    map.on('click', function(event) {
+    var latlng = event.latlng;
+    console.log("latlng: "+latlng);
+    var latitude = latlng.lat;
+    console.log("Latitude"+latitude);
+    var longitude = latlng.lng;
+    console.log("Longitude"+longitude);
+
+    // Set the value of the target div with the clicked location
+    var targetDiv = document.getElementById('locacion'+i);
+    //targetDiv.innerHTML = ('Latitude: ' + latitude + ', Longitude: ' + longitude);
+    targetDiv.innerHTML = (latlng);
+  });
 }
 
 //Popup flotante

@@ -105,7 +105,7 @@ dash.get("/RutasPaseadores", (req, res) => {
 });
 
 //AÑADIRPERRO
-dash.get("/AnadirPerro", (req, res) => {
+dash.get("/AnadirPerro", async(req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -114,12 +114,19 @@ dash.get("/AnadirPerro", (req, res) => {
             )
             let nombre = token.nombre;
             let foto = token.foto;
+            let email = token.email;
+            
+            // Fetch del usuario
+            let rutaUsuario = process.env.API + "usuarios/" + email;
+            const resultUsuario = await fetch(rutaUsuario)
+            const usuario = await resultUsuario.json();
 
             res.render("dashViews/AnadirPerro", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu": 0
+                "mnu": 0,
+                "email": email
 
             });
         } catch (error) {
@@ -131,7 +138,7 @@ dash.get("/AnadirPerro", (req, res) => {
 });
 
 //MISPERROS
-dash.get("/MisPerros", (req, res) => {
+dash.get("/MisPerros", async(req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -140,12 +147,19 @@ dash.get("/MisPerros", (req, res) => {
             )
             let nombre = token.nombre;
             let foto = token.foto;
+            let email = token.email;
+
+            // Fetch del usuario
+            let rutaUsuario = process.env.API + "usuarios/" + email;
+            const resultUsuario = await fetch(rutaUsuario)
+            const usuario = await resultUsuario.json();
 
             res.render("dashViews/MisPerros", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu": 0
+                "email": email,
+                "usuario": usuario
 
             });
         } catch (error) {
@@ -263,7 +277,7 @@ dash.post("/Configuracion", async (req, res)=>{
     res.redirect("MisPaseos")
 });
 
-dash.get("/Terminos", (req, res)=>{
+dash.get("/Terminos", async(req, res)=>{
     if(req.cookies.token){
         try{
             const token = jwt.verify(
@@ -314,7 +328,7 @@ dash.get("/Perfil", (req, res) => {
     }
 });
 
-dash.get("/Chat", (req, res)=>{
+dash.get("/Chat", async(req, res)=>{
     if(req.cookies.token){
         try{
             const token = jwt.verify(
@@ -378,7 +392,7 @@ dash.get("/users", async(req, res) => {
     }
 });
 
-dash.get("/Terminos", (req, res)=>{
+dash.get("/Terminos", async(req, res)=>{
     if(req.cookies.token){
         try{
             const token = jwt.verify(
@@ -447,7 +461,7 @@ dash.post("/save",async (req, res)=>{
     
     res.redirect("/v1/usuario")
 })
-dash.get("/usuario-edit", (req, res)=>{
+dash.get("/usuario-edit", async(req, res)=>{
     if(req.cookies.eib_per){
         try {
             const data = {
