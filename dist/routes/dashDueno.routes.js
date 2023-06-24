@@ -128,52 +128,9 @@ dash.get("/RutasPaseadores", function (req, res) {
 });
 
 //AÑADIRPERRO
-dash.get("/AnadirPerro", function (req, res) {
-  if (req.cookies.token) {
-    try {
-      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
-      var nombre = token.nombre;
-      var foto = token.foto;
-      res.render("dashViews/AnadirPerro", {
-        "rol": "dueno",
-        "nombre": nombre,
-        "foto": foto,
-        "mnu": 0
-      });
-    } catch (error) {
-      res.redirect("/Ingresa");
-    }
-  } else {
-    res.redirect("/Ingresa");
-  }
-});
-
-//MISPERROS
-dash.get("/MisPerros", function (req, res) {
-  if (req.cookies.token) {
-    try {
-      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
-      var nombre = token.nombre;
-      var foto = token.foto;
-      res.render("dashViews/MisPerros", {
-        "rol": "dueno",
-        "nombre": nombre,
-        "foto": foto,
-        "mnu": 0
-      });
-    } catch (error) {
-      res.redirect("/Ingresa");
-    }
-  } else {
-    res.redirect("/Ingresa");
-  }
-});
-
-//CONFIGURACIÓN
-//Vista para que el usuario cree o actualize su perfil
-dash.get("/Configuracion", /*#__PURE__*/function () {
+dash.get("/AnadirPerro", /*#__PURE__*/function () {
   var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee2(req, res) {
-    var token, nombre, foto, email, ruta, result, data;
+    var token, nombre, foto, email, rutaUsuario, resultUsuario, usuario;
     return _regenerator["default"].wrap(function _callee2$(_context2) {
       while (1) switch (_context2.prev = _context2.next) {
         case 0:
@@ -185,25 +142,22 @@ dash.get("/Configuracion", /*#__PURE__*/function () {
           token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
           nombre = token.nombre;
           foto = token.foto;
-          email = token.email;
-          ruta = process.env.API + "usuarios/" + email;
+          email = token.email; // Fetch del usuario
+          rutaUsuario = process.env.API + "usuarios/" + email;
           _context2.next = 9;
-          return (0, _nodeFetch["default"])(ruta);
+          return (0, _nodeFetch["default"])(rutaUsuario);
         case 9:
-          result = _context2.sent;
+          resultUsuario = _context2.sent;
           _context2.next = 12;
-          return result.json();
+          return resultUsuario.json();
         case 12:
-          data = _context2.sent;
-          //console.log(data);
-
-          res.render("dashViews/Configuracion", {
+          usuario = _context2.sent;
+          res.render("dashViews/AnadirPerro", {
             "rol": "dueno",
             "nombre": nombre,
             "foto": foto,
             "mnu": 0,
-            "email": email,
-            "usuario": data
+            "email": email
           });
           _context2.next = 19;
           break;
@@ -227,12 +181,124 @@ dash.get("/Configuracion", /*#__PURE__*/function () {
   };
 }());
 
-//Creación y actualización del perfil del usuario
-dash.post("/Configuracion", /*#__PURE__*/function () {
+//MISPERROS
+dash.get("/MisPerros", /*#__PURE__*/function () {
   var _ref3 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee3(req, res) {
-    var user, url, metodo, datos, id, option, result;
+    var token, nombre, foto, email, rutaUsuario, resultUsuario, usuario;
     return _regenerator["default"].wrap(function _callee3$(_context3) {
       while (1) switch (_context3.prev = _context3.next) {
+        case 0:
+          if (!req.cookies.token) {
+            _context3.next = 21;
+            break;
+          }
+          _context3.prev = 1;
+          token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+          nombre = token.nombre;
+          foto = token.foto;
+          email = token.email; // Fetch del usuario
+          rutaUsuario = process.env.API + "usuarios/" + email;
+          _context3.next = 9;
+          return (0, _nodeFetch["default"])(rutaUsuario);
+        case 9:
+          resultUsuario = _context3.sent;
+          _context3.next = 12;
+          return resultUsuario.json();
+        case 12:
+          usuario = _context3.sent;
+          res.render("dashViews/MisPerros", {
+            "rol": "dueno",
+            "nombre": nombre,
+            "foto": foto,
+            "email": email,
+            "usuario": usuario
+          });
+          _context3.next = 19;
+          break;
+        case 16:
+          _context3.prev = 16;
+          _context3.t0 = _context3["catch"](1);
+          res.redirect("/Ingresa");
+        case 19:
+          _context3.next = 22;
+          break;
+        case 21:
+          res.redirect("/Ingresa");
+        case 22:
+        case "end":
+          return _context3.stop();
+      }
+    }, _callee3, null, [[1, 16]]);
+  }));
+  return function (_x5, _x6) {
+    return _ref3.apply(this, arguments);
+  };
+}());
+
+//CONFIGURACIÓN
+//Vista para que el usuario cree o actualize su perfil
+dash.get("/Configuracion", /*#__PURE__*/function () {
+  var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
+    var token, nombre, foto, email, ruta, result, data;
+    return _regenerator["default"].wrap(function _callee4$(_context4) {
+      while (1) switch (_context4.prev = _context4.next) {
+        case 0:
+          if (!req.cookies.token) {
+            _context4.next = 21;
+            break;
+          }
+          _context4.prev = 1;
+          token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+          nombre = token.nombre;
+          foto = token.foto;
+          email = token.email;
+          ruta = process.env.API + "usuarios/" + email;
+          _context4.next = 9;
+          return (0, _nodeFetch["default"])(ruta);
+        case 9:
+          result = _context4.sent;
+          _context4.next = 12;
+          return result.json();
+        case 12:
+          data = _context4.sent;
+          //console.log(data);
+
+          res.render("dashViews/Configuracion", {
+            "rol": "dueno",
+            "nombre": nombre,
+            "foto": foto,
+            "mnu": 0,
+            "email": email,
+            "usuario": data
+          });
+          _context4.next = 19;
+          break;
+        case 16:
+          _context4.prev = 16;
+          _context4.t0 = _context4["catch"](1);
+          res.redirect("/Ingresa");
+        case 19:
+          _context4.next = 22;
+          break;
+        case 21:
+          res.redirect("/Ingresa");
+        case 22:
+        case "end":
+          return _context4.stop();
+      }
+    }, _callee4, null, [[1, 16]]);
+  }));
+  return function (_x7, _x8) {
+    return _ref4.apply(this, arguments);
+  };
+}());
+
+//Creación y actualización del perfil del usuario
+dash.post("/Configuracion", /*#__PURE__*/function () {
+  var _ref5 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee5(req, res) {
+    var user, url, metodo, datos, id, option, result;
+    return _regenerator["default"].wrap(function _callee5$(_context5) {
+      while (1) switch (_context5.prev = _context5.next) {
         case 0:
           //Campos del usuario
           user = {
@@ -246,7 +312,7 @@ dash.post("/Configuracion", /*#__PURE__*/function () {
             pais: req.body.pais,
             email: req.body.email
           };
-          _context3.prev = 1;
+          _context5.prev = 1;
           url = process.env.API + "usuarios";
           metodo = "post";
           datos = {
@@ -282,7 +348,7 @@ dash.post("/Configuracion", /*#__PURE__*/function () {
               'Content-Type': 'application/json'
             }
           }; //Fetch
-          _context3.next = 9;
+          _context5.next = 9;
           return (0, _nodeFetch["default"])(url, option).then(function (response) {
             return response.json();
           }).then(function (data) {
@@ -298,45 +364,59 @@ dash.post("/Configuracion", /*#__PURE__*/function () {
             console.log("Ha habido un error: " + error);
           });
         case 9:
-          result = _context3.sent;
-          _context3.next = 15;
+          result = _context5.sent;
+          _context5.next = 15;
           break;
         case 12:
-          _context3.prev = 12;
-          _context3.t0 = _context3["catch"](1);
-          console.log("Informacion no insertada: " + _context3.t0);
+          _context5.prev = 12;
+          _context5.t0 = _context5["catch"](1);
+          console.log("Informacion no insertada: " + _context5.t0);
           //console.log("Metodo: " + option.method);
         case 15:
           res.redirect("MisPaseos");
         case 16:
         case "end":
-          return _context3.stop();
+          return _context5.stop();
       }
-    }, _callee3, null, [[1, 12]]);
+    }, _callee5, null, [[1, 12]]);
   }));
-  return function (_x5, _x6) {
-    return _ref3.apply(this, arguments);
+  return function (_x9, _x10) {
+    return _ref5.apply(this, arguments);
   };
 }());
-dash.get("/Terminos", function (req, res) {
-  if (req.cookies.token) {
-    try {
-      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
-      var nombre = token.nombre;
-      var foto = token.foto;
-      res.render("dashViews/Terminos", {
-        "rol": "dueno",
-        "nombre": nombre,
-        "foto": foto,
-        "mnu": 0
-      });
-    } catch (error) {
-      res.redirect("/Ingresa");
-    }
-  } else {
-    res.redirect("/Ingresa");
-  }
-});
+dash.get("/Terminos", /*#__PURE__*/function () {
+  var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
+    var token, nombre, foto;
+    return _regenerator["default"].wrap(function _callee6$(_context6) {
+      while (1) switch (_context6.prev = _context6.next) {
+        case 0:
+          if (req.cookies.token) {
+            try {
+              token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+              nombre = token.nombre;
+              foto = token.foto;
+              res.render("dashViews/Terminos", {
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": foto,
+                "mnu": 0
+              });
+            } catch (error) {
+              res.redirect("/Ingresa");
+            }
+          } else {
+            res.redirect("/Ingresa");
+          }
+        case 1:
+        case "end":
+          return _context6.stop();
+      }
+    }, _callee6);
+  }));
+  return function (_x11, _x12) {
+    return _ref6.apply(this, arguments);
+  };
+}());
 
 //PERFIL
 dash.get("/Perfil", function (req, res) {
@@ -358,25 +438,39 @@ dash.get("/Perfil", function (req, res) {
     res.redirect("/Ingresa");
   }
 });
-dash.get("/Chat", function (req, res) {
-  if (req.cookies.token) {
-    try {
-      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
-      var nombre = token.nombre;
-      var foto = token.foto;
-      res.render("dashViews/chat", {
-        "rol": "dueno",
-        "nombre": nombre,
-        "foto": "foto",
-        "mnu": 0
-      });
-    } catch (error) {
-      res.redirect("/Ingresa");
-    }
-  } else {
-    res.redirect("/Ingresa");
-  }
-});
+dash.get("/Chat", /*#__PURE__*/function () {
+  var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
+    var token, nombre, foto;
+    return _regenerator["default"].wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          if (req.cookies.token) {
+            try {
+              token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+              nombre = token.nombre;
+              foto = token.foto;
+              res.render("dashViews/chat", {
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": "foto",
+                "mnu": 0
+              });
+            } catch (error) {
+              res.redirect("/Ingresa");
+            }
+          } else {
+            res.redirect("/Ingresa");
+          }
+        case 1:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7);
+  }));
+  return function (_x13, _x14) {
+    return _ref7.apply(this, arguments);
+  };
+}());
 
 //SALIR
 dash.get("/salir", function (req, res) {
@@ -386,10 +480,10 @@ dash.get("/salir", function (req, res) {
 
 //Esto hay que bananearlo cuando acabemos xd
 dash.get("/users", /*#__PURE__*/function () {
-  var _ref4 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee4(req, res) {
+  var _ref8 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee8(req, res) {
     var token, nombre, foto;
-    return _regenerator["default"].wrap(function _callee4$(_context4) {
-      while (1) switch (_context4.prev = _context4.next) {
+    return _regenerator["default"].wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
         case 0:
           if (req.cookies.token) {
             try {
@@ -417,33 +511,47 @@ dash.get("/users", /*#__PURE__*/function () {
           }
         case 1:
         case "end":
-          return _context4.stop();
+          return _context8.stop();
       }
-    }, _callee4);
+    }, _callee8);
   }));
-  return function (_x7, _x8) {
-    return _ref4.apply(this, arguments);
+  return function (_x15, _x16) {
+    return _ref8.apply(this, arguments);
   };
 }());
-dash.get("/Terminos", function (req, res) {
-  if (req.cookies.token) {
-    try {
-      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
-      var nombre = token.nombre;
-      var foto = token.foto;
-      res.render("dashViews/Terminos", {
-        "rol": "dueno",
-        "nombre": nombre,
-        "foto": foto,
-        "mnu": 0
-      });
-    } catch (error) {
-      res.redirect("/Ingresa");
-    }
-  } else {
-    res.redirect("/Ingresa");
-  }
-});
+dash.get("/Terminos", /*#__PURE__*/function () {
+  var _ref9 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee9(req, res) {
+    var token, nombre, foto;
+    return _regenerator["default"].wrap(function _callee9$(_context9) {
+      while (1) switch (_context9.prev = _context9.next) {
+        case 0:
+          if (req.cookies.token) {
+            try {
+              token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+              nombre = token.nombre;
+              foto = token.foto;
+              res.render("dashViews/Terminos", {
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": foto,
+                "mnu": 0
+              });
+            } catch (error) {
+              res.redirect("/Ingresa");
+            }
+          } else {
+            res.redirect("/Ingresa");
+          }
+        case 1:
+        case "end":
+          return _context9.stop();
+      }
+    }, _callee9);
+  }));
+  return function (_x17, _x18) {
+    return _ref9.apply(this, arguments);
+  };
+}());
 
 /*Ejemplo de rutas del crud
 dash.post("/save",async (req, res)=>{
@@ -489,7 +597,7 @@ dash.post("/save",async (req, res)=>{
     
     res.redirect("/v1/usuario")
 })
-dash.get("/usuario-edit", (req, res)=>{
+dash.get("/usuario-edit", async(req, res)=>{
     if(req.cookies.eib_per){
         try {
             const data = {
