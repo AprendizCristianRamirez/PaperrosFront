@@ -183,10 +183,10 @@ dash.get("/Configuracion", async(req, res) => {
             let foto = token.foto;
             let email = token.email;
 
-            let ruta = process.env.API + "usuarios/" + email;
-            const result = await fetch(ruta)
-            const data = await result.json();
-            //console.log(data);
+            // Fetch del usuario
+            let rutaUsuario = process.env.API + "usuarios/" + email;
+            const resultUsuario = await fetch(rutaUsuario)
+            const usuario = await resultUsuario.json();
 
             res.render("dashViews/Configuracion", {
                 "rol": "dueno",
@@ -194,8 +194,7 @@ dash.get("/Configuracion", async(req, res) => {
                 "foto": foto,
                 "mnu": 0,
                 "email": email,
-                "usuario": data
-
+                "usuario": usuario
             });
         } catch (error) {
             res.redirect("/Ingresa")
@@ -268,21 +267,19 @@ dash.post("/Configuracion", async (req, res)=>{
             console.log(data);
             if (data[0].affectedRows>0){
                 console.log("Los datos fueron insertados");
-                //console.log("Metodo: " + option.method);
             }else{
                 console.log("No se inserto");
-                //console.log("Metodo: " + option.method);
             }
         })
         .then(error=>{console.log("Ha habido un error: "+ error);})
     } catch (error) {
         console.log("Informacion no insertada: "+error);
-        //console.log("Metodo: " + option.method);
     }
     
     res.redirect("MisPaseos")
 });
 
+// TERMINOS
 dash.get("/Terminos", async(req, res)=>{
     if(req.cookies.token){
         try{
@@ -296,8 +293,7 @@ dash.get("/Terminos", async(req, res)=>{
                 res.render("dashViews/Terminos",{
                 "rol": "dueno",
                 "nombre": nombre,
-                "foto": foto,
-                "mnu":0
+                "foto": foto
 
             });
         } catch (error){
@@ -309,21 +305,35 @@ dash.get("/Terminos", async(req, res)=>{
 });
 
 //PERFIL
-dash.get("/Perfil", (req, res) => {
+dash.get("/Perfil", async(req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
                 req.cookies.token,
                 process.env.SECRET_KEY
             )
+            // Información de las cookies
             let nombre = token.nombre;
             let foto = token.foto;
+            let email = token.email;
+
+            // Fetch del usuario
+            let rutaUsuario = process.env.API + "usuarios/" + email;
+            const resultUsuario = await fetch(rutaUsuario)
+            const usuario = await resultUsuario.json();
+
+            // Fetch de los paseos
+            let rutaPaseo = process.env.API + "paseo/";
+            const resultPaseo = await fetch(rutaPaseo)
+            const paseo = await resultPaseo.json();
 
             res.render("dashViews/Perfil", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu": 0
+                "email": email,
+                "usuario": usuario,
+                "paseo": paseo
 
             });
         } catch (error) {
@@ -334,6 +344,7 @@ dash.get("/Perfil", (req, res) => {
     }
 });
 
+// CHAT
 dash.get("/Chat", async(req, res)=>{
     if(req.cookies.token){
         try{
@@ -343,6 +354,12 @@ dash.get("/Chat", async(req, res)=>{
                 )
                 let nombre = token.nombre;
                 let foto = token.foto;
+                let email = token.email;
+
+                // Fetch del usuario
+                let rutaUsuario = process.env.API + "usuarios/" + email;
+                const resultUsuario = await fetch(rutaUsuario);
+                const usuario = await resultUsuario.json();
                 
                 res.render("dashViews/chat",{
                 "rol": "dueno",
@@ -365,40 +382,8 @@ dash.get("/salir", (req, res) => {
     res.redirect("/")
 })
 
-//Esto hay que bananearlo cuando acabemos xd
-dash.get("/users", async(req, res) => {
-    if (req.cookies.token) {
-        try {
-            const token = jwt.verify(
-                req.cookies.token,
-                process.env.SECRET_KEY
-            )
-            let nombre = token.nombre;
-            let foto = token.foto;
-
-            /*let ruta = process.env.API + "users";
-            let info;
-            const result = await fetch(ruta)
-            .then(resp => resp.json())
-            .then(data =>{
-                info = data
-            })
-
-            console.log(info);*/
-            res.render("dashboard", {
-                "nombre": nombre,
-                "foto": foto,
-                "mnu": 2
-            });
-        } catch (error) {
-            res.redirect("/Ingresa")
-        }
-    } else {
-        res.redirect("/Ingresa")
-    }
-});
-
-dash.get("/Terminos", async(req, res)=>{
+// TERMINOS
+/*dash.get("/Terminos", async(req, res)=>{
     if(req.cookies.token){
         try{
             const token = jwt.verify(
@@ -421,7 +406,7 @@ dash.get("/Terminos", async(req, res)=>{
     }else{
         res.redirect("/Ingresa")
     }
-});
+});*/
 
 /*Ejemplo de rutas del crud
 dash.post("/save",async (req, res)=>{
