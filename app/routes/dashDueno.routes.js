@@ -211,22 +211,27 @@ dash.post("/Configuracion", async (req, res)=>{
     let user = {
         //Asignar los campos de los inputs al objeto user
         nombre: req.body.nombre,
-        //apellidos: req.body.apellidos,
         municipio: req.body.municipio,
         direccion: req.body.direccion,
+        ubicacion: {
+            _latitude:req.body.paseoLatitude,
+            _longitude: req.body.paseoLongitude
+        },
         telefono: req.body.telefono,
         edad: req.body.edad,
         pais: req.body.pais,
         email: req.body.email
     }
+    console.log(user);
     try {
         const url = process.env.API + "usuarios";
         let metodo = "post";
         let datos = {
             nombre: user.nombre,
-            //apellidos: user.apellidos,
             municipio: user.municipio,
             direccion: user.direccion,
+            paseoLatitude: user.ubicacion._latitude,
+            paseoLongitude: user.ubicacion._longitude,
             telefono: user.telefono,
             edad: user.edad,
             pais: user.pais,
@@ -238,9 +243,10 @@ dash.post("/Configuracion", async (req, res)=>{
             metodo = "put";
             datos = {
                 nombre: user.nombre,
-                apellidos: user.apellidos,
                 municipio: user.municipio,
                 direccion: user.direccion,
+                paseoLatitude: user.ubicacion._latitude,
+                paseoLongitude: user.ubicacion._longitude,
                 telefono: user.telefono,
                 edad: user.edad,
                 pais: user.pais,

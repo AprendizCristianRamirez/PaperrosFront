@@ -9,11 +9,9 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
-                            <label class="TextoImagen">Añade una imagen de perfil:</label>
+                            <label class="TextoImagen">Añade tu ubicación:</label>
                             <!-- PENDIENTE POR HACER EL FORMULARIO PARA SUBIR LA IMAGEN A LA DB-->
-                            <input type="file" id="imagenPerro" name="img" class="form-control"
-                                placeholder="Elegir imagen">
-                            <img src="/v1/img/añadirImagenIcono2.png" alt="Imagen" class="imgPerfilConfig">
+                            <div id="map" class="mapaPaseo" alt="Ubicación de dueño"></div>
                         </div>
                     </div>
                     <div class="col-lg-6">
@@ -23,37 +21,40 @@
                                 value="<%= usuario.id %>">
                             <% } %>
                                 <!--email-->
-                                <input class="InputsAñadirPerro" type="hidden" id="email" name="email"
-                                    class="form-control" value="<%= email %>">
+                                <input type="hidden" id="email" name="email" value="<%= email %>">
+                                <!--Ubicación (Latitud)-->
+                                <input type="hidden" id="paseoLatitude" name="paseoLatitude">
+                                <!--Ubicación (Longitud)-->
+                                <input class="InputsAñadirPerro" type="hidden" id="paseoLongitude" name="paseoLongitude">
                                 <!--Campo de nombre-->
                                 <div class="form-group">
                                     <input class="InputsAñadirPerro" type="text" id="nombre" name="nombre"
-                                        class="form-control" placeholder="Nombre Completo">
+                                        class="form-control" placeholder="Nombre Completo" value="<%= usuario.nombre %>">
                                 </div>
                                 <!--Campo de dirección-->
                                 <div class="form-group ">
                                     <input class="InputsAñadirPerro" type="text" id="direccion" name="direccion"
-                                        class="form-control " placeholder="Dirección">
+                                        class="form-control " placeholder="Dirección" value="<%= usuario.direccion %>">
                                 </div>
                                 <!--Campo de teléfono-->
                                 <div class="form-group ">
                                     <input class="InputsAñadirPerro" type="text" id="telefono" name="telefono"
-                                        class="form-control " placeholder="Teléfono">
+                                        class="form-control " placeholder="Teléfono" value="<%= usuario.telefono %>">
                                 </div>
                                 <!--Campo de edad-->
                                 <div class="form-group ">
                                     <input class="InputsAñadirPerro" type="text" id="edad" name="edad"
-                                        class="form-control " placeholder="Edad">
+                                        class="form-control " placeholder="Edad" value="<%= usuario.edad %>">
                                 </div>
                                 <!--Campo de Municipio-->
                                 <div class="form-group ">
                                     <input class="InputsAñadirPerro" type="text" id="municipio" name="municipio"
-                                        class="form-control " placeholder="Municipio">
+                                        class="form-control " placeholder="Municipio" value="<%= usuario.municipio %>">
                                 </div>
                                 <!--Campo de País-->
                                 <div class="form-group ">
                                     <input class="InputsAñadirPerro" type="text" id="pais" name="pais"
-                                        class="form-control " placeholder="País">
+                                        class="form-control " placeholder="País" value="<%= usuario.pais %>">
                                 </div>
                                 <div class="row ">
                                     <div class="col-lg-12">

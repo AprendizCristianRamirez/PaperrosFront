@@ -29,7 +29,6 @@ for (i = 0; i < mapa; i++){
     //Crear función de clic
     map.on('click', function(event) {
     var latlng = event.latlng;
-    console.log("latlng: "+latlng);
     var latitude = latlng.lat;
     console.log("Latitude"+latitude);
     var longitude = latlng.lng;
