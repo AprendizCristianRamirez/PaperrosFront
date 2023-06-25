@@ -25,7 +25,6 @@ const __dirname = path.resolve();
 app.set("port",process.env.PORT);
 app.set("view engine", "ejs");
 app.set("views",path.resolve(path.join(__dirname, "app", "views")));
-console.log(path.resolve(path.join(__dirname, "app", "views")));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //middleware
