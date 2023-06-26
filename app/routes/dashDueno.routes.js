@@ -2,6 +2,7 @@ import { Router } from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import fetch from 'node-fetch';
+import puppeteer from "puppeteer";
 
 const dash = Router();
 
@@ -45,11 +46,11 @@ dash.get("/MisPaseos", async (req, res) => {
             }
         } catch (error) {
             console.log(error + "Error de cookies/fetch")
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     } else {
         console.log("Error de token")
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });
 
@@ -83,10 +84,10 @@ dash.get("/CrearPaseo", async (req, res) => {
                 "usuario": usuario
             });
         } catch (error) {
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     } else {
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });
 
@@ -104,16 +105,20 @@ dash.post("/CrearPaseo", async (req, res) => {
     }
 
     //Información de los perros seleccionados
-    const checkedPerros = [JSON.parse(req.body.perros)];
+    const checkedPerros = req.body.perros;
 
-    //console.log("Objeto + array: " +checkedPerros);
+
+    let perroArray = checkedPerros.map((item) => JSON.parse(item));
+
+    console.log(perroArray);
+    //console.log("Objeto + array: " + checkedPerros);
 
     //Añadir información del usuario a los perros
-    for (let i = 0; i < checkedPerros.length; i++) {
-        checkedPerros[i].nombre_dueno = usuario.nombre_dueno;
-        checkedPerros[i].foto_dueno = usuario.foto_dueno;
-        checkedPerros[i].email = usuario.email;
-        checkedPerros[i].localizacion = usuario.localizacion;
+    for (let i = 0; i < perroArray.length; i++) {
+        perroArray[i].nombre_dueno = usuario.nombre_dueno;
+        perroArray[i].foto_dueno = usuario.foto_dueno;
+        perroArray[i].email = usuario.email;
+        perroArray[i].localizacion = usuario.localizacion;
     }
 
     //console.log(checkedPerros);
@@ -137,7 +142,7 @@ dash.post("/CrearPaseo", async (req, res) => {
         //    img_paseador:req.body.paseadorImgPaseo,
         //    nombre_paseador:req.body.paseadorNombrePaseo
         //},
-        perro: checkedPerros
+        perro: perroArray
     }
     //console.log(paseo);
     try {
@@ -233,10 +238,10 @@ dash.get("/RutasPaseadores", (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     } else {
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });
 
@@ -266,10 +271,10 @@ dash.get("/AnadirPerro", async (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     } else {
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });
 
@@ -299,10 +304,10 @@ dash.get("/MisPerros", async (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     } else {
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });
 
@@ -333,10 +338,10 @@ dash.get("/Configuracion", async (req, res) => {
                 "usuario": usuario
             });
         } catch (error) {
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     } else {
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });
 
@@ -433,10 +438,10 @@ dash.get("/Terminos", async (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     } else {
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });
 
@@ -473,10 +478,10 @@ dash.get("/Perfil", async (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     } else {
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });
 
@@ -519,12 +524,86 @@ dash.get("/Perfil/:id", async (req, res) => {
             });
 
         } catch (error) {
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     } else {
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });
+
+//PDF
+// Plantilla  del pdf
+dash.get('/pdf', async(req, res) => {
+
+    if (req.cookies.token) {
+        try {
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+            )
+            // Información de las cookies
+            let nombre = token.nombre;
+            let foto = token.foto;
+            let email = token.email;
+
+            // Fetch del usuario
+            let rutaUsuario = process.env.API + "usuarios/" + email;
+            const resultUsuario = await fetch(rutaUsuario)
+            const usuario = await resultUsuario.json();
+
+            // Fetch de los paseos
+            let rutaPaseo = process.env.API + "paseo/";
+            const resultPaseo = await fetch(rutaPaseo)
+            const paseo = await resultPaseo.json();
+
+            //Ruta del archivo a renderizar
+            //const filePath = path.join(__dirname, "app", "views", "dashViews", "Reporte.ejs")
+
+            res.render("dashViews/Reporte", {
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": foto,
+                "email": email,
+                "usuario": usuario,
+                "paseo": paseo
+            }, (err, html) => {
+                if(err) {
+                    return response.send('Erro na leitura do arquivo')
+                }
+                // enviar para o navegador
+                return response.send(html)
+            });
+
+        } catch (error) {
+            res.redirect("/Salir")
+        }
+    } else {
+        res.redirect("/Salir")
+    }
+});
+
+//Ruta para crear pdf
+dash.get('/CreatePdf', async(request, response) => {
+
+    const browser = await puppeteer.launch()
+    const page = await browser.newPage()
+
+    await page.goto('/Perfil', {
+        waitUntil: 'networkidle0'
+    })
+
+    const pdf = await page.pdf({
+        printBackground: true,
+        format: 'Letter'
+    })
+
+    await browser.close()
+
+    response.contentType("application/pdf")
+
+    return response.send(pdf)
+
+})
 
 // CHAT
 dash.get("/Chat", async (req, res) => {
@@ -552,10 +631,10 @@ dash.get("/Chat", async (req, res) => {
 
             });
         } catch (error) {
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     } else {
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });
 
@@ -584,10 +663,10 @@ dash.get("/salir", (req, res) => {
 
             });
         } catch (error){
-            res.redirect("/Ingresa")
+            res.redirect("/Salir")
         }
     }else{
-        res.redirect("/Ingresa")
+        res.redirect("/Salir")
     }
 });*/
 
