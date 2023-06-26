@@ -120,6 +120,7 @@ dash.post("/CrearPaseo", async (req, res) => {
 
     //Campos del usuario
     let paseo = {
+        autor: req.body.duenoEmailPaseo,
         titulo: req.body.tituloPaseo,
         descripcion: req.body.descripcionPaseo,
         destino: {
@@ -143,6 +144,7 @@ dash.post("/CrearPaseo", async (req, res) => {
         const url = process.env.API + "paseo";
         let metodo = "post";
         let datos = {
+            autor: paseo.autor,
             titulo: paseo.titulo,
             descripcion: paseo.descripcion,
             destino: {
@@ -150,6 +152,7 @@ dash.post("/CrearPaseo", async (req, res) => {
                 _longitude: paseo.destino._longitude
             },
             tipo: "personalizado",
+            estado: "confirmado",
             nombre_destino: paseo.nombre_destino,
             hora_fin: paseo.hora_fin,
             hora_inicio: paseo.hora_inicio,
