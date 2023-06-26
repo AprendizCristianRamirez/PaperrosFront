@@ -8,7 +8,7 @@ const firebaseConfig = {
     messagingSenderId: "909088774674",
     appId: "1:909088774674:web:a63a0e3a8f709c5c8716cb",
     measurementId: "G-TX82FTKS5R"
-  };
+};
 
 //Inicializar Firebase
 firebase.initializeApp(firebaseConfig);
@@ -16,9 +16,9 @@ const db = firebase.firestore();
 
 // Función del formulario
 const form = document.getElementById('anadirPerro');
-form.addEventListener('submit', async(e) => {
+form.addEventListener('submit', async (e) => {
     e.preventDefault();
-  
+
     // Datos del formulario
     const id = document.querySelector('#id').value;
     const nombre = document.querySelector('#nombre').value;
@@ -48,6 +48,6 @@ form.addEventListener('submit', async(e) => {
         // Redireccionar a la pagina de MisPerros
         window.location.href = "/v1/dueno/MisPerros";
     } catch (error) {
-    console.error('Error al insertar perro:', error);
+        console.error('Error al insertar perro:', error);
     }
 });

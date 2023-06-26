@@ -9,35 +9,42 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
+                            <!-- INPUT LONGITUD Y LATITUD -->
                             <label class="TextoMapa">Selecciona el lugar de paseo en el mapa:</label>
+                            <%# Leaflet %>
+                                <script src="/v1/js/leafletElegir.js"></script>
 
-                            <input type="hidden" id="paseoLatitude" name="paseoLatitude" value="0">
-
-                            <input type="hidden" id="paseoLongitude" name="paseoLongitude" value="0">
-
-                            <input type="hidden" id="duenoIdPaseo" name="duenoIdPaseo" value="<%= email %>">
-
-                            <input type="hidden" id="duenoImgPaseo" name="duenoImgPaseo" value="<%= foto %>">
-
-                            <input type="hidden" id="duenoNombrePaseo" name="duenoNombrePaseo" value="<%= nombre %>">
-
-                            <input type="hidden" id="paseadorIdPaseo" name="paseadorIdPaseo" value="<%= email %>">
-
-                            <input type="hidden" id="paseadorImgPaseo" name="paseadorImgPaseo" value="<%= foto %>">
-
-                            <input type="hidden" id="paseadorNombrePaseo" name="paseadorNombrePaseo" value="<%= nombre %>">
-
-                            <input type="hidden" id="perroIdPaseo" name="perroIdPaseo" value="1">
-
-                            <input type="hidden" id="perroImgPaseo" name="perroImgPaseo" value="lilajpg">
-
-                            <input type="hidden" id="perroLocalizacionPaseo" name="perroLocalizacionPaseo" value="0x0">
-
-                            <input type="hidden" id="perroNombrePaseo" name="perroNombrePaseo" value="lila">
-
-                            <!--  <input type="hidden" id=""> -->
-                            <div id="map"></div>
+                                <!--Ubicación (Latitud)-->
+                                <input type="hidden" id="paseoLatitude" name="paseoLatitude">
+                                <!--Ubicación (Longitud)-->
+                                <input type="hidden" id="paseoLongitude" name="paseoLongitude">
                         </div>
+
+                        <!-- INPUT HIDDEN ID DEL DUEÑO -->
+                        <input type="hidden" id="duenoIdPaseo" name="duenoIdPaseo" value="<%= usuario.id %>">
+                        <!-- INPUT HIDDEN IMG DEL DUEÑO -->
+                        <input type="hidden" id="duenoImgPaseo" name="duenoImgPaseo" value="<%= foto %>">
+                        <!-- INPUT HIDDEN NOMBRE DEL DUEÑO -->
+                        <input type="hidden" id="duenoNombrePaseo" name="duenoNombrePaseo" value="<%= nombre %>">
+
+                        <!-- INPUT HIDDEN ID DEL PASEADOR -->
+                        <input type="hidden" id="paseadorIdPaseo" name="paseadorIdPaseo" value="0">
+                        <!-- INPUT HIDDEN IMG DEL PASEADOR -->
+                        <input type="hidden" id="paseadorImgPaseo" name="paseadorImgPaseo" value="0">
+                        <!-- INPUT HIDDEN NOMBRE DEL PASEADOR -->
+                        <input type="hidden" id="paseadorNombrePaseo" name="paseadorNombrePaseo" value="0">
+
+                        <!-- INPUT HIDDEN ID DEL PERRO -->
+                        <input type="hidden" id="perroIdPaseo" name="perroIdPaseo" value="0">
+                        <!-- INPUT HIDDEN IMG DEL PERRO -->
+                        <input type="hidden" id="perroImgPaseo" name="perroImgPaseo" value="0">
+                        <!-- INPUT HIDDEN LOCALIZACION DEL PERRO -->
+                        <input type="hidden" id="perroLocalizacionPaseo" name="perroLocalizacionPaseo" value="0x0">
+                        <!-- INPUT HIDDEN NOMBRE DEL PERRO -->
+                        <input type="hidden" id="perroNombrePaseo" name="perroNombrePaseo" value="0">
+
+
+                        <!-- INPUT SELECCION DE PERROS DEL USUARIO -->
                         <div class="form-group">
                             <textarea class="InputDescripcionPaseo" name="descripcionPaseo" id="descripcionPaseo"
                                 cols="30" rows="10" placeholder="Descripcion"></textarea>
@@ -62,33 +69,40 @@
                             </label>
                         </div>
                     </div> -->
+                        <!-- INPUT TITULO -->
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <input class="InputsAñadirPerro" type="text" id="TituloPaseo" name="TituloPaseo"
                                     class="form-control" placeholder="Titulo">
                             </div>
+                            <!-- INPUT FECHA -->
                             <div class="form-group ">
                                 <input class="InputsAñadirPerro" type="text" id="fechaPaseo " name="fechaPaseo"
                                     class="form-control " placeholder="Fecha">
                             </div>
+                            <!-- INPUT HORA DE INICIO -->
                             <div class="form-group ">
                                 <label class="TextoMapa">Selecciona una hora de inicio</label>
                                 <input class="InputsAñadirPerro" type="text" id="horaInicioPaseo" name="horaInicioPaseo"
                                     class="form-control " placeholder="Hora inicio">
                             </div>
+                            <!-- INPUT HORA FIN -->
                             <div class="form-group ">
                                 <label class="TextoMapa">Selecciona una hora de finalizacion</label>
                                 <input class="InputsAñadirPerro" type="text" id="horaFinPaseo" name="horaFinPaseo"
                                     class="form-control " placeholder="Hora fin">
                             </div>
+                            <!-- INPUT NOMBRE DEL DESTINO -->
                             <div class="form-group">
                                 <input class="InputsAñadirPerro" type="text" id="nombreDestinoPaseo"
                                     name="nombreDestinoPaseo" class="form-control" placeholder="Lugar del paseo">
                             </div>
+                            <!-- INPUT PRECIO POR PERRO -->
                             <div class="form-group">
                                 <input class="InputsAñadirPerro" type="text" id="precioPaseo" name="precioPaseo"
                                     class="form-control" placeholder="Precio por perro">
                             </div>
+                            <!-- INPUT METODO DE PAGO -->
                             <div class="form-group">
                                 <input class="InputsAñadirPerro" type="text" id="medioPagoPaseo" name="medioPagoPaseo"
                                     class="form-control" placeholder="Metodo para realizar el pago">

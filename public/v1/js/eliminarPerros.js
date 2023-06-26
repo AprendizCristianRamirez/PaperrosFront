@@ -8,23 +8,23 @@ const firebaseConfig = {
     messagingSenderId: "909088774674",
     appId: "1:909088774674:web:a63a0e3a8f709c5c8716cb",
     measurementId: "G-TX82FTKS5R"
-  };
+};
 
 //Inicializar Firebase
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 
 // Función del formulario
-async function eliminarPerro(idPerro){
-  
+async function eliminarPerro(idPerro) {
+
     // Datos del formulario
     const id = document.querySelector('#id').value;
-    const nombre = document.querySelector('#nombre'+idPerro).value;
-    const raza = document.querySelector('#raza'+idPerro).value;
-    const comportamiento = document.querySelector('#comportamiento'+idPerro).value;
-    const vacunas = document.querySelector('#vacunas'+idPerro).value;
-    const estatura = document.querySelector('#estatura'+idPerro).value;
-    const peso = document.querySelector('#peso'+idPerro).value;
+    const nombre = document.querySelector('#nombre' + idPerro).value;
+    const raza = document.querySelector('#raza' + idPerro).value;
+    const comportamiento = document.querySelector('#comportamiento' + idPerro).value;
+    const vacunas = document.querySelector('#vacunas' + idPerro).value;
+    const estatura = document.querySelector('#estatura' + idPerro).value;
+    const peso = document.querySelector('#peso' + idPerro).value;
 
     // Objeto con los datos del perro
     const perros = {
@@ -45,6 +45,6 @@ async function eliminarPerro(idPerro){
 
         window.location.href = "/v1/dueno/MisPerros";
     } catch (error) {
-    console.error('Error al insertar perro:', error);
+        console.error('Error al insertar perro:', error);
     }
 };
