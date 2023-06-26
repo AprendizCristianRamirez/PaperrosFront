@@ -430,11 +430,40 @@ dash.get("/Terminos", async (req, res) => {
             )
             let nombre = token.nombre;
             let foto = token.foto;
+            let email = token.email;
 
             res.render("dashViews/Terminos", {
                 "rol": "dueno",
                 "nombre": nombre,
-                "foto": foto
+                "foto": foto,
+                "email": email
+
+            });
+        } catch (error) {
+            res.redirect("/Ingresa")
+        }
+    } else {
+        res.redirect("/Ingresa")
+    }
+});
+
+// REPORTES
+dash.get("/Reportes", async (req, res) => {
+    if (req.cookies.token) {
+        try {
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
+            let email = token.email;
+
+            res.render("dashViews/reportes", {
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": foto,
+                "email": email
 
             });
         } catch (error) {
