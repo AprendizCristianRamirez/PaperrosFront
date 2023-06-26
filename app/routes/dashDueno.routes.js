@@ -102,12 +102,9 @@ dash.post("/CrearPaseo", async (req, res)=>{
             _longitude: req.body.paseoLongitude
         }
     }
-    console.log("Json: " + JSON.parse(req.body.perros))
 
     //Información de los perros seleccionados
-    const checkPerros = [JSON.parse(req.body.perros)];
-
-    const checkedPerros = [checkPerros];
+    const checkedPerros = [JSON.parse(req.body.perros)];
 
       //console.log("Objeto + array: " +checkedPerros);
 
@@ -118,8 +115,6 @@ dash.post("/CrearPaseo", async (req, res)=>{
         checkedPerros[i].email = usuario.email;
         checkedPerros[i].localizacion = usuario.localizacion;
       }
-
-      //console.log(checkedPerros);
 
     //Campos del usuario
     let paseo = {
@@ -149,14 +144,15 @@ dash.post("/CrearPaseo", async (req, res)=>{
             titulo: paseo.titulo,
             descripcion: paseo.descripcion,
             destino: {
-                _latitude:paseo._latitude,
-                _longitude: paseo._longitude
+                _latitude:paseo.destino._latitude,
+                _longitude: paseo.destino._longitude
             },
+            tipo: "personalizado",
             nombre_destino: paseo.nombre_destino,
             hora_fin: paseo.hora_fin,
             hora_inicio: paseo.hora_inicio,
             precio: paseo.precio,
-            medio_de_pago: medio_de_pago,
+            medio_de_pago: paseo.medio_de_pago,
             paseador: { 
                 //Vacio porque luego el paseador decide tomar el paseo
             },
@@ -170,8 +166,8 @@ dash.post("/CrearPaseo", async (req, res)=>{
                 titulo: paseo.titulo,
                 descripcion: paseo.descripcion,
                 destino: {
-                    _latitude:paseo._latitude,
-                    _longitude: paseo._longitude
+                    _latitude:paseo.destino._latitude,
+                    _longitude: paseo.destino._longitude
                 },
                 nombre_destino: paseo.nombre_destino,
                 hora_fin: paseo.hora_fin,
@@ -184,6 +180,7 @@ dash.post("/CrearPaseo", async (req, res)=>{
                 perro: paseo.perro
             }
         }
+        console.log(datos);
         //Configuración del fetch
         const option = {
             method : metodo, //En metodo iria post si no tiene id y post en el caso contrario

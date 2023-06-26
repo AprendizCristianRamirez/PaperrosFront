@@ -7,7 +7,7 @@ for (i = 0; i < mapa; i++){
     
     // Y establecer el punto donde se iniciará el mapa
     // Los parametros de setView son ([Latitud, Longitud], zoom)
-    var map = L.map(mapId).setView([mapaData[i].destino._latitude, mapaData[i].destino._longitude], 14);
+    var map = L.map(mapId).setView([mapaData[i].destino._latitude, mapaData[i].destino._longitude], 15);
 
     // Establecer tile (skin o aspecto) del mapa
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -17,10 +17,10 @@ for (i = 0; i < mapa; i++){
 
     //Añadir area del paseo
     var circle = L.circle([mapaData[i].destino._latitude, mapaData[i].destino._longitude], {
-        color: 'brown',
+        color: 'none',
         fillColor: '#a47559',
-        fillOpacity: 0.5,
-        radius: 500
+        fillOpacity: 0.4,
+        radius: 300
     }).addTo(map);
     
     //Asignar popups

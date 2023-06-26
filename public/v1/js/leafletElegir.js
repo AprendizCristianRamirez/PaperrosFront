@@ -7,7 +7,7 @@ map.locate({setView: true, maxZoom: 16});
 // Establecer tile (skin o aspecto) del mapa
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
-    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+    attribution: '<a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
 //Crear función de clic
@@ -26,7 +26,7 @@ map.on('click', function(event) {
     campoLongitude.value = longitude;    
 
     //Obtener ubicación
-    map.locate({setView: true, maxZoom: 17});
+    //map.locate({setView: true, maxZoom: 17});
 
     //Error cuando no se obtiene la ubicación
     function onLocationError(e) {

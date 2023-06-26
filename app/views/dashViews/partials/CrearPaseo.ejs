@@ -14,14 +14,14 @@
                                 <%# Mapa %>
                             <div id="map" class="mapaPaseo" alt="Ubicación de dueño"></div>
                                 <%# Mapa: latitud %>
-                            <input type="hidden" id="paseoLatitude" name="paseoLatitude" value="0">
+                            <input type="hidden" id="paseoLatitude" name="paseoLatitude" value="0" required>
                                 <%# Mapa: Longitud %>
-                            <input type="hidden" id="paseoLongitude" name="paseoLongitude" value="0">
+                            <input type="hidden" id="paseoLongitude" name="paseoLongitude" value="0" required>
 
                             <%# Datos del dueño %>
-                            <input type="hidden" id="duenoEmailPaseo" name="duenoEmailPaseo" value="<%= email %>">
-                            <input type="hidden" id="duenoFotoPaseo" name="duenoFotoPaseo" value="<%= foto %>">
-                            <input type="hidden" id="duenoNombrePaseo" name="duenoNombrePaseo" value="<%= nombre %>">
+                            <input type="hidden" id="duenoEmailPaseo" name="duenoEmailPaseo" value="<%= email %>" required>
+                            <input type="hidden" id="duenoFotoPaseo" name="duenoFotoPaseo" value="<%= foto %>" required>
+                            <input type="hidden" id="duenoNombrePaseo" name="duenoNombrePaseo" value="<%= nombre %>" required>
 
                             <%# Datos del paseador %>
                             <!--<input type="hidden" id="paseadorIdPaseo" name="paseadorIdPaseo" value="<%= email %>">
@@ -50,52 +50,39 @@
                     <div class="form-group ">
                         <label class="TextoMapa">Selecciona una hora de inicio</label>
                         <input class="InputsAñadirPerro" type="date" id="fechaPaseo " name="fechaPaseo"
-                            class="form-control " placeholder="Fecha">
+                            class="form-control " placeholder="Fecha" required>
                         <label class="TextoMapa">Selecciona una hora de inicio</label>
                         <input class="InputsAñadirPerro" type="time" id="horaInicioPaseo" name="horaInicioPaseo"
-                            class="form-control " placeholder="Hora inicio">
+                            class="form-control " placeholder="Hora inicio" required>
                         <label class="TextoMapa">Selecciona una hora de finalizacion</label>
                         <input class="InputsAñadirPerro" type="time" id="horaFinPaseo" name="horaFinPaseo"
-                            class="form-control " placeholder="Hora fin">
+                            class="form-control " placeholder="Hora fin" required>
                     </div>
 
                     </div> 
                         <div class="col-lg-6">
                             <div class="form-group">
                                 <input class="InputsAñadirPerro" type="text" id="tituloPaseo" name="tituloPaseo"
-                                    class="form-control" placeholder="Titulo">
+                                    class="form-control" placeholder="Titulo" required>
                             </div>
-                            <!-- INPUT FECHA -->
-                            <div class="form-group ">
-                                <input class="InputsAñadirPerro" type="text" id="fechaPaseo " name="fechaPaseo"
-                                    class="form-control " placeholder="Fecha">
-                            </div>
-                            <!-- INPUT HORA DE INICIO -->
-                            <div class="form-group ">
-                                <label class="TextoMapa">Selecciona una hora de inicio</label>
-                                <input class="InputsAñadirPerro" type="text" id="horaInicioPaseo" name="horaInicioPaseo"
-                                    class="form-control " placeholder="Hora inicio">
-                            </div>
-                            <!-- INPUT HORA FIN -->
-                            <div class="form-group ">
-                                <label class="TextoMapa">Selecciona una hora de finalizacion</label>
-                                <input class="InputsAñadirPerro" type="text" id="horaFinPaseo" name="horaFinPaseo"
-                                    class="form-control " placeholder="Hora fin">
+                            <div class="form-group">
+                                <input class="InputsAñadirPerro" type="text" id="descripcionPaseo" name="descripcionPaseo"
+                                    class="form-control" placeholder="Descripción" required>
                             </div>
                             <!-- INPUT NOMBRE DEL DESTINO -->
                             <div class="form-group">
                                 <input class="InputsAñadirPerro" type="text" id="nombreDestinoPaseo"
-                                    name="nombreDestinoPaseo" class="form-control" placeholder="Lugar del paseo">
+                                    name="nombreDestinoPaseo" class="form-control" placeholder="Lugar del paseo" required>
                             </div>
                             <!-- INPUT PRECIO POR PERRO -->
                             <div class="form-group">
                                 <input class="InputsAñadirPerro" type="text" id="precioPaseo" name="precioPaseo"
-                                    class="form-control" placeholder="Precio por perro">
+                                    class="form-control" placeholder="Precio por perro" required>
                             </div>
                             <!-- INPUT METODO DE PAGO -->
                             <div class="form-group">
                                 <input class="InputsAñadirPerro" type="text" id="medioPagoPaseo" name="medioPagoPaseo"
-                                    class="form-control" placeholder="Metodo para realizar el pago">
+                                    class="form-control" placeholder="Metodo para realizar el pago" required>
                             </div>
                         </div>
                     </div>
