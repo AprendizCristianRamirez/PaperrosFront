@@ -1,6 +1,8 @@
 // Y establecer el punto donde se iniciará el mapa
 // Los parametros de setView son ([Latitud, Longitud], zoom)
-var map = L.map('map').setView([6.164065, -75.589371], 12);
+var map = L.map('map').setView([6.164065, -75.589371], 13);
+//var map = L.map('map').fitWorld();
+map.locate({setView: true, maxZoom: 16});
 
 // Establecer tile (skin o aspecto) del mapa
 L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -16,19 +18,22 @@ map.on('click', function(event) {
     var longitude = latlng.lng;
     console.log("Longitude"+longitude);
 
-    // Set the value of the target div with the clicked location
+    // Establecer la latitud en el campo
     var campoLatitude = document.getElementById('paseoLatitude');
     campoLatitude.value = latitude;
-
+// Establecer la longitud en el campo
     var campoLongitude = document.getElementById('paseoLongitude');
     campoLongitude.value = longitude;    
-});
 
-//Popup flotante
-/*var popup = L.popup()
-.setLatLng([6.17591, -75.6])
-.setContent("I am a standalone popup.")
-.openOn(map);*/
+    //Obtener ubicación
+    map.locate({setView: true, maxZoom: 17});
+
+    //Error cuando no se obtiene la ubicación
+    function onLocationError(e) {
+        alert(e.message);
+    }
+    map.on('locationerror', onLocationError);
+});
 
 //Función de onclick
 var popup2 = L.popup();
@@ -36,7 +41,7 @@ var popup2 = L.popup();
 function onMapClick(e) {
 popup2
     .setLatLng(e.latlng)
-    .setContent("Hiciste click en " + e.latlng.toString())
+    .setContent("Hiciste click en " + e.latlng.lat.toString() + ", " + e.latlng.lng.toString())
     .openOn(map);
 }
 

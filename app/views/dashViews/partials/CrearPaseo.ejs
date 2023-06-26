@@ -4,82 +4,70 @@
         <p class="fs-4 text-parrafo text-center">
             Adjunta la informacion de tu paseo para poder publicarla.
         </p>
-        <form action="http://localhost:3001/api/paseo/" method="post">
+        <form action="/v1/dueno/CrearPaseo" method="post">
             <div class="container ContainerAñadirPerro">
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="form-group">
+                            <%# Datos del mapa %>
                             <label class="TextoMapa">Selecciona el lugar de paseo en el mapa:</label>
-
+                                <%# Mapa %>
+                            <div id="map" class="mapaPaseo" alt="Ubicación de dueño"></div>
+                                <%# Mapa: latitud %>
                             <input type="hidden" id="paseoLatitude" name="paseoLatitude" value="0">
-
+                                <%# Mapa: Longitud %>
                             <input type="hidden" id="paseoLongitude" name="paseoLongitude" value="0">
 
-                            <input type="hidden" id="duenoIdPaseo" name="duenoIdPaseo" value="<%= email %>">
-
-                            <input type="hidden" id="duenoImgPaseo" name="duenoImgPaseo" value="<%= foto %>">
-
+                            <%# Datos del dueño %>
+                            <input type="hidden" id="duenoEmailPaseo" name="duenoEmailPaseo" value="<%= email %>">
+                            <input type="hidden" id="duenoFotoPaseo" name="duenoFotoPaseo" value="<%= foto %>">
                             <input type="hidden" id="duenoNombrePaseo" name="duenoNombrePaseo" value="<%= nombre %>">
 
-                            <input type="hidden" id="paseadorIdPaseo" name="paseadorIdPaseo" value="<%= email %>">
-
+                            <%# Datos del paseador %>
+                            <!--<input type="hidden" id="paseadorIdPaseo" name="paseadorIdPaseo" value="<%= email %>">
                             <input type="hidden" id="paseadorImgPaseo" name="paseadorImgPaseo" value="<%= foto %>">
+                            <input type="hidden" id="paseadorNombrePaseo" name="paseadorNombrePaseo" value="<%= nombre %>">-->
 
-                            <input type="hidden" id="paseadorNombrePaseo" name="paseadorNombrePaseo" value="<%= nombre %>">
-
-                            <input type="hidden" id="perroIdPaseo" name="perroIdPaseo" value="1">
-
-                            <input type="hidden" id="perroImgPaseo" name="perroImgPaseo" value="lilajpg">
-
+                            <%# Datos del paseador %>
+                            <!--<input type="hidden" id="perroImgPaseo" name="perroImgPaseo" value="lilajpg">
                             <input type="hidden" id="perroLocalizacionPaseo" name="perroLocalizacionPaseo" value="0x0">
-
-                            <input type="hidden" id="perroNombrePaseo" name="perroNombrePaseo" value="lila">
+                            <input type="hidden" id="perroNombrePaseo" name="perroNombrePaseo" value="lila">-->
 
                             <!--  <input type="hidden" id=""> -->
                             <div id="map"></div>
                         </div>
-                        <div class="form-group">
-                            <textarea class="InputDescripcionPaseo" name="descripcionPaseo" id="descripcionPaseo"
-                                cols="30" rows="10" placeholder="Descripcion"></textarea>
-                        </div>
-                        <!--        <div class="form-group">
-                            <label class="TextoMapa">Selecciona los perros para el paseo</label>
-                            <br>
-                            <label for="perro1">
-                                <input type="checkbox" id="perro1" name="perro" value ="perro" %> Perro 1
+                    <div class="form-group">
+
+                        <% usuario.perros.forEach(function(element) { %>
+                            <label>
+                              <input type="checkbox" name="perros" value="<%= JSON.stringify(element) %>">
+                              <%= element.nombre %>
                             </label>
                             <br>
-                            <label for="perro2">
-                                <input type="checkbox" id="perro2" name="perro" value ="perro" %> Perro 2
-                            </label>
-                            <br>
-                            <label for="perro3">
-                                <input type="checkbox" id="perro3" name="perro" valuee ="perro"%> Perro 3
-                            </label>
-                            <br>
-                            <label for="perro4">
-                                <input type="checkbox" id="perro4" name="perro" value ="perro" %> Perro 4
-                            </label>
-                        </div>
-                    </div> -->
+                        <% }); %>
+                          
+                    </div>
+                    <div class="form-group ">
+                        <label class="TextoMapa">Selecciona una hora de inicio</label>
+                        <input class="InputsAñadirPerro" type="date" id="fechaPaseo " name="fechaPaseo"
+                            class="form-control " placeholder="Fecha">
+                        <label class="TextoMapa">Selecciona una hora de inicio</label>
+                        <input class="InputsAñadirPerro" type="time" id="horaInicioPaseo" name="horaInicioPaseo"
+                            class="form-control " placeholder="Hora inicio">
+                        <label class="TextoMapa">Selecciona una hora de finalizacion</label>
+                        <input class="InputsAñadirPerro" type="time" id="horaFinPaseo" name="horaFinPaseo"
+                            class="form-control " placeholder="Hora fin">
+                    </div>
+
+                    </div> 
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <input class="InputsAñadirPerro" type="text" id="TituloPaseo" name="TituloPaseo"
+                                <input class="InputsAñadirPerro" type="text" id="tituloPaseo" name="tituloPaseo"
                                     class="form-control" placeholder="Titulo">
                             </div>
-                            <div class="form-group ">
-                                <input class="InputsAñadirPerro" type="text" id="fechaPaseo " name="fechaPaseo"
-                                    class="form-control " placeholder="Fecha">
-                            </div>
-                            <div class="form-group ">
-                                <label class="TextoMapa">Selecciona una hora de inicio</label>
-                                <input class="InputsAñadirPerro" type="text" id="horaInicioPaseo" name="horaInicioPaseo"
-                                    class="form-control " placeholder="Hora inicio">
-                            </div>
-                            <div class="form-group ">
-                                <label class="TextoMapa">Selecciona una hora de finalizacion</label>
-                                <input class="InputsAñadirPerro" type="text" id="horaFinPaseo" name="horaFinPaseo"
-                                    class="form-control " placeholder="Hora fin">
+                            <div class="form-group">
+                                <textarea class="InputsAñadirPerro" name="descripcionPaseo" id="descripcionPaseo"
+                                    cols="30" rows="10" placeholder="Descripcion"></textarea>
                             </div>
                             <div class="form-group">
                                 <input class="InputsAñadirPerro" type="text" id="nombreDestinoPaseo"
@@ -101,7 +89,7 @@
                                 <a href="/MisPerros">
                                     <button class="BotonCancelarPerro">Cancelar</button>
                                 </a>
-                                <input type="submit" class="BotonSubirPerro">Subir</input>
+                                <input type="submit" class="BotonSubirPerro"></input>
                             </div>
                         </div>
                     </div>

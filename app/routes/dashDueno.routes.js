@@ -38,7 +38,7 @@ dash.get("/MisPaseos", async(req, res) => {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu": 0,
+                "email": email,
                 "usuario": usuario,
                 "paseo": paseo
             });
@@ -54,7 +54,7 @@ dash.get("/MisPaseos", async(req, res) => {
 });
 
 //CREARPASEO
-dash.get("/CrearPaseo", (req, res) => {
+dash.get("/CrearPaseo", async(req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -63,13 +63,24 @@ dash.get("/CrearPaseo", (req, res) => {
             )
             let nombre = token.nombre;
             let foto = token.foto;
+            let email = token.email;
+
+            // Fetch del usuario
+            let rutaUsuario = process.env.API + "usuarios/" + email;
+            const resultUsuario = await fetch(rutaUsuario)
+            const usuario = await resultUsuario.json();
+
+            // Fetch de los paseos
+            let rutaPaseo = process.env.API + "paseo/";
+            const resultPaseo = await fetch(rutaPaseo)
+            const paseo = await resultPaseo.json();
 
             res.render("dashViews/CrearPaseo", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu": 0
-
+                "email": email,
+                "usuario": usuario
             });
         } catch (error) {
             res.redirect("/Ingresa")
@@ -77,6 +88,127 @@ dash.get("/CrearPaseo", (req, res) => {
     } else {
         res.redirect("/Ingresa")
     }
+});
+
+dash.post("/CrearPaseo", async (req, res)=>{
+
+    //Datos del usuario dueño de los perros
+    const usuario = {
+        nombre_dueno: req.body.duenoNombrePaseo,
+        foto_dueno: req.body.duenoFotoPaseo,
+        email: req.body.duenoEmailPaseo,
+        localizacion: {
+            _latitude: req.body.paseoLatitude,
+            _longitude: req.body.paseoLongitude
+        }
+    }
+    console.log("Json: " + JSON.parse(req.body.perros))
+
+    //Información de los perros seleccionados
+    const checkPerros = [JSON.parse(req.body.perros)];
+
+    const checkedPerros = [checkPerros];
+
+      //console.log("Objeto + array: " +checkedPerros);
+
+    //Añadir información del usuario a los perros
+      for (let i = 0; i < checkedPerros.length; i++) {
+        checkedPerros[i].nombre_dueno = usuario.nombre_dueno;
+        checkedPerros[i].foto_dueno = usuario.foto_dueno;
+        checkedPerros[i].email = usuario.email;
+        checkedPerros[i].localizacion = usuario.localizacion;
+      }
+
+      //console.log(checkedPerros);
+
+    //Campos del usuario
+    let paseo = {
+        titulo: req.body.tituloPaseo,
+        descripcion: req.body.descripcionPaseo,
+        destino: {
+            _latitude:req.body.paseoLatitude,
+            _longitude: req.body.paseoLongitude
+        },
+        nombre_destino: req.body.nombreDestinoPaseo,
+        hora_fin: req.body.horaFinPaseo,
+        hora_inicio: req.body.horaInicioPaseo,
+        precio: req.body.precioPaseo,
+        medio_de_pago: req.body.medioPagoPaseo,
+        //paseador: { No se usa porque estamos creando un paseo personalizado (que debe tomar el paseador)
+        //    id_paseador:req.body.paseadorIdPaseo,
+        //    img_paseador:req.body.paseadorImgPaseo,
+        //    nombre_paseador:req.body.paseadorNombrePaseo
+        //},
+        perro: checkedPerros
+    }
+    //console.log(paseo);
+    try {
+        const url = process.env.API + "paseo";
+        let metodo = "post";
+        let datos = {
+            titulo: paseo.titulo,
+            descripcion: paseo.descripcion,
+            destino: {
+                _latitude:paseo._latitude,
+                _longitude: paseo._longitude
+            },
+            nombre_destino: paseo.nombre_destino,
+            hora_fin: paseo.hora_fin,
+            hora_inicio: paseo.hora_inicio,
+            precio: paseo.precio,
+            medio_de_pago: medio_de_pago,
+            paseador: { 
+                //Vacio porque luego el paseador decide tomar el paseo
+            },
+            perro: paseo.perro
+        };
+    //Si el campo tiene un id, será metodo put (actualizar)
+        if (req.body.id){
+            const id = req.body.id;
+            metodo = "put";
+            datos = {
+                titulo: paseo.titulo,
+                descripcion: paseo.descripcion,
+                destino: {
+                    _latitude:paseo._latitude,
+                    _longitude: paseo._longitude
+                },
+                nombre_destino: paseo.nombre_destino,
+                hora_fin: paseo.hora_fin,
+                hora_inicio: paseo.hora_inicio,
+                precio: paseo.precio,
+                medio_de_pago: medio_de_pago,
+                paseador: { 
+                    //Vacio porque luego el paseador decide tomar el paseo
+                },
+                perro: paseo.perro
+            }
+        }
+        //Configuración del fetch
+        const option = {
+            method : metodo, //En metodo iria post si no tiene id y post en el caso contrario
+            body : JSON.stringify(datos),
+            headers : {
+                'Content-Type':'application/json'
+            }
+        }
+        //Fetch
+        const result = await fetch(url, option)
+        .then(response=>response.json())
+        .then(data=>{
+            console.log(data);
+            if (data[0].affectedRows>0){
+                console.log("Los datos fueron insertados");
+            }else{
+                console.log("No se inserto");
+            }
+        })
+        .then(error=>{console.log("Ha habido un error: "+ error);})
+    } catch (error) {
+        console.log("Informacion no insertada: "+error);
+    }
+    
+    res.redirect("MisPaseos")
 });
 
 dash.get("/RutasPaseadores", (req, res) => {
