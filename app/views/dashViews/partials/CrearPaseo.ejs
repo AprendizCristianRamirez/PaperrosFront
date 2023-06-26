@@ -10,7 +10,7 @@
                     <div class="col-lg-6">
                         <div class="form-group">
                             <%# Datos del mapa %>
-                            <label class="TextoMapa">Selecciona el lugar de paseo en el mapa:</label>
+                                <label class="TextoMapa">Selecciona el lugar de paseo en el mapa:</label>
                                 <%# Mapa %>
                             <div id="map" class="mapaPaseo" alt="Ubicación de dueño"></div>
                                 <%# Mapa: latitud %>
@@ -23,20 +23,20 @@
                             <input type="hidden" id="duenoFotoPaseo" name="duenoFotoPaseo" value="<%= foto %>" required>
                             <input type="hidden" id="duenoNombrePaseo" name="duenoNombrePaseo" value="<%= nombre %>" required>
 
-                            <%# Datos del paseador %>
-                            <!--<input type="hidden" id="paseadorIdPaseo" name="paseadorIdPaseo" value="<%= email %>">
+                                                <%# Datos del paseador %>
+                                                    <!--<input type="hidden" id="paseadorIdPaseo" name="paseadorIdPaseo" value="<%= email %>">
                             <input type="hidden" id="paseadorImgPaseo" name="paseadorImgPaseo" value="<%= foto %>">
                             <input type="hidden" id="paseadorNombrePaseo" name="paseadorNombrePaseo" value="<%= nombre %>">-->
 
-                            <%# Datos del paseador %>
-                            <!--<input type="hidden" id="perroImgPaseo" name="perroImgPaseo" value="lilajpg">
+                                                    <%# Datos del paseador %>
+                                                        <!--<input type="hidden" id="perroImgPaseo" name="perroImgPaseo" value="lilajpg">
                             <input type="hidden" id="perroLocalizacionPaseo" name="perroLocalizacionPaseo" value="0x0">
                             <input type="hidden" id="perroNombrePaseo" name="perroNombrePaseo" value="lila">-->
 
-                            <!--  <input type="hidden" id=""> -->
-                            <div id="map"></div>
+                                                        <!--  <input type="hidden" id=""> -->
+                                                        <div id="map"></div>
                         </div>
-                    <div class="form-group">
+                        <div class="form-group">
 
                         <% usuario.perros.forEach(function(element) { %>
                             <label>
@@ -85,18 +85,69 @@
                                     class="form-control" placeholder="Metodo para realizar el pago" required>
                             </div>
                         </div>
+                        <div class="form-group ">
+                            <label class="TextoMapa">Selecciona una hora de inicio</label>
+                            <input class="InputsAñadirPerro" type="date" id="fechaPaseo " name="fechaPaseo"
+                                class="form-control " placeholder="Fecha">
+                            <label class="TextoMapa">Selecciona una hora de inicio</label>
+                            <input class="InputsAñadirPerro" type="time" id="horaInicioPaseo" name="horaInicioPaseo"
+                                class="form-control " placeholder="Hora inicio">
+                            <label class="TextoMapa">Selecciona una hora de finalizacion</label>
+                            <input class="InputsAñadirPerro" type="time" id="horaFinPaseo" name="horaFinPaseo"
+                                class="form-control " placeholder="Hora fin">
+                        </div>
+
                     </div>
-                    <div class="row ">
-                        <div class="col-lg-12">
-                            <div class="form-group a-center">
-                                <a href="/MisPerros">
-                                    <button class="BotonCancelarPerro">Cancelar</button>
-                                </a>
-                                <input type="submit" class="BotonSubirPerro"></input>
-                            </div>
+                    <div class="col-lg-6">
+                        <div class="form-group">
+                            <input class="InputsAñadirPerro" type="text" id="tituloPaseo" name="tituloPaseo"
+                                class="form-control" placeholder="Titulo">
+                        </div>
+                        <!-- INPUT FECHA -->
+                        <div class="form-group ">
+                            <input class="InputsAñadirPerro" type="text" id="fechaPaseo " name="fechaPaseo"
+                                class="form-control " placeholder="Fecha">
+                        </div>
+                        <!-- INPUT HORA DE INICIO -->
+                        <div class="form-group ">
+                            <label class="TextoMapa">Selecciona una hora de inicio</label>
+                            <input class="InputsAñadirPerro" type="text" id="horaInicioPaseo" name="horaInicioPaseo"
+                                class="form-control " placeholder="Hora inicio">
+                        </div>
+                        <!-- INPUT HORA FIN -->
+                        <div class="form-group ">
+                            <label class="TextoMapa">Selecciona una hora de finalizacion</label>
+                            <input class="InputsAñadirPerro" type="text" id="horaFinPaseo" name="horaFinPaseo"
+                                class="form-control " placeholder="Hora fin">
+                        </div>
+                        <!-- INPUT NOMBRE DEL DESTINO -->
+                        <div class="form-group">
+                            <input class="InputsAñadirPerro" type="text" id="nombreDestinoPaseo"
+                                name="nombreDestinoPaseo" class="form-control" placeholder="Lugar del paseo">
+                        </div>
+                        <!-- INPUT PRECIO POR PERRO -->
+                        <div class="form-group">
+                            <input class="InputsAñadirPerro" type="text" id="precioPaseo" name="precioPaseo"
+                                class="form-control" placeholder="Precio por perro">
+                        </div>
+                        <!-- INPUT METODO DE PAGO -->
+                        <div class="form-group">
+                            <input class="InputsAñadirPerro" type="text" id="medioPagoPaseo" name="medioPagoPaseo"
+                                class="form-control" placeholder="Metodo para realizar el pago">
                         </div>
                     </div>
                 </div>
+                <div class="row ">
+                    <div class="col-lg-12">
+                        <div class="form-group a-center">
+                            <a href="/MisPerros">
+                                <button class="BotonCancelarPerro">Cancelar</button>
+                            </a>
+                            <input type="submit" class="BotonSubirPerro"></input>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </form>
         <% } else { %>
             <%# Crear paseo paseador %>

@@ -915,6 +915,7 @@ CODIGO OPCIONAL POR SI HAY PROBLEMAS DE DISEÑO O SE PREFIERE ESTE DISEÑO
 }
 
 .historialtitle {
+    text-align: center;
     font-family: "CormorantMedium";
     font-size: 25px;
     display: grid;

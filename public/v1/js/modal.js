@@ -1,11 +1,18 @@
 // Obtener elementos del DOM
 var modal = document.getElementById("myModal");
 var btn = document.getElementById("myBtn");
+var btn2 = document.getElementById("myBtn2");
 var input = document.getElementById("myInput");
 
 // Abrir el modal cuando se hace clic en el botón
 btn.addEventListener("click", function () {
     modal.style.display = "block";
+});
+
+// Cerrar el modal cuando se hace clic en el botón
+btn2.addEventListener("click", function () {
+    var modal = document.getElementById('myModal');
+    modal.style.display = 'none';
 });
 
 // Cerrar el modal cuando se hace clic fuera de él
