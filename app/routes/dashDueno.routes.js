@@ -6,7 +6,7 @@ import fetch from 'node-fetch';
 const dash = Router();
 
 //MISPASEOS
-dash.get("/MisPaseos", async(req, res) => {
+dash.get("/MisPaseos", async (req, res) => {
     if (req.cookies.token) {
         try {
             //Verificación del token
@@ -31,17 +31,17 @@ dash.get("/MisPaseos", async(req, res) => {
             const paseo = await resultPaseo.json();
 
             //Si no tiene cuenta, será redirigido para crear una
-            if(usuario == false){
+            if (usuario == false) {
                 res.redirect("Configuracion");
             } else {
-            res.render("dashViews/MisPaseos", {
-                "rol": "dueno",
-                "nombre": nombre,
-                "foto": foto,
-                "email": email,
-                "usuario": usuario,
-                "paseo": paseo
-            });
+                res.render("dashViews/MisPaseos", {
+                    "rol": "dueno",
+                    "nombre": nombre,
+                    "foto": foto,
+                    "email": email,
+                    "usuario": usuario,
+                    "paseo": paseo
+                });
             }
         } catch (error) {
             console.log(error + "Error de cookies/fetch")
@@ -54,7 +54,7 @@ dash.get("/MisPaseos", async(req, res) => {
 });
 
 //CREARPASEO
-dash.get("/CrearPaseo", async(req, res) => {
+dash.get("/CrearPaseo", async (req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -90,7 +90,7 @@ dash.get("/CrearPaseo", async(req, res) => {
     }
 });
 
-dash.post("/CrearPaseo", async (req, res)=>{
+dash.post("/CrearPaseo", async (req, res) => {
 
     //Datos del usuario dueño de los perros
     const usuario = {
@@ -109,24 +109,24 @@ dash.post("/CrearPaseo", async (req, res)=>{
 
     const checkedPerros = [checkPerros];
 
-      //console.log("Objeto + array: " +checkedPerros);
+    //console.log("Objeto + array: " +checkedPerros);
 
     //Añadir información del usuario a los perros
-      for (let i = 0; i < checkedPerros.length; i++) {
+    for (let i = 0; i < checkedPerros.length; i++) {
         checkedPerros[i].nombre_dueno = usuario.nombre_dueno;
         checkedPerros[i].foto_dueno = usuario.foto_dueno;
         checkedPerros[i].email = usuario.email;
         checkedPerros[i].localizacion = usuario.localizacion;
-      }
+    }
 
-      //console.log(checkedPerros);
+    //console.log(checkedPerros);
 
     //Campos del usuario
     let paseo = {
         titulo: req.body.tituloPaseo,
         descripcion: req.body.descripcionPaseo,
         destino: {
-            _latitude:req.body.paseoLatitude,
+            _latitude: req.body.paseoLatitude,
             _longitude: req.body.paseoLongitude
         },
         nombre_destino: req.body.nombreDestinoPaseo,
@@ -149,7 +149,7 @@ dash.post("/CrearPaseo", async (req, res)=>{
             titulo: paseo.titulo,
             descripcion: paseo.descripcion,
             destino: {
-                _latitude:paseo._latitude,
+                _latitude: paseo._latitude,
                 _longitude: paseo._longitude
             },
             nombre_destino: paseo.nombre_destino,
@@ -157,20 +157,20 @@ dash.post("/CrearPaseo", async (req, res)=>{
             hora_inicio: paseo.hora_inicio,
             precio: paseo.precio,
             medio_de_pago: medio_de_pago,
-            paseador: { 
+            paseador: {
                 //Vacio porque luego el paseador decide tomar el paseo
             },
             perro: paseo.perro
         };
-    //Si el campo tiene un id, será metodo put (actualizar)
-        if (req.body.id){
+        //Si el campo tiene un id, será metodo put (actualizar)
+        if (req.body.id) {
             const id = req.body.id;
             metodo = "put";
             datos = {
                 titulo: paseo.titulo,
                 descripcion: paseo.descripcion,
                 destino: {
-                    _latitude:paseo._latitude,
+                    _latitude: paseo._latitude,
                     _longitude: paseo._longitude
                 },
                 nombre_destino: paseo.nombre_destino,
@@ -178,7 +178,7 @@ dash.post("/CrearPaseo", async (req, res)=>{
                 hora_inicio: paseo.hora_inicio,
                 precio: paseo.precio,
                 medio_de_pago: medio_de_pago,
-                paseador: { 
+                paseador: {
                     //Vacio porque luego el paseador decide tomar el paseo
                 },
                 perro: paseo.perro
@@ -186,28 +186,28 @@ dash.post("/CrearPaseo", async (req, res)=>{
         }
         //Configuración del fetch
         const option = {
-            method : metodo, //En metodo iria post si no tiene id y post en el caso contrario
-            body : JSON.stringify(datos),
-            headers : {
-                'Content-Type':'application/json'
+            method: metodo, //En metodo iria post si no tiene id y post en el caso contrario
+            body: JSON.stringify(datos),
+            headers: {
+                'Content-Type': 'application/json'
             }
         }
         //Fetch
         const result = await fetch(url, option)
-        .then(response=>response.json())
-        .then(data=>{
-            console.log(data);
-            if (data[0].affectedRows>0){
-                console.log("Los datos fueron insertados");
-            }else{
-                console.log("No se inserto");
-            }
-        })
-        .then(error=>{console.log("Ha habido un error: "+ error);})
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data[0].affectedRows > 0) {
+                    console.log("Los datos fueron insertados");
+                } else {
+                    console.log("No se inserto");
+                }
+            })
+            .then(error => { console.log("Ha habido un error: " + error); })
     } catch (error) {
-        console.log("Informacion no insertada: "+error);
+        console.log("Informacion no insertada: " + error);
     }
-    
+
     res.redirect("MisPaseos")
 });
 
@@ -220,12 +220,14 @@ dash.get("/RutasPaseadores", (req, res) => {
             )
             let nombre = token.nombre;
             let foto = token.foto;
+            let email = token.email
 
             res.render("dashViews/RutasPaseadores", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu": 0
+                "mnu": 0,
+                "email": email
 
             });
         } catch (error) {
@@ -237,7 +239,7 @@ dash.get("/RutasPaseadores", (req, res) => {
 });
 
 //AÑADIRPERRO
-dash.get("/AnadirPerro", async(req, res) => {
+dash.get("/AnadirPerro", async (req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -247,7 +249,7 @@ dash.get("/AnadirPerro", async(req, res) => {
             let nombre = token.nombre;
             let foto = token.foto;
             let email = token.email;
-            
+
             // Fetch del usuario
             let rutaUsuario = process.env.API + "usuarios/" + email;
             const resultUsuario = await fetch(rutaUsuario)
@@ -270,7 +272,7 @@ dash.get("/AnadirPerro", async(req, res) => {
 });
 
 //MISPERROS
-dash.get("/MisPerros", async(req, res) => {
+dash.get("/MisPerros", async (req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -304,7 +306,7 @@ dash.get("/MisPerros", async(req, res) => {
 
 //CONFIGURACIÓN
 //Vista para que el usuario cree o actualize su perfil
-dash.get("/Configuracion", async(req, res) => {
+dash.get("/Configuracion", async (req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -337,7 +339,7 @@ dash.get("/Configuracion", async(req, res) => {
 });
 
 //Creación y actualización del perfil del usuario
-dash.post("/Configuracion", async (req, res)=>{
+dash.post("/Configuracion", async (req, res) => {
     //Campos del usuario
     let user = {
         //Asignar los campos de los inputs al objeto user
@@ -345,7 +347,7 @@ dash.post("/Configuracion", async (req, res)=>{
         municipio: req.body.municipio,
         direccion: req.body.direccion,
         ubicacion: {
-            _latitude:req.body.paseoLatitude,
+            _latitude: req.body.paseoLatitude,
             _longitude: req.body.paseoLongitude
         },
         telefono: req.body.telefono,
@@ -368,8 +370,8 @@ dash.post("/Configuracion", async (req, res)=>{
             pais: user.pais,
             id: user.email
         };
-    //Si el campo tiene un id, será metodo put (actualizar)
-        if (req.body.id){
+        //Si el campo tiene un id, será metodo put (actualizar)
+        if (req.body.id) {
             const id = req.body.id;
             metodo = "put";
             datos = {
@@ -386,58 +388,58 @@ dash.post("/Configuracion", async (req, res)=>{
         }
         //Configuración del fetch
         const option = {
-            method : metodo, //En metodo iria post si no tiene id y post en el caso contrario
-            body : JSON.stringify(datos),
-            headers : {
-                'Content-Type':'application/json'
+            method: metodo, //En metodo iria post si no tiene id y post en el caso contrario
+            body: JSON.stringify(datos),
+            headers: {
+                'Content-Type': 'application/json'
             }
         }
         //Fetch
         const result = await fetch(url, option)
-        .then(response=>response.json())
-        .then(data=>{
-            console.log(data);
-            if (data[0].affectedRows>0){
-                console.log("Los datos fueron insertados");
-            }else{
-                console.log("No se inserto");
-            }
-        })
-        .then(error=>{console.log("Ha habido un error: "+ error);})
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                if (data[0].affectedRows > 0) {
+                    console.log("Los datos fueron insertados");
+                } else {
+                    console.log("No se inserto");
+                }
+            })
+            .then(error => { console.log("Ha habido un error: " + error); })
     } catch (error) {
-        console.log("Informacion no insertada: "+error);
+        console.log("Informacion no insertada: " + error);
     }
-    
+
     res.redirect("MisPaseos")
 });
 
 // TERMINOS
-dash.get("/Terminos", async(req, res)=>{
-    if(req.cookies.token){
-        try{
+dash.get("/Terminos", async (req, res) => {
+    if (req.cookies.token) {
+        try {
             const token = jwt.verify(
                 req.cookies.token,
                 process.env.SECRET_KEY
-                )
-                let nombre = token.nombre;
-                let foto = token.foto;
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
 
-                res.render("dashViews/Terminos",{
+            res.render("dashViews/Terminos", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto
 
             });
-        } catch (error){
+        } catch (error) {
             res.redirect("/Ingresa")
         }
-    }else{
+    } else {
         res.redirect("/Ingresa")
     }
 });
 
 //PERFIL
-dash.get("/Perfil", async(req, res) => {
+dash.get("/Perfil", async (req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -476,34 +478,81 @@ dash.get("/Perfil", async(req, res) => {
     }
 });
 
-// CHAT
-dash.get("/Chat", async(req, res)=>{
-    if(req.cookies.token){
-        try{
+dash.get("/Perfil/:id", async (req, res) => {
+    if (req.cookies.token) {
+        try {
             const token = jwt.verify(
                 req.cookies.token,
                 process.env.SECRET_KEY
-                )
-                let nombre = token.nombre;
-                let foto = token.foto;
-                let email = token.email;
+            )
+            // Información de las cookies
+            let nombre = token.nombre;
+            let foto = token.foto;
+            let email = token.email;
 
-                // Fetch del usuario
-                let rutaUsuario = process.env.API + "usuarios/" + email;
-                const resultUsuario = await fetch(rutaUsuario);
-                const usuario = await resultUsuario.json();
-                
-                res.render("dashViews/chat",{
+            // Fetch del usuario
+            let rutaUsuario = process.env.API + "usuarios/" + email;
+            const resultUsuario = await fetch(rutaUsuario)
+            const usuario = await resultUsuario.json();
+
+            // Fetch delPerfil
+            let rutaPerfil = process.env.API + "usuarios/" + req.params.id;
+            const resultPerfil = await fetch(rutaPerfil)
+            const perfil = await resultPerfil.json();
+
+            // Fetch de los paseos
+            let rutaPaseo = process.env.API + "paseo/";
+            const resultPaseo = await fetch(rutaPaseo)
+            const paseo = await resultPaseo.json();
+
+            res.render("dashViews/Perfil", {
+                "rol": "dueno",
+                "nombre": nombre,
+                "foto": foto,
+                "email": email,
+                "usuario": usuario,
+                "paseo": paseo,
+                "perfil": perfil,
+                "idPerfil": req.params.id
+            });
+
+        } catch (error) {
+            res.redirect("/Ingresa")
+        }
+    } else {
+        res.redirect("/Ingresa")
+    }
+});
+
+// CHAT
+dash.get("/Chat", async (req, res) => {
+    if (req.cookies.token) {
+        try {
+            const token = jwt.verify(
+                req.cookies.token,
+                process.env.SECRET_KEY
+            )
+            let nombre = token.nombre;
+            let foto = token.foto;
+            let email = token.email;
+
+            // Fetch del usuario
+            let rutaUsuario = process.env.API + "usuarios/" + email;
+            const resultUsuario = await fetch(rutaUsuario);
+            const usuario = await resultUsuario.json();
+
+            res.render("dashViews/chat", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": "foto",
-                "mnu":0
+                "mnu": 0,
+                "email": email
 
             });
-        } catch (error){
+        } catch (error) {
             res.redirect("/Ingresa")
         }
-    }else{
+    } else {
         res.redirect("/Ingresa")
     }
 });
