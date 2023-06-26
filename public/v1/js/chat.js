@@ -1,26 +1,45 @@
-function openChat(userId) {
-    // Aquí puedes cargar el chat correspondiente al usuario seleccionado
-    // Puedes utilizar AJAX, fetch o cualquier otra técnica para obtener los mensajes del chat y mostrarlos en el chat window (div con id "chat")
+//Configuración de firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyALJKR35EG30on83uQap3Q7Dfv0T3vbK1E",
+    authDomain: "paperros-41ac7.firebaseapp.com",
+    databaseURL: "https://paperros-41ac7-default-rtdb.firebaseio.com",
+    projectId: "paperros-41ac7",
+    storageBucket: "paperros-41ac7.appspot.com",
+    messagingSenderId: "909088774674",
+    appId: "1:909088774674:web:a63a0e3a8f709c5c8716cb",
+    measurementId: "G-TX82FTKS5R"
+};
+
+//Inicializar Firebase
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+
+// Controlador para enviar un mensaje
+async function enviarMensaje(req, res) {
+    try {
+        const { enviador, mensaje, usuario1, usuario2 } = req.body;
+
+        const chatRef = db.collection('chats').doc(usuario1.id + '_' + usuario2.id);
+        const mensajeData = {
+            enviador,
+            mensaje,
+            fecha: new Date().toISOString(),
+        };
+
+        // Agregar el nuevo mensaje al array de mensajes existente
+        await chatRef.update({
+            mensajes: Firestore.FieldValue.arrayUnion(mensajeData),
+            ultimo_mensaje: mensajeData,
+        });
+
+        res.status(200).json({ message: 'Mensaje enviado correctamente' });
+    } catch (error) {
+        res.status(500).json({ error: 'Ocurrió un error al enviar el mensaje' });
+    }
 }
 
-function sendMessage() {
-    const messageInput = document.getElementById('messageInput');
-    const message = messageInput.value;
+app.post('/api/enviar-mensaje', enviarMensaje);
 
-    // Aquí puedes enviar el mensaje a través de una solicitud al servidor y actualizar el chat en tiempo real
-
-    // Agregar el mensaje al chat window
-    const chatWindow = document.getElementById('chat');
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message');
-    messageElement.innerHTML = `
-    <div class="message-sender">
-        <img src="user-avatar.png" alt="User Avatar">
-    </div>
-    <div class="message-content">${message}</div>
-    `;
-    chatWindow.appendChild(messageElement);
-
-    // Limpiar el campo de texto
-    messageInput.value = '';
-}
+app.listen(3000, () => {
+    console.log('Servidor escuchando en el puerto 3000');
+});
