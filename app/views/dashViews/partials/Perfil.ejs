@@ -1,3 +1,5 @@
+<% let perroId = 0; %>
+<% let paseoId = 0; %>
 <% if ( rol=="dueno" ) { %>
   <%# Perfil del dueño %>
   <h1 class="display-1 text-titulo text-center">MI PERFIL</h1>
@@ -42,7 +44,7 @@
 
           <a href="/v1/dueno/reportes" id="myBtn" class="btn-danger">Reportar</a>
 
-                <div id="myModal" class="modal">
+                <div id="modalPerro" class="modal">
                   <div class="modal-content">
                     <h8>Nombre:</h8>
                     <h1><%= element.nombre %></h1>
@@ -80,9 +82,10 @@
                 <p class="misperrostitle">
                   <%= element.nombre %>
                 </p>
-                <button id="myBtn" class="boton-profile">Ver</button>
+                <button id="btnAbrirPerro<%= perroId %>" class="boton-profile">Ver</button>
 
-                <div id="myModal" class="modal">
+                <%# Modal del perro %>
+                <div id="modalPerro<%= perroId %>" class="modal">
                   <div class="modal-content">
                     <h8>Nombre:</h8>
                     <h1><%= element.nombre %></h1>
@@ -101,10 +104,11 @@
 
                     <h8>Vacunas:</h8>
                     <h4><%= element.vacunas %></h4>
-                    <button id="myBtn2" class="btn-danger">Cerrar</button>
+                    <button id="btnClose<%= perroId %>" class="btn-danger">Cerrar</button>
                   </div>
                 </div>
               </div>
+              <% perroId ++; %>
             <% }); %>
           </div>
         </div>
@@ -133,6 +137,7 @@
               </div>
             </div>
           </div>
+          
         <% }); %>
       </div>
     </div>
@@ -158,4 +163,12 @@
       </div>
     </div>
   <% } %>
+
+  <script>
+    // Llevar "mapa" de EJS a Js Leaflet
+    const perroId = "<%= perroId %>";
+    //Esto saca error pero está melo, aunque me dé mucha ansiedad que esté rojito
+    // Llevar el objeto "paseo" de EJS a Js Leaflet
+    const mapaData = <%- JSON.stringify(paseo) %>;
+  </script>
 <%# } %>

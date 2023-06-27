@@ -14,16 +14,14 @@
                     <div id="map<%= mapa %>" class="mapaPaseo" alt="Mapa de paseo"></div>
                     <div class="card-body">
                         <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
-                        <p class="card-text"><b>TITULO DEL SERVICIO</b></p>
+                        <p class="card-text"><b><%= element.titulo %></b></p>
                         <p class="card-text"><%= element.descripcion %></p>
                         <!--MOSTRAR UN MODAL O UNA ALERTA CON TODA LA INFORMACION, TRAER LOS DATOS DE LA BASE DE DATOS
                         Y MOSTRARLOS CON ALGUN FRAMEWORK-->
                         <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
                         <b><p class="card-text">Precio del servicio:</b> $<%= element.precio %></p>
                         <!--ACA VA A IR UN INCLUDE DEL ESTADO DEL SERVICIO-->
-                        <b><p class="card-text">Estado del servicio:</b></p>
-                        <!--PRUEBA, BORRAR DESPUES-->
-                        <p class="card-text" id="locacion<%= mapa %>">locacion<%= mapa %></p>
+                        <b><p class="card-text">Estado del servicio: </b> <%= element.estado %></p>
                         <a href="#" class="btn btn-primary aBotonCarta1">Detalles</a>
                     </div>
                 </div>
@@ -110,7 +108,7 @@
                     <div id="map<%= mapa %>" class="mapaPaseo" alt="Mapa de paseo"></div>
                     <div class="card-body">
                         <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
-                        <p class="card-text"><b>TITULO DEL SERVICIO</b></p>
+                        <p class="card-text"><b><%= element.titulo %></b></p>
                         <p class="card-text"><%= element.descripcion %></p>
                         <!--MOSTRAR UN MODAL O UNA ALERTA CON TODA LA INFORMACION, TRAER LOS DATOS DE LA BASE DE DATOS
                         Y MOSTRARLOS CON ALGUN FRAMEWORK-->

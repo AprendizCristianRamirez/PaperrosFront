@@ -18,7 +18,7 @@
                 <a href="/v1/dueno/MisPaseos" class="aBoton">Ser dueño</a>
             <% } %>
             <%# Usuario %>
-            <a class="aBarra"><%= nombre %></a>
+            <a class="aBarra"><%= usuario.nombre || nombre %></a>
             <a ><img class="ImagenPerfil" src="<%= foto %>" height="60" width="60"></img></a>
         </div>
 </nav>
