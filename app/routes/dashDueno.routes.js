@@ -2,7 +2,6 @@ import { Router } from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import fetch from 'node-fetch';
-import pdfkit from 'pdfkit';
 
 const dash = Router();
 
@@ -566,102 +565,7 @@ dash.get("/Perfil/:id", async (req, res) => {
 });
 
 //PDF
-// Render the EJS template to HTML
-const renderEjsToHtml = async () => {
-    try {
-      //const templateData = {}; // Add any necessary data for rendering the EJS template
-      // Información de las cookies
-      let nombre = token.nombre;
-      let foto = token.foto;
-      let email = token.email;
-
-      // Fetch del usuario
-      let rutaUsuario = process.env.API + "usuarios/" + email;
-      const resultUsuario = await fetch(rutaUsuario)
-      const usuario = await resultUsuario.json();
-
-      // Fetch de los paseos
-      let rutaPaseo = process.env.API + "paseo/";
-      const resultPaseo = await fetch(rutaPaseo)
-      const paseo = await resultPaseo.json();
-
-      const html = await ejs.renderFile("dashViews/Perfil", {
-        "rol": "dueno",
-        "nombre": nombre,
-        "foto": foto,
-        "email": email,
-        "usuario": usuario,
-        "paseo": paseo,
-        "perfil": usuario,
-        "idPerfil": email
-    });
-      return html;
-    } catch (error) {
-      console.error('Error rendering EJS to HTML:', error);
-      throw error;
-    }
-  };
-  
-// Plantilla  del pdf
-// Express route for generating PDF
-dash.get('/generate-pdf', async (req, res) => {
-    try {
-      // Render the EJS template to HTML
-      let nombre = token.nombre;
-      let foto = token.foto;
-      let email = token.email;
-
-      // Fetch del usuario
-      let rutaUsuario = process.env.API + "usuarios/" + email;
-      const resultUsuario = await fetch(rutaUsuario)
-      const usuario = await resultUsuario.json();
-
-      // Fetch de los paseos
-      let rutaPaseo = process.env.API + "paseo/";
-      const resultPaseo = await fetch(rutaPaseo)
-      const paseo = await resultPaseo.json();
-      const html = await ejs.renderFile("dashViews/Perfil", {
-        "rol": "dueno",
-        "nombre": nombre,
-        "foto": foto,
-        "email": email,
-        "usuario": usuario,
-        "paseo": paseo,
-        "perfil": usuario,
-        "idPerfil": email
-    });
-  
-      // Create a PDF document
-      const doc = new PDFDocument();
-  
-      // Pipe the PDF document to a writable stream
-      const stream = fs.createWriteStream('/');
-      doc.pipe(stream);
-  
-      // Embed the HTML content into the PDF document
-      doc.html(html, {
-        // Set options for rendering HTML
-        // Add any necessary styling or configuration options
-      });
-  
-      // Finalize the PDF document
-      doc.end();
-  
-      // Send the PDF file as a response
-      res.contentType('application/pdf');
-      doc.pipe(res);
-  
-      // Uncomment the following line if you want to save the PDF file locally
-      // stream.on('finish', () => console.log('PDF file created successfully'));
-  
-    } catch (error) {
-      console.error('Error generating PDF:', error);
-      res.status(500).send('Error generating PDF');
-    }
-  });
-
-
-  dash.get("/Reporte", async (req, res) => {
+dash.get("/Reporte", async (req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -683,7 +587,7 @@ dash.get('/generate-pdf', async (req, res) => {
             const resultPaseo = await fetch(rutaPaseo)
             const paseo = await resultPaseo.json();
 
-            res.render("dashViews/Perfil", {
+            res.render("dashViews/Reporte", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
