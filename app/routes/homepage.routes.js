@@ -29,7 +29,8 @@ home.get("/Paseadores", (req, res)=>{
 home.get("/Contactanos", (req, res)=>{
     res.render("homeViews/contactanos", {
         "titulo":"Paperros","activo":5,
-        "google": process.env.GOOGLE_LOGIN
+        res.redirect("/"),
+        "google": process.env.GOOGLE_LOGIN,
         });
 });
 
