@@ -12,7 +12,6 @@ import bodyParser from "body-parser";
 import "./config/middlewares/google.js"
 //RUTAS
 import dashPaseador from "./routes/dashPaseador.routes.js";
-import dash from "./routes/dashAdmin.routes.js";
 import dashDueno from "./routes/dashDueno.routes.js";
 import home from "./routes/homepage.routes.js";
 import dashAdmin from "./routes/dashAdmin.routes.js";
