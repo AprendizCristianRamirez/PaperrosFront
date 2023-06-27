@@ -53,7 +53,6 @@ dash.get("/MisPaseos", async (req, res) => {
     }
 });
 
-
 //CREARPASEO
 //Vista para crear paseo
 dash.get("/CrearPaseo", async (req, res) => {
@@ -91,6 +90,7 @@ dash.get("/CrearPaseo", async (req, res) => {
         res.redirect("/Salir")
     }
 });
+
 //Creación del paseo
 dash.post("/CrearPaseo", async (req, res) => {
 
@@ -214,7 +214,6 @@ dash.post("/CrearPaseo", async (req, res) => {
     res.redirect("MisPaseos")
 });
 
-
 //RUTAS DE PASEADORES (MANADA)
 dash.get("/RutasPaseadores", (req, res) => {
     if (req.cookies.token) {
@@ -242,7 +241,6 @@ dash.get("/RutasPaseadores", (req, res) => {
         res.redirect("/Salir")
     }
 });
-
 
 //AÑADIRPERRO
 dash.get("/AnadirPerro", async (req, res) => {
@@ -277,7 +275,6 @@ dash.get("/AnadirPerro", async (req, res) => {
     }
 });
 
-
 //MISPERROS
 dash.get("/MisPerros", async (req, res) => {
     if (req.cookies.token) {
@@ -310,7 +307,6 @@ dash.get("/MisPerros", async (req, res) => {
         res.redirect("/Salir")
     }
 });
-
 
 //CONFIGURACIÓN
 //Vista para que el usuario cree o actualize su perfil
@@ -345,6 +341,7 @@ dash.get("/Configuracion", async (req, res) => {
         res.redirect("/Salir")
     }
 });
+
 //Creación y actualización del perfil del usuario
 dash.post("/Configuracion", async (req, res) => {
     //Campos del usuario
@@ -420,7 +417,6 @@ dash.post("/Configuracion", async (req, res) => {
     res.redirect("MisPaseos")
 });
 
-
 // TERMINOS
 dash.get("/Terminos", async (req, res) => {
     if (req.cookies.token) {
@@ -448,7 +444,6 @@ dash.get("/Terminos", async (req, res) => {
     }
 });
 
-
 // REPORTES
 dash.get("/Reportes", async (req, res) => {
     if (req.cookies.token) {
@@ -475,7 +470,6 @@ dash.get("/Reportes", async (req, res) => {
         res.redirect("/Salir")
     }
 });
-
 
 //PERFIL
 dash.get("/Perfil", async (req, res) => {
@@ -517,6 +511,7 @@ dash.get("/Perfil", async (req, res) => {
         res.redirect("/Salir")
     }
 });
+
 //VER PERFIL ESPECIFICO
 dash.get("/Perfil/:id", async (req, res) => {
     if (req.cookies.token) {
@@ -606,7 +601,6 @@ dash.get("/Reporte", async (req, res) => {
     }
 });
 
-
 // CHAT
 dash.get("/Chat", async (req, res) => {
     if (req.cookies.token) {
@@ -640,13 +634,11 @@ dash.get("/Chat", async (req, res) => {
     }
 });
 
-
 //SALIR
 dash.get("/salir", (req, res) => {
     res.clearCookie("token");
     res.redirect("/")
 })
-
 
 // TERMINOS
 /*dash.get("/Terminos", async(req, res)=>{
