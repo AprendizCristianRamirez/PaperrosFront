@@ -40,7 +40,30 @@
 
           <a href="/v1/dueno/chat" class="boton-profile">Chatea</a>
 
-          <a href="/v1/dueno/reportes" class="btn-danger">Reportar</a>
+          <a href="/v1/dueno/reportes" id="myBtn" class="btn-danger">Reportar</a>
+
+                <div id="myModal" class="modal">
+                  <div class="modal-content">
+                    <h8>Nombre:</h8>
+                    <h1><%= element.nombre %></h1>
+
+                    <h8>Comportamiento:</h8>
+                    <h4><%= element.comportamiento %></h4>
+
+                    <h8>Estatura:</h8>
+                    <h4><%= element.estatura %> Cm</h4>
+
+                    <h8>Peso:</h8>
+                    <h4><%= element.peso %> Kg</h4>
+
+                    <h8>Raza:</h8>
+                    <h4><%= element.raza %></h4>
+
+                    <h8>Vacunas:</h8>
+                    <h4><%= element.vacunas %></h4>
+                    <button id="myBtn2" class="btn-danger">Cerrar</button>
+                  </div>
+                </div>
 
         <% }; %>
 
