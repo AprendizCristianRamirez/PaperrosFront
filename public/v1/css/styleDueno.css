@@ -50,6 +50,10 @@ p {
     height: 200px;
 }
 
+.mapaConfig {
+    height: 524px;
+}
+
 .ImagenPerfil {
     border-radius: 40px;
     margin-right: 10px;
@@ -82,6 +86,7 @@ p {
     min-width: 350px;
     border-radius: 5px;
     font-family: 'CormorantLight';
+    border: none;
     color: #927167;
     font-size: 20px;
     text-align: center;
@@ -119,6 +124,7 @@ p {
 .InputsAñadirPerro {
     margin-top: 52.7px;
     width: auto;
+    border: none;
     display: flex;
     height: 44px;
     min-width: 350px;
@@ -151,16 +157,15 @@ p {
 }
 
 .a-center {
-
     display: flex;
     align-items: center;
     justify-content: center;
-
 }
 
 .BotonSubirPerro {
     align-items: center;
     margin-top: 10px;
+    border: none;
     flex-direction: column;
     margin-left: 20px;
     margin-bottom: 10px;
@@ -183,6 +188,25 @@ p {
 
 .BotonCancelarPerro {
     align-items: center;
+    text-decoration: none;
+    margin-top: 10px;
+    border: none;
+    flex-direction: column;
+    margin-left: 20px;
+    margin-bottom: 10px;
+    background-color: #b5c8ad;
+    color: #F3F3F3;
+    font-size: 20px;
+    font-family: 'CormorantLight';
+    border-radius: 20px;
+    width: 100px;
+}
+
+.BotonCancelarConfig {
+    align-items: center;
+    padding-left: 15px;
+    border: none;
+    text-decoration: none;
     margin-top: 10px;
     flex-direction: column;
     margin-left: 20px;
@@ -193,6 +217,10 @@ p {
     font-family: 'CormorantLight';
     border-radius: 20px;
     width: 100px;
+}
+
+.BotonCancelarConfig:hover {
+    color: #000000;
 }
 
 .BotonCancelarPerro:hover {
@@ -303,20 +331,6 @@ p {
 
 
 /* FIN DEL CODIGO DEL ASIDE */
-
-
-/* 
-
-CODIGO OPCIONAL POR SI HAY PROBLEMAS DE DISEÑO O SE PREFIERE ESTE DISEÑO
-
-.menucentrado{
-    margin-right: 420px;
-}
-.divbody {
-    margin-left: 13%;
-}
-
-*/
 
 .card {
     margin-bottom: 20px;

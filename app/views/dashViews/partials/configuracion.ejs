@@ -1,127 +1,104 @@
-<% if ( rol=="dueno" ) { %>
+<% if (rol == "dueno") { %>
     <%# Crear Paseo dueño %>
-        <h1 class="text-uppercase text-titulo text-center">CONFIGURACION DEL PERFIL</h1>
-        <p class="fs-4 text-parrafo text-center">
-            Digita la informacion solicitada para actualizar tu perfil
-        </p>
-        <form action="/v1/dueno/Configuracion" method="post">
-            <div class="container ContainerAñadirPerro">
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label class="TextoImagen">Añade tu ubicación:</label>
-                            <!-- PENDIENTE POR HACER EL FORMULARIO PARA SUBIR LA IMAGEN A LA DB-->
-                            <div id="map" class="mapaPaseo" alt="Ubicación de dueño"></div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <!--id-->
-                        <% if ( usuario !=false ) { %>
-                            <input class="InputsAñadirPerro" type="hidden" id="id" name="id" class="form-control"
-                                value="<%= usuario.id %>">
-                            <% } %>
-                                <!--email-->
-                                <input type="hidden" id="email" name="email" value="<%= email %>">
-                                <!--Ubicación (Latitud)-->
-                                <input type="hidden" id="paseoLatitude" name="paseoLatitude">
-                                <!--Ubicación (Longitud)-->
-                                <input class="InputsAñadirPerro" type="hidden" id="paseoLongitude" name="paseoLongitude">
-                                <!--Campo de nombre-->
-                                <div class="form-group">
-                                    <input class="InputsAñadirPerro" type="text" id="nombre" name="nombre"
-                                        class="form-control" placeholder="Nombre Completo" value="<%= usuario.nombre %>">
-                                </div>
-                                <!--Campo de dirección-->
-                                <div class="form-group ">
-                                    <input class="InputsAñadirPerro" type="text" id="direccion" name="direccion"
-                                        class="form-control " placeholder="Dirección" value="<%= usuario.direccion %>">
-                                </div>
-                                <!--Campo de teléfono-->
-                                <div class="form-group ">
-                                    <input class="InputsAñadirPerro" type="text" id="telefono" name="telefono"
-                                        class="form-control " placeholder="Teléfono" value="<%= usuario.telefono %>">
-                                </div>
-                                <!--Campo de edad-->
-                                <div class="form-group ">
-                                    <input class="InputsAñadirPerro" type="text" id="edad" name="edad"
-                                        class="form-control " placeholder="Edad" value="<%= usuario.edad %>">
-                                </div>
-                                <!--Campo de Municipio-->
-                                <div class="form-group ">
-                                    <input class="InputsAñadirPerro" type="text" id="municipio" name="municipio"
-                                        class="form-control " placeholder="Municipio" value="<%= usuario.municipio %>">
-                                </div>
-                                <!--Campo de País-->
-                                <div class="form-group ">
-                                    <input class="InputsAñadirPerro" type="text" id="pais" name="pais"
-                                        class="form-control " placeholder="País" value="<%= usuario.pais %>">
-                                </div>
-                                <div class="row ">
-                                    <div class="col-lg-12">
-                                        <div class="form-group a-center">
-                                            <button class="BotonCancelarPerro"><a class="aBotonHref"
-                                                    href="/v1/dueno/perfil">Cancelar</a< /button>
-                                                    <input type="submit" value="subir"
-                                                        class="BotonSubirPerro">Subir</input>
-                                        </div>
-                                    </div>
-                                </div>
-                    </div>
-        </form>
-        <% } else { %>
-            <%# Crear paseo paseador %>
-                <h1 class="text-uppercase text-titulo-paseador text-center">CONFIGURACION DEL PERFIL</h1>
-                <p class="fs-4 text-parrafo-paseador text-center">
-                    Digita la informacion solicitada para actualizar tu perfil
-                </p>
-                <form action="">
-                    <div class="container ContainerAñadirPerro">
-                        <div class="row">
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <label class="TextoImagen">Añade una imagen de perfil:</label>
-                                    <!-- PENDIENTE POR HACER EL FORMULARIO PARA SUBIR LA IMAGEN A LA DB-->
-                                    <input type="file" id="imagenPerro" name="img" class="form-control"
-                                        placeholder="Elegir imagen">
-                                    <img src="/v1/img/añadirImagenIcono2.png" alt="Imagen" class="imgPerfilConfig">
-                                </div>
-                                <div class="form-group">
-                                    <textarea class="InputDescripcionPaseo" name="DescripcionUsuarioPaseador"
-                                        id="DescripcionUsuarioPaseador" cols="30" rows="10"
-                                        placeholder="Descripcion"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-lg-6">
-                                <div class="form-group">
-                                    <input class="InputsAñadirPerro" type="text" id="NombreUsuario" name="NombreUsuario"
-                                        class="form-control" placeholder="Nombre Completo">
-                                </div>
-                                <div class="form-group ">
-                                    <input class="InputsAñadirPerro" type="number" id="NumPaseador " name="NumPaseador"
-                                        class="form-control " placeholder="Numero telefonico">
-                                </div>
-                                <div class="form-group ">
-                                    <input class="InputsAñadirPerro" type="text" id="CuentaBancariaPaseador"
-                                        name="CuentaBancariaPaseador" class="form-control "
-                                        placeholder="Cuenta Bancaria">
-                                </div>
-                                <div class="form-group ">
-                                    <input class="InputsAñadirPerro" type="text" id="CorreoPaseador"
-                                        name="CorreoPaseador" class="form-control " placeholder="Correo Electronico">
-                                </div>
-                                <div class="form-group ">
-                                    <input class="InputsAñadirPerro" type="text" id="CiudadPaseador"
-                                        name="CiudadPaseador" class="form-control " placeholder="Ciudad de residencia">
-                                </div>
-                                <div class="row ">
-                                    <div class="col-lg-12">
-                                        <div class="form-group a-center">
-                                            <button class="BotonCancelarPerro"><a class="aBotonHref"
-                                                    href="/v1/paseador/perfil">Cancelar</a< /button>
-                                                    <button class="BotonSubirPerro">Subir</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                </form>
-                <% } %>
+    <h1 class="text-uppercase text-titulo text-center">CONFIGURACION DEL PERFIL</h1>
+    <p class="fs-4 text-parrafo text-center">Digita la informacion solicitada para actualizar tu perfil</p>
+    <form action="/v1/dueno/Configuracion" method="post">
+    <div class="container ContainerAñadirPerro">
+        <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+        <label class="TextoImagen">Añade tu ubicación, ten en cuenta que esta ubicacion es el punto inicial para tus perros:</label>
+            <!-- PENDIENTE POR HACER EL FORMULARIO PARA SUBIR LA IMAGEN A LA DB-->
+        <div id="map" class="mapaConfig" alt="Ubicación de dueño"></div>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <!--id-->
+            <% if (usuario != false) { %>
+            <input class="InputsAñadirPerro" type="hidden" id="id" name="id" class="form-control" value="<%= usuario.id %>">
+            <% } %>
+            <!--email-->
+            <input type="hidden" id="email" name="email" value="<%= email %>">
+            <!--Ubicación (Latitud)-->
+            <input type="hidden" id="paseoLatitude" name="paseoLatitude">
+            <!--Ubicación (Longitud)-->
+            <input class="InputsAñadirPerro" type="hidden" id="paseoLongitude" name="paseoLongitude">
+            <!--Campo de nombre-->
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="text" id="nombre" name="nombre" class="form-control" placeholder="Nombre Completo" value="<%= usuario.nombre %>">
+            </div>
+            <!--Campo de dirección-->
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="text" id="direccion" name="direccion" class="form-control" placeholder="Dirección" value="<%= usuario.direccion %>">
+            </div>
+            <!--Campo de teléfono-->
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="text" id="telefono" name="telefono" class="form-control" placeholder="Teléfono" value="<%= usuario.telefono %>">
+            </div>
+            <!--Campo de edad-->
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="text" id="edad" name="edad" class="form-control" placeholder="Edad" value="<%= usuario.edad %>">
+            </div>
+            <!--Campo de Municipio-->
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="text" id="municipio" name="municipio" class="form-control" placeholder="Municipio" value="<%= usuario.municipio %>">
+            </div>
+            <!--Campo de País-->
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="text" id="pais" name="pais" class="form-control" placeholder="País" value="<%= usuario.pais %>">
+            </div>
+            <div class="form-group text-center">
+            <a class="BotonCancelarConfig" href="/v1/dueno/perfil">Cancelar</a>
+                <input type="submit" value="Subir" class="BotonSubirPerro">
+            </div>
+        </div>
+        </div>
+    </div>
+    </form>
+<% } else { %>
+    <%# Crear paseo paseador %>
+    <h1 class="text-uppercase text-titulo-paseador text-center">CONFIGURACION DEL PERFIL</h1>
+    <p class="fs-4 text-parrafo-paseador text-center">Digita la informacion solicitada para actualizar tu perfil</p>
+    <form action="">
+    <div class="container ContainerAñadirPerro">
+        <div class="row">
+        <div class="col-lg-6">
+            <div class="form-group">
+            <label class="TextoImagen">Añade una imagen de perfil:</label>
+            <!-- PENDIENTE POR HACER EL FORMULARIO PARA SUBIR LA IMAGEN A LA DB-->
+            <input type="file" id="imagenPerro" name="img" class="form-control" placeholder="Elegir imagen">
+            <img src="/v1/img/añadirImagenIcono2.png" alt="Imagen" class="imgPerfilConfig">
+            </div>
+            <div class="form-group">
+            <textarea class="InputDescripcionPaseo" name="DescripcionUsuarioPaseador" id="DescripcionUsuarioPaseador" cols="30" rows="10" placeholder="Descripcion"></textarea>
+            </div>
+        </div>
+        <div class="col-lg-6">
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="text" id="NombreUsuario" name="NombreUsuario" class="form-control" placeholder="Nombre Completo">
+            </div>
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="number" id="NumPaseador" name="NumPaseador" class="form-control" placeholder="Numero telefonico">
+            </div>
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="text" id="CuentaBancariaPaseador" name="CuentaBancariaPaseador" class="form-control" placeholder="Cuenta Bancaria">
+            </div>
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="text" id="CorreoPaseador" name="CorreoPaseador" class="form-control" placeholder="Correo Electronico">
+            </div>
+            <div class="form-group">
+                <input class="InputsAñadirPerro" type="text" id="CiudadPaseador" name="CiudadPaseador" class="form-control" placeholder="Ciudad de residencia">
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                <div class="form-group text-center">
+                    <button class="BotonCancelarPerro"><a class="aBotonHref" href="/v1/paseador/perfil">Cancelar</a></button>
+                    <button class="BotonSubirPerro">Subir</button>
+                </div>
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+    </form>
+<% } %>
