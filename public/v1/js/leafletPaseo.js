@@ -7,7 +7,7 @@ for (i = 0; i < mapa; i++){
     
     // Y establecer el punto donde se iniciará el mapa
     // Los parametros de setView son ([Latitud, Longitud], zoom)
-    var map = L.map(mapId).setView([mapaData[i].destino._latitude, mapaData[i].destino._longitude], 15);
+    var map = L.map(mapId).setView([mapaData[i].destino._latitude, mapaData[i].destino._longitude], 14);
 
     // Establecer tile (skin o aspecto) del mapa
     L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {

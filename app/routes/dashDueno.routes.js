@@ -2,7 +2,7 @@ import { Router } from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import fetch from 'node-fetch';
-import puppeteer from "puppeteer";
+import pdfkit from 'pdfkit';
 
 const dash = Router();
 
@@ -54,7 +54,9 @@ dash.get("/MisPaseos", async (req, res) => {
     }
 });
 
+
 //CREARPASEO
+//Vista para crear paseo
 dash.get("/CrearPaseo", async (req, res) => {
     if (req.cookies.token) {
         try {
@@ -90,7 +92,7 @@ dash.get("/CrearPaseo", async (req, res) => {
         res.redirect("/Salir")
     }
 });
-
+//Creación del paseo
 dash.post("/CrearPaseo", async (req, res) => {
 
     //Datos del usuario dueño de los perros
@@ -105,13 +107,11 @@ dash.post("/CrearPaseo", async (req, res) => {
     }
 
     //Información de los perros seleccionados
+    //Este datos es un array de strings
+    //por ejemplo: ['{"raza": "Golden", "nombre": "Martina"...}', '{"raza": "Golden", "nombre": "Martina"...}', '{"raza": "Bulldog"...]
     const checkedPerros = req.body.perros;
-
-
+    //Aqui se convierte ese array de strings a un array de objetos con cada posición de checkedPerros
     let perroArray = checkedPerros.map((item) => JSON.parse(item));
-
-    console.log(perroArray);
-    //console.log("Objeto + array: " + checkedPerros);
 
     //Añadir información del usuario a los perros
     for (let i = 0; i < perroArray.length; i++) {
@@ -120,8 +120,6 @@ dash.post("/CrearPaseo", async (req, res) => {
         perroArray[i].email = usuario.email;
         perroArray[i].localizacion = usuario.localizacion;
     }
-
-    //console.log(checkedPerros);
 
     //Campos del usuario
     let paseo = {
@@ -144,7 +142,7 @@ dash.post("/CrearPaseo", async (req, res) => {
         //},
         perro: perroArray
     }
-    //console.log(paseo);
+    // Petición de POST o PUT del paseo
     try {
         const url = process.env.API + "paseo";
         let metodo = "post";
@@ -190,7 +188,6 @@ dash.post("/CrearPaseo", async (req, res) => {
                 perro: paseo.perro
             }
         }
-        console.log(datos);
         //Configuración del fetch
         const option = {
             method: metodo, //En metodo iria post si no tiene id y post en el caso contrario
@@ -218,6 +215,8 @@ dash.post("/CrearPaseo", async (req, res) => {
     res.redirect("MisPaseos")
 });
 
+
+//RUTAS DE PASEADORES (MANADA)
 dash.get("/RutasPaseadores", (req, res) => {
     if (req.cookies.token) {
         try {
@@ -244,6 +243,7 @@ dash.get("/RutasPaseadores", (req, res) => {
         res.redirect("/Salir")
     }
 });
+
 
 //AÑADIRPERRO
 dash.get("/AnadirPerro", async (req, res) => {
@@ -278,6 +278,7 @@ dash.get("/AnadirPerro", async (req, res) => {
     }
 });
 
+
 //MISPERROS
 dash.get("/MisPerros", async (req, res) => {
     if (req.cookies.token) {
@@ -310,6 +311,7 @@ dash.get("/MisPerros", async (req, res) => {
         res.redirect("/Salir")
     }
 });
+
 
 //CONFIGURACIÓN
 //Vista para que el usuario cree o actualize su perfil
@@ -344,7 +346,6 @@ dash.get("/Configuracion", async (req, res) => {
         res.redirect("/Salir")
     }
 });
-
 //Creación y actualización del perfil del usuario
 dash.post("/Configuracion", async (req, res) => {
     //Campos del usuario
@@ -420,6 +421,7 @@ dash.post("/Configuracion", async (req, res) => {
     res.redirect("MisPaseos")
 });
 
+
 // TERMINOS
 dash.get("/Terminos", async (req, res) => {
     if (req.cookies.token) {
@@ -446,6 +448,7 @@ dash.get("/Terminos", async (req, res) => {
         res.redirect("/Ingresa")
     }
 });
+
 
 // REPORTES
 dash.get("/Reportes", async (req, res) => {
@@ -474,6 +477,7 @@ dash.get("/Reportes", async (req, res) => {
     }
 });
 
+
 //PERFIL
 dash.get("/Perfil", async (req, res) => {
     if (req.cookies.token) {
@@ -497,6 +501,7 @@ dash.get("/Perfil", async (req, res) => {
             const resultPaseo = await fetch(rutaPaseo)
             const paseo = await resultPaseo.json();
 
+
             res.render("dashViews/Perfil", {
                 "rol": "dueno",
                 "nombre": nombre,
@@ -513,7 +518,7 @@ dash.get("/Perfil", async (req, res) => {
         res.redirect("/Salir")
     }
 });
-
+//VER PERFIL ESPECIFICO
 dash.get("/Perfil/:id", async (req, res) => {
     if (req.cookies.token) {
         try {
@@ -531,7 +536,7 @@ dash.get("/Perfil/:id", async (req, res) => {
             const resultUsuario = await fetch(rutaUsuario)
             const usuario = await resultUsuario.json();
 
-            // Fetch delPerfil
+            // Fetch del Perfil
             let rutaPerfil = process.env.API + "usuarios/" + req.params.id;
             const resultPerfil = await fetch(rutaPerfil)
             const perfil = await resultPerfil.json();
@@ -561,9 +566,102 @@ dash.get("/Perfil/:id", async (req, res) => {
 });
 
 //PDF
-// Plantilla  del pdf
-dash.get('/pdf', async(req, res) => {
+// Render the EJS template to HTML
+const renderEjsToHtml = async () => {
+    try {
+      //const templateData = {}; // Add any necessary data for rendering the EJS template
+      // Información de las cookies
+      let nombre = token.nombre;
+      let foto = token.foto;
+      let email = token.email;
 
+      // Fetch del usuario
+      let rutaUsuario = process.env.API + "usuarios/" + email;
+      const resultUsuario = await fetch(rutaUsuario)
+      const usuario = await resultUsuario.json();
+
+      // Fetch de los paseos
+      let rutaPaseo = process.env.API + "paseo/";
+      const resultPaseo = await fetch(rutaPaseo)
+      const paseo = await resultPaseo.json();
+
+      const html = await ejs.renderFile("dashViews/Perfil", {
+        "rol": "dueno",
+        "nombre": nombre,
+        "foto": foto,
+        "email": email,
+        "usuario": usuario,
+        "paseo": paseo,
+        "perfil": usuario,
+        "idPerfil": email
+    });
+      return html;
+    } catch (error) {
+      console.error('Error rendering EJS to HTML:', error);
+      throw error;
+    }
+  };
+  
+// Plantilla  del pdf
+// Express route for generating PDF
+dash.get('/generate-pdf', async (req, res) => {
+    try {
+      // Render the EJS template to HTML
+      let nombre = token.nombre;
+      let foto = token.foto;
+      let email = token.email;
+
+      // Fetch del usuario
+      let rutaUsuario = process.env.API + "usuarios/" + email;
+      const resultUsuario = await fetch(rutaUsuario)
+      const usuario = await resultUsuario.json();
+
+      // Fetch de los paseos
+      let rutaPaseo = process.env.API + "paseo/";
+      const resultPaseo = await fetch(rutaPaseo)
+      const paseo = await resultPaseo.json();
+      const html = await ejs.renderFile("dashViews/Perfil", {
+        "rol": "dueno",
+        "nombre": nombre,
+        "foto": foto,
+        "email": email,
+        "usuario": usuario,
+        "paseo": paseo,
+        "perfil": usuario,
+        "idPerfil": email
+    });
+  
+      // Create a PDF document
+      const doc = new PDFDocument();
+  
+      // Pipe the PDF document to a writable stream
+      const stream = fs.createWriteStream('/');
+      doc.pipe(stream);
+  
+      // Embed the HTML content into the PDF document
+      doc.html(html, {
+        // Set options for rendering HTML
+        // Add any necessary styling or configuration options
+      });
+  
+      // Finalize the PDF document
+      doc.end();
+  
+      // Send the PDF file as a response
+      res.contentType('application/pdf');
+      doc.pipe(res);
+  
+      // Uncomment the following line if you want to save the PDF file locally
+      // stream.on('finish', () => console.log('PDF file created successfully'));
+  
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      res.status(500).send('Error generating PDF');
+    }
+  });
+
+
+  dash.get("/Reporte", async (req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
@@ -585,22 +683,15 @@ dash.get('/pdf', async(req, res) => {
             const resultPaseo = await fetch(rutaPaseo)
             const paseo = await resultPaseo.json();
 
-            //Ruta del archivo a renderizar
-            //const filePath = path.join(__dirname, "app", "views", "dashViews", "Reporte.ejs")
-
-            res.render("dashViews/Reporte", {
+            res.render("dashViews/Perfil", {
                 "rol": "dueno",
                 "nombre": nombre,
                 "foto": foto,
                 "email": email,
                 "usuario": usuario,
-                "paseo": paseo
-            }, (err, html) => {
-                if(err) {
-                    return response.send('Erro na leitura do arquivo')
-                }
-                // enviar para o navegador
-                return response.send(html)
+                "paseo": paseo,
+                "perfil": usuario,
+                "idPerfil": email
             });
 
         } catch (error) {
@@ -611,28 +702,6 @@ dash.get('/pdf', async(req, res) => {
     }
 });
 
-//Ruta para crear pdf
-dash.get('/CreatePdf', async(request, response) => {
-
-    const browser = await puppeteer.launch()
-    const page = await browser.newPage()
-
-    await page.goto('/Perfil', {
-        waitUntil: 'networkidle0'
-    })
-
-    const pdf = await page.pdf({
-        printBackground: true,
-        format: 'Letter'
-    })
-
-    await browser.close()
-
-    response.contentType("application/pdf")
-
-    return response.send(pdf)
-
-})
 
 // CHAT
 dash.get("/Chat", async (req, res) => {
@@ -667,11 +736,13 @@ dash.get("/Chat", async (req, res) => {
     }
 });
 
+
 //SALIR
 dash.get("/salir", (req, res) => {
     res.clearCookie("token");
     res.redirect("/")
 })
+
 
 // TERMINOS
 /*dash.get("/Terminos", async(req, res)=>{
