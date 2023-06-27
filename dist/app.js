@@ -20,8 +20,13 @@ var _dashDuenoRoutes = _interopRequireDefault(require("./routes/dashDueno.routes
 var _homepageRoutes = _interopRequireDefault(require("./routes/homepage.routes.js"));
 //IMPORTAR LIBRERIAS
 
+//import { loginRouterAdmin } from "./routes/loginAdmin.routes.js";
+
 //RUTAS
 
+//import dash from "./routes/dashAdmin.routes.js";
+
+//import dashAdmin from "./routes/dashAdmin.routes.js";
 //INICIALIZACION
 _dotenv["default"].config();
 var app = (0, _express["default"])();
@@ -44,10 +49,20 @@ app.use((0, _cookieParser["default"])());
 
 //RUTAS
 app.use("/v1/dueno", _dashDuenoRoutes["default"]);
+//app.use("/v1/admin", dashAdmin);
 app.use("/v1/paseador", _dashPaseadorRoutes["default"]);
 app.get("/", function (req, res) {
   res.render("home");
 });
+
+//app.use("/auth/admin", passport.authenticate("auth-google", {
+//    scope: [
+//        "https://www.googleapis.com/auth/userinfo.profile",
+//       "https://www.googleapis.com/auth/userinfo.email"
+//    ],
+//    session: false,
+//}), loginRouterAdmin);
+
 app.use("/auth", _passport["default"].authenticate("auth-google", {
   scope: ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"],
   session: false
