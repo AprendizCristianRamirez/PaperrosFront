@@ -5,7 +5,7 @@ import ejs from "ejs";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { loginRouter } from "./routes/login.routes.js";
-import { loginRouterAdmin } from "./routes/loginAdmin.routes.js";
+//import { loginRouterAdmin } from "./routes/loginAdmin.routes.js";
 import passport from "passport";
 import cookieparser from "cookie-parser";
 import bodyParser from "body-parser";
@@ -43,13 +43,13 @@ app.get("/", (req, res)=>{
     res.render("home");
 })
 
-app.use("/auth/admin", passport.authenticate("auth-google", {
+/*app.use("/auth/admin", passport.authenticate("auth-google", {
     scope: [
         "https://www.googleapis.com/auth/userinfo.profile",
         "https://www.googleapis.com/auth/userinfo.email"
     ],
     session: false,
-}), loginRouterAdmin);
+}), loginRouterAdmin);*/
 
 app.use("/auth", passport.authenticate("auth-google", {
     scope: [
