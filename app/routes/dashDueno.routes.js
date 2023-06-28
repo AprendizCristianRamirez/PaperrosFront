@@ -53,6 +53,26 @@ dash.get("/MisPaseos", async (req, res) => {
     }
 });
 
+dash.get("/MisPaseos", async (req, res)=>{
+    const id = req.query.id;
+    const url = "http://localhost:5000/api/users/"+id;
+    const option = {
+        method : "delete",
+        headers : {
+            'Content-Type':'application/json'
+        }
+    }
+
+    const result = await fetch(url, option)
+    .then(response=>response.json())
+    .then(data=>{
+        if(data.affectedRows > 0){
+            console.log("registro borrado");
+        }
+    })
+    res.redirect("/v1/usuario")
+})
+
 //CREARPASEO
 //Vista para crear paseo
 dash.get("/CrearPaseo", async (req, res) => {
