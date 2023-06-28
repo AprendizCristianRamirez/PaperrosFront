@@ -1,0 +1,242 @@
+<%# Variable para generar IDs en los mapas %>
+<% let mapa = 0; %>
+<% let paseoId = 0; %>
+<% let perroId = 0; %>
+
+<!-- Datos del usuario -->
+<input type="hidden" id="email" name="email" value="<%= email %>">
+<input type="hidden" id="nombre" name="nombre" value="<%= usuario.nombre %>">
+<input type="hidden" id="foto" name="foto" value="<%= foto %>">
+
+<% if ( rol == "dueno" ) { %>
+
+    <%# Mis paseos del dueño %>
+    <%# Paseos personalizados generados por el usuario %>
+    <h1 class="display-1 text-titulo text-center">PASEOS EN MANADA</h1>
+    <div class="container">
+        <div class="row">
+        <%# Renderizar las tarjetas de los paseos en curso y programados%>
+
+        <% paseo.forEach((element)=>{ %>
+
+            <%# Mostrar solo los paseos personalizados que creó el usuario%>
+            <% if((element.autor != email) && (element.tipo == "manada") && (element.estado == "programado")){ %>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <%# Tarjeta %>
+                    <div class="card">
+                        <div id="map<%= mapa %>" class="mapaPaseo" alt="Mapa de paseo"></div>
+                        <div class="card-body">
+                            <p class="card-text"><b><%= element.titulo %></b></p>
+                            <p class="card-text"><%= element.descripcion %></p>
+                            <b><p class="card-text">Precio del servicio:</b> $<%= element.precio %></p>
+                            <b><p class="card-text">Estado del servicio: </b> <%= element.estado %></p>
+                            <button id="btnAbrirPaseo<%= paseoId %>" class="btn btn-primary aBotonCarta1">Detalles</button>
+                            <button onclick="agregarPerros('<%= element.id %>')" class="btn btn-primary aBotonCartaCancelar1">Tomar el paseo</button>
+                        </div>
+                    </div>
+                    <%# Modal (detalles del paseo) %>
+                    <div id="modalPaseo<%= paseoId %>" class="modal">
+                        <div class="modal-content">
+                        <h8>Descripcion:</h8>
+                        <h4><%= element.descripcion %></h4>
+                        <h8>Estado:</h8>
+                        <h4><%= element.estado %></h4>
+                        <h8>Duración:</h8>
+                        <h4><%= element.hora_inicio %> a <%= element.hora_inicio %></h4>
+                        <h8>Medio de pago:</h8>
+                        <h4><%= element.medio_de_pago %></h4>
+                        <h8>Precio:</h8>
+                        <h4>$<%= element.precio %></h4>
+                        <% if(element.paseador != null) { %>
+                            <h8>Paseador:</h8>
+                            <h4><%= element.paseador.nombre %></h4>
+                        <% } %>
+
+                        <h8>Tipo:</h8>
+                        <h4><%= element.tipo %></h4>
+
+                        <a href="/v1/dueno/Perfil/<%= element.autor %>"><button id="btnAbrirPerro<%= perroId %>" class="btn btn-primary aBotonCarta1">
+                            Ir al perfil del paseador
+                        </button></a>
+
+                        <%# Renderización de perros %>
+                        <p class="misperrostitle">PERROS: </p>
+                        <div class="container">
+                            <div class="row-profile">
+                                <br>
+                                <% element.perro.forEach((perros)=>{ %>
+                                    <div class="small-container">
+                                    <img class="profile-image-dog" src="/v1/img/logoCirculo.png" alt="Imagen">
+                                    <p class="misperrostitle">
+                                        <%= perros.nombre %>
+                                    </p>
+                                    <button id="btnAbrirPerro<%= perroId %>" class="btn btn-primary aBotonCarta1">Ver perro</button>
+                    
+                                    <%# Modal del perro %>
+                                    <div id="modalPerro<%= perroId %>" class="modal">
+                                        <div class="modal-content">
+                                        <h8>Nombre:</h8>
+                                        <h1><%= perros.nombre %></h1>
+                    
+                                        <h8>Comportamiento:</h8>
+                                        <h4><%= perros.comportamiento %></h4>
+                    
+                                        <h8>Estatura:</h8>
+                                        <h4><%= perros.estatura %> Cm</h4>
+                    
+                                        <h8>Peso:</h8>
+                                        <h4><%= perros.peso %> Kg</h4>
+                    
+                                        <h8>Raza:</h8>
+                                        <h4><%= perros.raza %></h4>
+                    
+                                        <h8>Vacunas:</h8>
+                                        <h4><%= perros.vacunas %></h4>
+                                        <!--<button id="btnClose<%= perroId %>" class="btn-danger">Cerrar</button>-->
+
+                                        <a href="/v1/dueno/Perfil/<%= perros.email %>"><button id="btnAbrirPerro<%= perroId %>" class="btn btn-primary aBotonCarta1">
+                                            Ir al perfil del dueño
+                                        </button></a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <% perroId ++; %>
+                                <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <% paseoId ++ %>
+                <% mapa ++ %>
+
+                <% } %>
+
+        <% }); %>
+
+        </div>
+    </div>
+        
+<% } else { %>
+    
+    <%# Mis paseos del dueño %>
+    <%# Paseos personalizados generados por el usuario %>
+    <h1 class="display-1 text-titulo text-center">PASEOS PERSONALIZADOS</h1>
+    <div class="container">
+        <div class="row">
+        <%# Renderizar las tarjetas de los paseos en curso y programados%>
+
+        <% paseo.forEach((element)=>{ %>
+
+            <%# Mostrar solo los paseos personalizados que creó el usuario%>
+            <% if((element.autor != email) && (element.tipo == "personalizado") && (element.estado == "programado")){ %>
+
+                <div class="col-lg-4 col-md-6 col-sm-12">
+                    <%# Tarjeta %>
+                    <div class="card">
+                        <div id="map<%= mapa %>" class="mapaPaseo" alt="Mapa de paseo"></div>
+                        <div class="card-body">
+                            <p class="card-text"><b><%= element.titulo %></b></p>
+                            <p class="card-text"><%= element.descripcion %></p>
+                            <b><p class="card-text">Precio del servicio:</b> $<%= element.precio %></p>
+                            <b><p class="card-text">Estado del servicio: </b> <%= element.estado %></p>
+                            <button id="btnAbrirPaseo<%= paseoId %>" class="btn btn-primary aBotonCarta1">Detalles</button>
+                            <button onclick="tomarPaseoPaseador('<%= element.id %>')" class="btn btn-primary aBotonCartaCancelar1">Tomar el paseo</button>
+                        </div>
+                    </div>
+                    <%# Modal (detalles del paseo) %>
+                    <div id="modalPaseo<%= paseoId %>" class="modal">
+                        <div class="modal-content">
+                        <h8>Descripcion:</h8>
+                        <h4><%= element.descripcion %></h4>
+                        <h8>Estado:</h8>
+                        <h4><%= element.estado %></h4>
+                        <h8>Duración:</h8>
+                        <h4><%= element.hora_inicio %> a <%= element.hora_inicio %></h4>
+                        <h8>Medio de pago:</h8>
+                        <h4><%= element.medio_de_pago %></h4>
+                        <h8>Precio:</h8>
+                        <h4>$<%= element.precio %></h4>
+                        <% if(element.paseador != null) { %>
+                            <h8>Paseador:</h8>
+                            <h4><%= element.precio %></h4>
+                        <% } %>
+
+                        <h8>Tipo:</h8>
+                        <h4><%= element.tipo %></h4>
+
+                        <a href="/v1/dueno/Perfil/<%= element.autor %>"><button id="btnAbrirPerro<%= perroId %>" class="btn btn-primary aBotonCarta1">
+                            Ir al perfil del paseador
+                        </button></a>
+
+                        <%# Renderización de perros %>
+                        <p class="misperrostitle">PERROS: </p>
+                        <div class="container">
+                            <div class="row-profile">
+                                <br>
+                                <% element.perro.forEach((perros)=>{ %>
+                                    <div class="small-container">
+                                    <img class="profile-image-dog" src="/v1/img/logoCirculo.png" alt="Imagen">
+                                    <p class="misperrostitle">
+                                        <%= perros.nombre %>
+                                    </p>
+                                    <button id="btnAbrirPerro<%= perroId %>" class="btn btn-primary aBotonCarta1">Ver perro</button>
+                    
+                                    <%# Modal del perro %>
+                                    <div id="modalPerro<%= perroId %>" class="modal">
+                                        <div class="modal-content">
+                                        <h8>Nombre:</h8>
+                                        <h1><%= perros.nombre %></h1>
+                    
+                                        <h8>Comportamiento:</h8>
+                                        <h4><%= perros.comportamiento %></h4>
+                    
+                                        <h8>Estatura:</h8>
+                                        <h4><%= perros.estatura %> Cm</h4>
+                    
+                                        <h8>Peso:</h8>
+                                        <h4><%= perros.peso %> Kg</h4>
+                    
+                                        <h8>Raza:</h8>
+                                        <h4><%= perros.raza %></h4>
+                    
+                                        <h8>Vacunas:</h8>
+                                        <h4><%= perros.vacunas %></h4>
+                                        <!--<button id="btnClose<%= perroId %>" class="btn-danger">Cerrar</button>-->
+
+                                        <a href="/v1/dueno/Perfil/<%= perros.email %>"><button id="btnAbrirPerro<%= perroId %>" class="btn btn-primary aBotonCarta1">
+                                            Ir al perfil del dueño
+                                        </button></a>
+                                        </div>
+                                    </div>
+                                    </div>
+                                    <% perroId ++; %>
+                                <% }); %>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <% paseoId ++ %>
+                <% mapa ++ %>
+
+                <% } %>
+
+        <% }); %>
+
+        </div>
+    </div>
+<% } %>
+
+<script>
+    // Llevar "mapa" de EJS a Js Leaflet
+    const mapa = "<%= mapa %>";
+    const paseoId = "<%= paseoId %>";
+    const perroId = "<%= perroId %>";
+    //Esto saca error pero está melo, aunque me dé mucha ansiedad que esté rojito
+    // Llevar el objeto "paseo" de EJS a Js Leaflet
+    const mapaData = <%- JSON.stringify(paseo) %>;
+</script>

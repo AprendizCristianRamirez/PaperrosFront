@@ -52,10 +52,6 @@ p {
     z-index: 0;
 }
 
-.mapaPaseando {
-    height: 700px;
-}
-
 .mapaConfig {
     height: 524px;
 }
@@ -130,14 +126,13 @@ p {
 .InputsAñadirPerro {
     margin-top: 52.7px;
     width: auto;
-    border: none;
     display: flex;
     height: 44px;
     min-width: 350px;
     margin-bottom: 15px;
     border-radius: 5px;
     font-family: 'CormorantLight';
-    color: #927167;
+    color: #b5c8ad;
     font-size: 20px;
     text-align: center;
 }
@@ -163,15 +158,16 @@ p {
 }
 
 .a-center {
+
     display: flex;
     align-items: center;
     justify-content: center;
+
 }
 
 .BotonSubirPerro {
     align-items: center;
     margin-top: 10px;
-    border: none;
     flex-direction: column;
     margin-left: 20px;
     margin-bottom: 10px;
@@ -187,46 +183,38 @@ p {
     color: #000000;
 }
 
+.aBotonHref {
+    text-decoration: none;
+    color: #FFFFFF;
+}
+
+.aBotonHref:hover {
+    color: #000000;
+}
+
 .imgAñadirPerro {
     max-width: 94%;
     height: auto;
 }
 
+.imgPerfilConfig {
+    max-width: 94%;
+    margin-bottom: 10px;
+    height: auto;
+}
+
 .BotonCancelarPerro {
     align-items: center;
-    text-decoration: none;
     margin-top: 10px;
-    border: none;
     flex-direction: column;
     margin-left: 20px;
     margin-bottom: 10px;
-    background-color: #b5c8ad;
+    background-color: #a47559;
     color: #F3F3F3;
     font-size: 20px;
     font-family: 'CormorantLight';
     border-radius: 20px;
     width: 100px;
-}
-
-.BotonCancelarConfig {
-    align-items: center;
-    padding-left: 15px;
-    border: none;
-    text-decoration: none;
-    margin-top: 10px;
-    flex-direction: column;
-    margin-left: 20px;
-    margin-bottom: 10px;
-    background-color: #b5c8ad;
-    color: #F3F3F3;
-    font-size: 20px;
-    font-family: 'CormorantLight';
-    border-radius: 20px;
-    width: 100px;
-}
-
-.BotonCancelarConfig:hover {
-    color: #000000;
 }
 
 .BotonCancelarPerro:hover {
@@ -290,14 +278,16 @@ p {
     /*Tamaño cuando el cursor señale la barra*/
     width: 70%;
     height: 100vh;
+
     /*Color*/
-    background: #ede8e4;
+    background: #e2e9e0;
 }
 
 .barra:hover h2 {
     /*posicion dentro de barra del h2*/
     padding: 15px;
     font-size: 35px;
+
 }
 
 .barra:hover a {
@@ -326,7 +316,7 @@ p {
 .barra:hover a:hover {
     font-size: 25px;
     padding: 30px 0px;
-    background: #b5c8ad;
+    background: #c5c5c5;
 }
 
 @media (min-width: 768px) {
@@ -337,6 +327,20 @@ p {
 
 
 /* FIN DEL CODIGO DEL ASIDE */
+
+
+/* 
+
+CODIGO OPCIONAL POR SI HAY PROBLEMAS DE DISEÑO O SE PREFIERE ESTE DISEÑO
+
+.menucentrado{
+    margin-right: 420px;
+}
+.divbody {
+    margin-left: 13%;
+}
+
+*/
 
 .card {
     margin-bottom: 20px;
@@ -366,7 +370,7 @@ p {
     font-size: 13px;
     padding: 5px 10px;
     margin-bottom: 5px;
-    background-color: #b5c8ad;
+    background-color: #a47559;
     text-decoration: none;
     border-radius: 5px
 }
@@ -402,13 +406,13 @@ p {
     display: inline-block;
     padding: 5px 10px;
     background-color: #b5c8ad;
-    color: white;
+    color: rgb(0, 0, 0);
     text-decoration: none;
     border-radius: 26px
 }
 
 .aBoton:hover {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .aTitulo {
@@ -416,7 +420,7 @@ p {
     font-weight: 400;
     text-decoration: none;
     padding: 5px 10px;
-    color: #ab6033;
+    color: #b5c8ad;
     font-size: 26.6667px;
 }
 
@@ -425,7 +429,7 @@ p {
     font-weight: 400;
     text-decoration: none;
     padding: 5px 10px;
-    color: #ab6033;
+    color: #b5c8ad;
     font-size: 26.6667px;
 }
 
@@ -453,7 +457,7 @@ p {
 }
 
 .aBarra:hover {
-    color: #ab6033;
+    color: #b5c8ad;
 }
 
 .btn {
@@ -893,126 +897,105 @@ p {
     width: 50px;
 }
 
-.container-profile {
+.text-parrafo-p {
+    color: #b5c8ad !important
+}
+
+.display-1-paseador {
+    color: #b5c8ad !important;
+    font-size: calc(1.625rem + 4.5vw);
+    font-weight: 700;
+    line-height: 1.2
+}
+
+.text-titulo-paseador {
+    color: #b5c8ad !important
+}
+
+.historialtitle-paseador {
+    color: #b5c8ad !important;
+    font-family: "CormorantMedium";
+    font-size: 25px;
+    display: grid;
+}
+
+.menupaseador {
+    background-color: #e2e9e0;
+}
+
+.tab-container {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    justify-content: flex-start;
+    flex-direction: column;
 }
 
-.profile-image {
-    flex: 1;
-    margin-right: 20px;
+.tab-content {
+    max-width: 500px;
+    padding: 20px;
     text-align: center;
+    margin: 20px;
 }
 
-.profile-image-dog {
-    width: 100%;
-    height: auto;
+.titulosperfilpaseador-title {
+    font-family: "CormorantMedium";
+    font-size: 40px;
+    display: grid;
+    color: #b5c8ad !important;
 }
 
-.profile-details {
-    flex: 1;
+.titulosperfilpaseador {
+    font-family: "CormorantLight";
+    font-size: 25px;
+    color: #221c1c !important;
+    justify-content: flex-start;
 }
 
-.profile-details h2 {
-    margin-top: 0;
+.text-parrafo-paseador {
+    color: #b5c8ad
 }
 
-.profile-details p {
-    margin-bottom: 10px;
+.text-titulo-paseador {
+    color: #b5c8ad
 }
 
-.addfile {
-    width: 50px;
-    height: 50px;
+.contenedorterminos {
+    margin-left: 90px;
+    width: 70%;
+    height: 50%;
+    display: flex;
+    justify-content: space-between;
+    /* Agrega esta línea para distribuir los contenedores a la izquierda y derecha */
+
 }
 
-.nametext {
+.contenedorterminosizq {
+    width: 70%;
+}
+
+.contenedorterminosder {
+    width: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.textocontenedorterminos {
+    margin: 30px;
+    text-align: justify;
     font-size: 35px;
 }
 
-.descriptiontext {
-    font-size: 25px;
+.imagenterminos {
+    margin: 70px;
+    width: 100%;
 }
 
-.historialtitle {
-    text-align: center;
-    font-family: "CormorantMedium";
-    font-size: 25px;
-    display: grid;
-}
-
-.small-container {
-    display: grid;
-    margin-left: 20px;
-    margin-right: 20px;
-    margin-bottom: 60px;
-    text-align: center;
-    width: 150px;
-    height: 150px;
-}
-
-.big-container {
-    display: inline-block;
-    margin-left: 200px;
-    margin-right: 200px;
-    text-align: center;
-    width: 150px;
-    height: 150px;
-    padding: 10px;
-}
-
-.boton-profile {
-    font-family: "CormorantLight";
-    text-decoration: none;
-    color: #000000;
-    font-size: 13px;
-    padding: 5px 10px;
-    margin-top: 10px;
-    margin-bottom: 5px;
-    background-color: #dfe5dc;
-    text-decoration: none;
-    border-radius: 5px
-}
-
-.row-profile {
-    --bs-gutter-x: 1.5rem;
-    --bs-gutter-y: 0;
-    display: flex;
-    flex-wrap: wrap;
-    margin-top: calc(var(--bs-gutter-y) * -1);
-    margin-right: calc(var(--bs-gutter-x) / -2);
-    margin-left: calc(var(--bs-gutter-x) / -2);
-    justify-content: center;
-}
-
-.card1 {
-    margin-left: 20px;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    min-width: 0;
-    word-wrap: break-word;
-    background-color: #fff;
-    background-clip: border-box;
-    border: 1px solid rgba(0, 0, 0, 0.125);
-    border-radius: false
-}
-
-.boton-vermas {
-    display: block;
-    text-align: center;
-    margin: 10px;
-    padding: 10px 20px;
-    color: #282525;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-.misperrostitle {
-    font-family: "CormorantMedium";
-    font-size: 25px;
-    display: grid;
-    justify-content: space-around;
+.imagenterminos img {
+    width: 600px;
+    height: 600px;
 }
 
 /*CHAT*/

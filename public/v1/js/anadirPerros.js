@@ -27,6 +27,7 @@ form.addEventListener('submit', async (e) => {
     const vacunas = document.querySelector('#vacunas').value;
     const estatura = document.querySelector('#estatura').value;
     const peso = document.querySelector('#peso').value;
+    const descripcion = document.querySelector('#descripcion').value;
 
     // Objeto con los datos del perro
     const perros = {
@@ -35,7 +36,8 @@ form.addEventListener('submit', async (e) => {
         "comportamiento": comportamiento,
         "vacunas": vacunas,
         "estatura": estatura,
-        "peso": peso
+        "peso": peso,
+        "descripcion": descripcion
     };
 
     // Inserción del perro en el array de perros del usuario

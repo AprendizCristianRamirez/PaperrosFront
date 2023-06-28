@@ -1,11 +1,11 @@
-import { Router } from "express";
+import { Router, urlencoded } from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import fetch from 'node-fetch';
 
 const dash = Router();
 
-//MISPASEOS
+//MIS PASEOS
 dash.get("/MisPaseos", async (req, res) => {
     if (req.cookies.token) {
         try {
@@ -53,9 +53,13 @@ dash.get("/MisPaseos", async (req, res) => {
     }
 });
 
-dash.get("/MisPaseos", async (req, res)=>{
-    const id = req.query.id;
-    const url = "http://localhost:5000/api/users/"+id;
+//Eliminar paseo
+dash.get("/BorrarPaseo/:id", async (req, res)=>{
+    //Tomar id del paseo
+    const id = req.params.id;
+    // Invocar API para borrar paseo con el id
+    const url = process.env.API + "/paseo/" + id;
+    // Describir metodo
     const option = {
         method : "delete",
         headers : {
@@ -70,8 +74,8 @@ dash.get("/MisPaseos", async (req, res)=>{
             console.log("registro borrado");
         }
     })
-    res.redirect("/v1/usuario")
-})
+    res.redirect("/v1/dueno/MisPaseos")
+});
 
 //CREARPASEO
 //Vista para crear paseo
@@ -120,8 +124,8 @@ dash.post("/CrearPaseo", async (req, res) => {
         foto_dueno: req.body.duenoFotoPaseo,
         email: req.body.duenoEmailPaseo,
         localizacion: {
-            _latitude: req.body.paseoLatitude,
-            _longitude: req.body.paseoLongitude
+            _latitude: req.body.duenoLatitude,
+            _longitude: req.body.duenoLongitude
         }
     }
 
@@ -129,17 +133,31 @@ dash.post("/CrearPaseo", async (req, res) => {
     //Este datos es un array de strings
     //por ejemplo: ['{"raza": "Golden", "nombre": "Martina"...}', '{"raza": "Golden", "nombre": "Martina"...}', '{"raza": "Bulldog"...]
     const checkedPerros = req.body.perros;
-    //Aqui se convierte ese array de strings a un array de objetos con cada posición de checkedPerros
-    let perroArray = checkedPerros.map((item) => JSON.parse(item));
+    let perrosArray = [];
+    let perroObjeto;
 
-    //Añadir información del usuario a los perros
-    for (let i = 0; i < perroArray.length; i++) {
-        perroArray[i].nombre_dueno = usuario.nombre_dueno;
-        perroArray[i].foto_dueno = usuario.foto_dueno;
-        perroArray[i].email = usuario.email;
-        perroArray[i].localizacion = usuario.localizacion;
+    if (Array.isArray(checkedPerros)) {
+        //Aqui se convierte ese array de strings a un array de objetos con cada posición de checkedPerros
+        perrosArray = checkedPerros.map((item) => JSON.parse(item));
+        //Añadir información del usuario a los perros
+        for (let i = 0; i < perrosArray.length; i++) {
+            perrosArray[i].nombre_dueno = usuario.nombre_dueno;
+            perrosArray[i].foto_dueno = usuario.foto_dueno;
+            perrosArray[i].email = usuario.email;
+            perrosArray[i].localizacion = usuario.localizacion;
+        }
+      } else {
+        // Si es un objeto (Un solo perro)
+        perroObjeto = JSON.parse(checkedPerros);
+        //Añadir información del usuario al perro
+        perroObjeto.nombre_dueno = usuario.nombre_dueno;
+        perroObjeto.foto_dueno = usuario.foto_dueno;
+        perroObjeto.email = usuario.email;
+        perroObjeto.localizacion = usuario.localizacion;
+        // Insertar el objeto en el array final
+        perrosArray[0] = perroObjeto;
     }
-
+    
     //Campos del usuario
     let paseo = {
         autor: req.body.duenoEmailPaseo,
@@ -159,7 +177,7 @@ dash.post("/CrearPaseo", async (req, res) => {
         //    img_paseador:req.body.paseadorImgPaseo,
         //    nombre_paseador:req.body.paseadorNombrePaseo
         //},
-        perro: perroArray
+        perro: perrosArray
     }
     // Petición de POST o PUT del paseo
     try {
@@ -185,28 +203,6 @@ dash.post("/CrearPaseo", async (req, res) => {
             },
             perro: paseo.perro
         };
-        //Si el campo tiene un id, será metodo put (actualizar)
-        if (req.body.id) {
-            const id = req.body.id;
-            metodo = "put";
-            datos = {
-                titulo: paseo.titulo,
-                descripcion: paseo.descripcion,
-                destino: {
-                    _latitude:paseo.destino._latitude,
-                    _longitude: paseo.destino._longitude
-                },
-                nombre_destino: paseo.nombre_destino,
-                hora_fin: paseo.hora_fin,
-                hora_inicio: paseo.hora_inicio,
-                precio: paseo.precio,
-                medio_de_pago: medio_de_pago,
-                paseador: {
-                    //Vacio porque luego el paseador decide tomar el paseo
-                },
-                perro: paseo.perro
-            }
-        }
         //Configuración del fetch
         const option = {
             method: metodo, //En metodo iria post si no tiene id y post en el caso contrario
@@ -234,25 +230,36 @@ dash.post("/CrearPaseo", async (req, res) => {
     res.redirect("MisPaseos")
 });
 
-//RUTAS DE PASEADORES (MANADA)
-dash.get("/RutasPaseadores", (req, res) => {
+//BUSCAR PASEO
+dash.get("/BuscarPaseo", async(req, res) => {
     if (req.cookies.token) {
         try {
             const token = jwt.verify(
                 req.cookies.token,
                 process.env.SECRET_KEY
             )
+            // Datos de las cookies
             let nombre = token.nombre;
             let foto = token.foto;
-            let email = token.email
+            let email = token.email;
 
-            res.render("dashViews/RutasPaseadores", {
-                "rol": "dueno",
-                "nombre": nombre,
-                "foto": foto,
-                "mnu": 0,
-                "email": email
+            // Fetch del usuario
+            let rutaUsuario = process.env.API + "usuarios/" + email;
+            const resultUsuario = await fetch(rutaUsuario)
+            const usuario = await resultUsuario.json();
 
+            // Fetch de los paseos
+            let rutaPaseo = process.env.API + "paseo/";
+            const resultPaseo = await fetch(rutaPaseo)
+            const paseo = await resultPaseo.json();
+            
+            res.render("dashViews/BuscarPaseo",{
+            "rol": "dueno",
+            "nombre": nombre,
+            "foto": foto,
+            "email": email,
+            "usuario": usuario,
+            "paseo": paseo
             });
         } catch (error) {
             res.redirect("/Salir")
@@ -284,7 +291,8 @@ dash.get("/AnadirPerro", async (req, res) => {
                 "nombre": nombre,
                 "foto": foto,
                 "mnu": 0,
-                "email": email
+                "email": email,
+                "usuario": usuario
 
             });
         } catch (error) {

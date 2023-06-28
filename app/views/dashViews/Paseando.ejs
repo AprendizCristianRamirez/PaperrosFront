@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head.ejs"); %>
+
+    <body>
+        <%# Partial del menú %>
+        <%- include("./partials/menu.ejs"); %>
+
+        <%# Mapa %>
+        <div id="map" class="mapaPaseando" alt="Mapa de paseo"></div>
+
+        <div class="container ContainerAñadirPerro">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="form-group">
+                    <label class="TextoImagen">Deja un comentario o informe del paseo:</label>
+                    <textarea name="comentario" id="comentario" cols="70" rows="10"></textarea>
+                </div>
+            </div>
+        <button id="comentario" class="btn btn-primary aBotonCarta1" onclick="cambiarEstadoPaseo('<%= paseo.id %>', 'finalizado')">Finalizar paseo</button> 
+        </div>
+
+
+    
+        <%# Partial del footer %>
+        <%- include("./partials/footer.ejs"); %>
+
+        
+        <script>
+            // Llevar el objeto "paseo" de EJS a Js Leaflet
+            const mapaData = <%- JSON.stringify(paseo) %>;
+        </script>
+
+        <%# Firebase %>
+        <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
+        
+        <script src="/v1/js/paseo/estadoPaseo.js"></script>
+
+        <%# Leaflet %>
+        <script src="/v1/js/leafletPaseando.js"></script>
+    </body>
+
+</html>

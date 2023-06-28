@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<%- include("./partials/head.ejs"); %>
+
+<body>
+
+    <button id="download-button">Generate PDF</button>
+
+    <div id="renderizar">
+        <nav class="navbar navbar-expand-lg bg-header navbar-light shadow-sm py-3 py-lg-0 px-3 px-lg-0">
+            <a href="https://paperrosfront-production.up.railway.app/" class="aTitulo ms-lg-5">
+                <h1Titulo class="m-0 text-uppercase"> <img src="/homepage/img/LogoCirculo.png" height="60" width="60"></img>
+                    PaPerros</h1Titulo>
+            </a>
+        </nav>
+            <%# Perfil del dueño %>
+        <div class="container-profile">
+            <div class="profile-image">
+                <!--img class="profile-image" src="<%= foto %>" height="300px" alt="Foto de perfil">-->
+                <div class="profile-details">
+                    <br>
+                    <br>
+                    <%# Nombre del perfil %>
+                    <h2 class="text-parrafo text-center nametext">
+                        <%= nombre %>
+                    </h2>
+                    <%# Dirección %>
+                    <% if ( email==idPerfil ) { %>
+                    <p class="descriptiontext"><strong>País: </strong>
+                        <%= perfil.pais %>
+                    </p>
+                    <p class="descriptiontext"><strong>Municipio: </strong>
+                        <%= perfil.municipio%>
+                    </p>
+                    <p class="descriptiontext"><strong>Dirección: </strong>
+                        <%= perfil.direccion %>
+                    </p>
+                    <p class="descriptiontext"><strong>Edad: </strong>
+                        <%= perfil.edad %>
+                    </p>
+                    <p class="descriptiontext"><strong>Correo Electrónico:</strong>
+                        <%= email %>
+                    </p>
+                    <p class="descriptiontext"><strong>Teléfono:</strong>
+                        <%= perfil.telefono %>
+                    </p>
+                    <p class="descriptiontext"><strong>Cuenta de transferencia:</strong></p>
+
+                    <% } else { %>
+
+                    <a href="/v1/dueno/chat" class="boton-profile">Chatea</a>
+
+                    <a href="/v1/dueno/reportes" class="btn-danger">Reportar</a>
+
+                    <% }; %>
+
+                    <p class="misperrostitle">MIS PERROS: </p>
+
+                    <%# Perros %>
+                    <div class="container">
+                        <div class="row-profile">
+                            <br>
+                            <%# Renderización de perros %>
+                            <% perfil.perros.forEach((element)=>{ %>
+                            <div class="small-container">
+                                <img class="profile-image-dog" src="/v1/img/bulldog1.jpeg" alt="Imagen">
+                                <p class="misperrostitle">
+                                <%= element.nombre %>
+                                </p>
+                                <p class="descriptiontext"><strong>Comportamiento:</strong> <%= element.comportamiento %></p>
+
+                                <p class="descriptiontext"><strong>Estatura:</strong> <%= element.estatura %> Cm</p>
+
+                                <p class="descriptiontext"><strong>Peso:</strong> <%= element.peso %> Kg</p>
+
+                                <p class="descriptiontext"><strong>Raza:</strong> <%= element.raza %></p>
+
+                                <p class="descriptiontext"><strong>Vacunas:</strong> <%= element.vacunas %></p>
+                            </div>
+                            <% }); %>
+                        </div>
+                    </div>
+                    </div>
+                    <br>
+                    <p class="historialtitle">HISTORIAL DE PASEOS: </p>
+                    <%# Paseos %>
+                    <div class="container">
+                    <div class="row-profile">
+                        <%# Renderización de paseos %>
+                        <% paseo.forEach((element)=>{ %>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="card1">
+                            <div class="card-body">
+                                <p class="card-text"><%= element.titulo %></p>
+                                <p class="card-text">Precio del servicio: $<%= element.precio %>
+                                </p>
+                                <p class="card-text">Estado del servicio: <%= element.estado %>
+                                </p>
+                                <a href="#" class="boton-profile">Detalles</a>
+                            </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    </div>
+                </div>
+            </div>
+    <p class="card-text" id="footerPdf">Generado por <%= perfil.nombre %> (<%= email %>) el dia </p>
+        </div>
+    </div>
+    <br>
+    <br>
+
+    <%# Scripts %>
+    <script src="/v1/js/html2pdf.js"></script>
+    <script>
+        // Obtener fecha actual
+        const fechaActual = new Date();
+        // Obtener componentes de la fecha
+        const year = fechaActual.getFullYear();
+        const month = fechaActual.getMonth() + 1;
+        const day = fechaActual.getDate();
+        const hours = fechaActual.getHours();
+        const minutes = fechaActual.getMinutes();
+        const seconds = fechaActual.getSeconds();
+
+        // Asignar datos del generador del informe en el footer
+        const footer = document.getElementById('footerPdf');
+        footer.innerHTML += ` ${fechaActual}`
+
+        // Botón para generar informe
+        const button = document.getElementById('download-button');
+
+        function generatePDF() {
+            // Elemento que se convertira a pdf
+            const element = document.getElementById('renderizar');
+            // Designar nombre del archivo y guardarlo en el dispositivo
+            html2pdf().set({
+                filename: `<%= perfil.nombre %>Reporte${day}-${month}-${year}_${hours}-${minutes}-${seconds}.pdf`,
+            }).from(element).save();
+        }
+
+        // El botón para generar reporte
+        button.addEventListener('click', generatePDF);
+
+    </script>
+</body>
+</html>
