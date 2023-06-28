@@ -43,14 +43,6 @@ app.get("/", (req, res)=>{
     res.render("home");
 })
 
-/*app.use("/auth/admin", passport.authenticate("auth-google", {
-    scope: [
-        "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/userinfo.email"
-    ],
-    session: false,
-}), loginRouterAdmin);*/
-
 app.use("/auth", passport.authenticate("auth-google", {
     scope: [
         "https://www.googleapis.com/auth/userinfo.profile",
