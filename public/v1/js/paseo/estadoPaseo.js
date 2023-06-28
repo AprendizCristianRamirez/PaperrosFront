@@ -63,3 +63,15 @@ async function tomarPaseoPaseador(documento) {
     window.location.href = `/v1/paseador/MisPaseos`;
     
 };
+
+
+async function agregarPerro(documento, perros) {
+    console.log(perros);
+
+    await db.collection('paseo').doc(documento).update({
+        // arrayUnion() funciona insertando el dato dentro del parametro al array indicado (perros)
+        perro: perros
+    });
+
+    window.location.href = `/v1/paseador/MisPaseos`;
+}
