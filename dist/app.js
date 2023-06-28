@@ -34,7 +34,7 @@ var _dirname = _path["default"].resolve();
 //CONFIGURACION
 app.set("port", process.env.PORT);
 app.set("view engine", "ejs");
-app.set("views", _path["default"].resolve(_path["default"].join(_dirname, "app", "views")));
+app.set("views", _path["default"].resolve(_path["default"].join(_dirname, "views")));
 app.use(_bodyParser["default"].urlencoded({
   extended: false
 }));
