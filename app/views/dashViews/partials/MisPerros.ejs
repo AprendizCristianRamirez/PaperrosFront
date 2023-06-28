@@ -7,79 +7,39 @@
         <%# Este forEach trae todos los perros del usuario. Ej: "usuario.perros[3].nombre" %>
         <%# "usuario.perros[i].raza" equivale a "element.raza" %>
         <% usuario.perros.forEach((element)=>{ %>
-            <div class="col-lg-4 col-md-6 col-sm-12">
-                <div class="card">
-                    <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
-                    <img class="card-img-top" src="/v1/img/husky.jpg" height="300px" alt="Imagen 1">
-                    <div class="card-body">
-                        <!--Nombre del perro-->
-                        <p class="aBarra"><b><%= element.nombre %></b></p>
-                        <input type="hidden" id="nombre<%= perroId %>" name="nombre" class="form-control" value="<%= element.nombre %>">
-                        <!--Raza del perro-->
-                        <p class="card-text"><b>Raza: </b><%= element.raza %></p>
-                        <input type="hidden" id="raza<%= perroId %>" name="raza" class="form-control" value="<%= element.raza %>">
-                        <!--Comportamiento del perro-->
-                        <p class="card-text"><b>Comportamiento: </b><%= element.comportamiento %></p>
-                        <input type="hidden" id="comportamiento<%= perroId %>" name="comportamiento" class="form-control" value="<%= element.comportamiento %>">
-                        <!--Estatura del perro-->
-                        <p class="card-text"><b>Estatura: </b><%= element.estatura %> Cm</p>
-                        <input type="hidden" id="estatura<%= perroId %>" name="estatura" class="form-control" value="<%= element.estatura %>">
-                        <!--Peso del perro-->
-                        <p class="card-text"><b>Peso: </b><%= element.peso %> Kg</p>
-                        <input type="hidden" id="peso<%= perroId %>" name="peso" class="form-control" value="<%= element.peso %>">
-                        <!--Vacunas del perro-->
-                        <p class="card-text"><b>Vacunas: </b><%= element.vacunas %></p>
-                        <input type="hidden" id="vacunas<%= perroId %>" name="vacunas" class="form-control" value="<%= element.vacunas %>">
-                        
-                        <!--Botón de editar perro-->
-                        <a href="#" class="btn btn-primary aBotonCarta1">EDITAR</a>
-                        <!--Botón de borrar perro: la función eliminarperro(perroId) pertenece al script /js/eliminarMensaje.js-->
-                        <button class="btn btn-primary aBotonCarta1" onclick="eliminarPerro(<%= perroId %>)">ELIMINAR</button>                    </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+            <div class="card">
+                <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
+                <img class="card-img-top" src="/v1/img/logo.png" height="300px" alt="Imagen 1">
+                <div class="card-body">
+                    <!--Nombre del perro-->
+                    <p class="aBarra"><b><%= element.nombre %></b></p>
+                    <input type="hidden" id="nombre<%= perroId %>" name="nombre" class="form-control" value="<%= element.nombre %>">
+                    <!--Raza del perro-->
+                    <p class="card-text"><b>Raza: </b><%= element.raza %></p>
+                    <input type="hidden" id="raza<%= perroId %>" name="raza" class="form-control" value="<%= element.raza %>">
+                    <!--Comportamiento del perro-->
+                    <p class="card-text"><b>Comportamiento: </b><%= element.comportamiento %></p>
+                    <input type="hidden" id="comportamiento<%= perroId %>" name="comportamiento" class="form-control" value="<%= element.comportamiento %>">
+                    <!--Estatura del perro-->
+                    <p class="card-text"><b>Estatura: </b><%= element.estatura %> Cm</p>
+                    <input type="hidden" id="estatura<%= perroId %>" name="estatura" class="form-control" value="<%= element.estatura %>">
+                    <!--Peso del perro-->
+                    <p class="card-text"><b>Peso: </b><%= element.peso %> Kg</p>
+                    <input type="hidden" id="peso<%= perroId %>" name="peso" class="form-control" value="<%= element.peso %>">
+                    <!--Vacunas del perro-->
+                    <p class="card-text"><b>Vacunas: </b><%= element.vacunas %></p>
+                    <input type="hidden" id="vacunas<%= perroId %>" name="vacunas" class="form-control" value="<%= element.vacunas %>">
+                    
+                    <!--Botón de editar perro-->
+                    <!--<a href="#" class="btn btn-primary aBotonCarta1">EDITAR</a>-->
+                    <!--Botón de borrar perro: la función eliminarperro(perroId) pertenece al script /js/eliminarMensaje.js-->
+                    <button class="btn btn-primary aBotonCarta1" onclick="eliminarPerro(<%= perroId %>)">ELIMINAR</button>                    </div>
                 </div>
             </div>
         <% perroId++ %>
         <% }); %>
 
-
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card">
-                <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
-                <img class="card-img-top" src="/v1/img/bulldog2.jpg" height="300px" alt="Imagen 1">
-                <div class="card-body">
-                    <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
-                    <p class="card-text">NOMBRE DEL PERRO</p>
-                    <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
-                    <p class="card-text">Raza del perro</p>
-                    <a href="#" class="btn btn-primary aBotonCarta1">EDITAR</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card">
-                <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
-                <img class="card-img-top" src="/v1/img/PerritoBesos.jpg" height="300px" alt="Imagen 1">
-                <div class="card-body">
-                    <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
-                    <p class="card-text">NOMBRE DEL PERRO</p>
-                    <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
-                    <p class="card-text">Raza del perro</p>
-                    <a href="#" class="btn btn-primary aBotonCarta1">EDITAR</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6 col-sm-12">
-            <div class="card">
-                <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
-                <img class="card-img-top" src="/v1/img/bulldog1.jpeg" height="300px" alt="Imagen 1">
-                <div class="card-body">
-                    <!--ACA VA A IR UN INCLUDE DEL TITULO DEL SERVICIO-->
-                    <p class="card-text">NOMBRE DEL PERRO</p>
-                    <!--ACA VA A IR UN INCLUDE DEL PRECIO DEL SERVICIO-->
-                    <p class="card-text">Raza del perro</p>
-                    <a href="#" class="btn btn-primary aBotonCarta1">EDITAR</a>
-                </div>
-            </div>
-        </div>
         <div class="BotonAñadir">
             <a href="/v1/dueno/AnadirPerro">
                 <img src="/v1/img/añadirIcono.png" height="100" width="100">

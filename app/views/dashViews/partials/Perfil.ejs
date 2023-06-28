@@ -36,8 +36,6 @@
           </p>
           <p class="descriptiontext"><strong>Cuenta de transferencia:</strong></p>
 
-          <a href="/v1/dueno/reporte"><button id="generate-pdf-btn">Generar reporte</button></a>
-
         <% } else { %>
 
           <a href="/v1/dueno/chat" class="boton-profile">Chatea</a>
@@ -78,7 +76,7 @@
             <%# Renderización de perros %>
             <% perfil.perros.forEach((element)=>{ %>
               <div class="small-container">
-                <img class="profile-image-dog" src="/v1/img/bulldog1.jpeg" alt="Imagen">
+                <img class="profile-image-dog" src="/v1/img/logoCirculo.png" alt="Imagen">
                 <p class="misperrostitle">
                   <%= element.nombre %>
                 </p>
@@ -163,6 +161,8 @@
       </div>
     </div>
   <% } %>
+
+  <a href="/v1/dueno/reporte"><button id="generate-pdf-btn">Generar reporte</button></a>
 
   <script>
     // Llevar "mapa" de EJS a Js Leaflet
