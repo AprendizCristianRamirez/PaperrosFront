@@ -65,36 +65,13 @@ async function tomarPaseoPaseador(documento) {
 };
 
 
-async function agregarPerro(documento) {
+async function agregarPerro(documento, perros) {
+    console.log(perros);
 
-    const nombre = document.getElementById('nombre').value;
-    const email = document.getElementById('email').value;
-    const foto = document.getElementById('foto').value;
-
-    /*const arrayPerros = JSON.parse(perros).map((perro) => {
-        // Flatten the nested arrays or remove them
-        return {
-          nombre: perro.nombre,
-          raza: perro.raza,
-          comportamiento: perro.comportamiento,
-          vacunas: perro.vacunas,
-          estatura: perro.estatura,
-          peso: perro.peso,
-          descripcion: perro.descripcion,
-          email: email,
-          nombre: nombre,
-          foto: foto
-        };
-    });*/
-
-      console.log(perrosUsuario)
-
-    /*await db.collection('paseo').doc(documento).update({
+    await db.collection('paseo').doc(documento).update({
         // arrayUnion() funciona insertando el dato dentro del parametro al array indicado (perros)
-        perro: firebase.firestore.FieldValue.arrayUnion(arrayPerros)
-    });*/
+        perro: perros
+    });
 
-    //window.location.href = `/v1/dueno/MisPaseos`;
+    window.location.href = `/v1/paseador/MisPaseos`;
 }
-
-console.log(perrosUsuario)
