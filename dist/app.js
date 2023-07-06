@@ -21,8 +21,6 @@ var _dashDuenoRoutes = _interopRequireDefault(require("./routes/dashDueno.routes
 var _homepageRoutes = _interopRequireDefault(require("./routes/homepage.routes.js"));
 //IMPORTAR LIBRERIAS
 
-//import { loginRouterAdmin } from "./routes/loginAdmin.routes.js";
-
 //RUTAS
 
 //INICIALIZACION
@@ -52,15 +50,6 @@ app.use("/v1/admin", _dashAdminRoutes["default"]);
 app.get("/", function (req, res) {
   res.render("home");
 });
-
-/*app.use("/auth/admin", passport.authenticate("auth-google", {
-    scope: [
-        "https://www.googleapis.com/auth/userinfo.profile",
-        "https://www.googleapis.com/auth/userinfo.email"
-    ],
-    session: false,
-}), loginRouterAdmin);*/
-
 app.use("/auth", _passport["default"].authenticate("auth-google", {
   scope: ["https://www.googleapis.com/auth/userinfo.profile", "https://www.googleapis.com/auth/userinfo.email"],
   session: false

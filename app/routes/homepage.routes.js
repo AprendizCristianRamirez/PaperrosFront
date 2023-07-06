@@ -30,7 +30,7 @@ home.get("/Contactanos", (req, res)=>{
     res.render("homeViews/contactanos", {
         "titulo":"Paperros","activo":5,
         "google": process.env.GOOGLE_LOGIN,
-        "api": process.env.API
+        "api": proccess.env.API
         });
 });
 

@@ -120,8 +120,7 @@
       </div>
     </div>
   </div>
-  <% } %>
-  <a href="/v1/dueno/reporte"><button id="generate-pdf-btn">Generar reporte</button></a>
+  <% }; %>
 
   <% } else { %>
     <%# Perfil del paseador %>
@@ -253,17 +252,98 @@
             <% }; %>
         </div>
         </div>
-        <a href="/v1/paseador/reporte"><button id="generate-pdf-btn">Generar reporte</button></a>
     </div>
-    <% } %>
+    <% }; %>
     <% if ( email==idPerfil ) { %>
+        <a href="/v1/paseador/reporte"><button id="generate-pdf-btn">Generar reporte</button></a>
+    <% } %>
+<% } else { %>
+    <%# Perfil del dueño %>
+    <h1 class="display-1 text-titulo text-center">MI PERFIL</h1>
+
+    <div class="container-profile">
+        <div class="profile-image">
+        <% if ( email==idPerfil ) { %>
+            <img class="profile-image" src="<%= foto %>" height="300px" alt="Foto de perfil">
+        <% } %>
+        <div class="profile-details">
+            <br>
+            <br>
+            <%# Nombre del perfil %>
+            <h2 class="text-parrafo text-center nametext">
+            <%= nombre %>
+            </h2>
+            <%# Dirección %>
+            <% if ( email==idPerfil ) { %>
+            <p class="descriptiontext"><strong>País: </strong>
+                <%= perfil.pais %>
+            </p>
+            <p class="descriptiontext"><strong>Municipio: </strong>
+                <%= perfil.municipio%>
+            </p>
+            <p class="descriptiontext"><strong>Dirección: </strong>
+                <%= perfil.direccion %>
+            </p>
+            <p class="descriptiontext"><strong>Edad: </strong>
+                <%= perfil.edad %>
+            </p>
+            <p class="descriptiontext"><strong>Correo Electrónico:</strong>
+                <%= email %>
+            </p>
+            <p class="descriptiontext"><strong>Teléfono:</strong>
+                <%= perfil.telefono %>
+            </p>
+
+            <% } else { %>
+
+            <a href="http://wa.me/+57<%= perfil.telefono %>" class="boton-profile">Chatea</a>
+            <a href="/v1/dueno/reportes" id="myBtn" class="btn-danger">Reportar</a>
+
+            <% }; %>
+            <br>
+        </div>
+        </div>
+    </div>
+    <br>
+    <br>
+    <% if ( email==idPerfil ) { %>
+        <p class="historialtitle">HISTORIAL DE PASEOS: </p>
+        <%# Paseos %>
+        <div class="container">
+        <div class="row-profile">
+            <%# Renderización de paseos %>
+            <% paseo.forEach((element)=>{ %>
+
+                <% if( element.autor == email ){ %>
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <div class="card1">
+                        <div class="card-body">
+                            <p class="card-text"><%= element.titulo %></p>
+                            <p class="card-text">Precio del servicio: $<%= element.precio %>
+                            </p>
+                            <p class="card-text">Estado del servicio: <%= element.estado %>
+                            </p>
+                            <a href="#" class="boton-profile">Detalles</a>
+                        </div>
+                        </div>
+                    </div>
+                <% } %>
+                    
+            <% }); %>
+        </div>
+        </div>
+    </div>
+    <% }; %>
+    <% if ( email==idPerfil ) { %>
+        <a href="/v1/paseador/reporte"><button id="generate-pdf-btn">Generar reporte</button></a>
     <% } %>
 <% } %>
+
 
 <script>
     // Llevar "mapa" de EJS a Js Leaflet
     const perroId = "<%= perroId %>";
     //Esto saca error pero está melo, aunque me dé mucha ansiedad que esté rojito
     // Llevar el objeto "paseo" de EJS a Js Leaflet
-    const mapaData = "<%- JSON.stringify(paseo) %>";
+    const mapaData = <%- JSON.stringify(paseo) %>;
 </script>

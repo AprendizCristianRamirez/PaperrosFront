@@ -33,7 +33,7 @@
                             <b><p class="card-text">Precio del servicio:</b> $<%= element.precio %></p>
                             <b><p class="card-text">Estado del servicio: </b> <%= element.estado %></p>
                             <button id="btnAbrirPaseo<%= paseoId %>" class="btn btn-primary aBotonCarta1">Detalles</button>
-                            <button onclick="agregarPerro('<%= element.id %>')" class="btn btn-primary aBotonCartaCancelar1">Agregar mis perros</button>
+                            <button onclick="agregarPerro('<%= element.id %>', '<%= JSON.stringify(usuario.perros) %>')" class="btn btn-primary aBotonCartaCancelar1">Agregar mis perros</button>
                         </div>
                     </div>
                     <%# Modal (detalles del paseo) %>
@@ -237,7 +237,6 @@
     const mapa = "<%= mapa %>";
     const paseoId = "<%= paseoId %>";
     const perroId = "<%= perroId %>";
-    //const perrosUsuario = <%= JSON.stringify(usuario.perros) %>;
     //Esto saca error pero está melo, aunque me dé mucha ansiedad que esté rojito
     // Llevar el objeto "paseo" de EJS a Js Leaflet
     const mapaData = <%- JSON.stringify(paseo) %>;

@@ -39,7 +39,7 @@ home.get("/Contactanos", function (req, res) {
     "titulo": "Paperros",
     "activo": 5,
     "google": process.env.GOOGLE_LOGIN,
-    "api": process.env.API
+    "api": proccess.env.API
   });
 });
 home.get("/Registro", function (req, res) {
