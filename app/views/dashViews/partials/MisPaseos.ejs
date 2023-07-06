@@ -28,6 +28,7 @@
                             <b><p class="card-text">Estado del servicio: </b> <%= element.estado %></p>
                             <button id="btnAbrirPaseo<%= paseoId %>" class="btn btn-primary aBotonCarta1">Detalles</button>
                             <% if(element.estado == "programado") { %>
+                                <input type="button" class="btn btn-primary aBotonCarta1" id="btnBorrarPaseo" value="Cancelar"></input>
                                 <a href="/v1/dueno/BorrarPaseo/<%= element.id %>" class="btn btn-primary aBotonCartaCancelar1">Cancelar</a>
                             <% } %>
                         </div>
