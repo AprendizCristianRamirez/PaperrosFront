@@ -2,6 +2,7 @@ import { Router, urlencoded } from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import fetch from 'node-fetch';
+import perros from "../config/perros.json";
 
 const dash = Router();
 
@@ -281,6 +282,10 @@ dash.get("/AnadirPerro", async (req, res) => {
             let foto = token.foto;
             let email = token.email;
 
+            // array de vacunas
+            const vacunas = ["Rabia", "Moquillo canino", "Parvovirus", 
+            "Adenovirus canino tipo 2", "Leptospirosis", "Tos de las perreras"];
+
             // Fetch del usuario
             let rutaUsuario = process.env.API + "usuarios/" + email;
             const resultUsuario = await fetch(rutaUsuario)
@@ -292,7 +297,9 @@ dash.get("/AnadirPerro", async (req, res) => {
                 "foto": foto,
                 "mnu": 0,
                 "email": email,
-                "usuario": usuario
+                "usuario": usuario,
+                "perros": perros, //Importado desde perros.json
+                "vacunas": vacunas
 
             });
         } catch (error) {

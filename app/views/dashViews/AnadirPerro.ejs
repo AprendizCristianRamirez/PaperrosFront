@@ -22,25 +22,34 @@
                 <div class="col-lg-6">
                     <%# Imagen %>
                     <div class="form-group">
-                        <%# Nombre %>
-                        <div class="form-group">
-                            <input class="InputsAñadirPerro" type="text" id="nombre" name="nombre"
-                                class="form-control" placeholder="Nombre" required>
-                        </div>
                         <%# Raza %>
-                        <div class="form-group">
-                            <input class="InputsAñadirPerro" type="text " id="raza" name="raza"
-                                class="form-control " placeholder="Raza" required>
-                        </div>
-                        <%# Comportamiento %>
-                        <div class="form-group">
-                            <input class="InputsAñadirPerro" type="text" id="comportamiento" name="comportamiento"
-                                class="form-control" placeholder="Comportamiento" required>
-                        </div>
+                        <div class="form-group ">
+                            <select class="" id="raza" name="raza" multiple>
+                                <% perros.forEach((element => { %>
+                                    <option value="<%= element.nombre %>" data-imagen="<%= element.imagen %>"><%= element.nombre %></option>   
+                                <% })) %>
+                            </select>
+                        </div>  
+                        <%# Vacunas %>
+                        <% vacunas.sort().forEach((vacuna) => { %>
+                            <div class="form-group">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" value="<%= vacuna %>" id="<%= vacuna %>" name="vacunas">
+                                    <label class="form-check-label" for="<%= vacuna %>">
+                                        <%= vacuna %>
+                                    </label>
+                                </div>
+                            </div>
+                        <% }) %>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     
+                    <%# Nombre %>
+                    <div class="form-group">
+                        <input class="InputsAñadirPerro" type="text" id="nombre" name="nombre"
+                            class="form-control" placeholder="Nombre" required>
+                    </div>
                     <%# Estatura %>
                     <div class="form-group">
                         <input class="InputsAñadirPerro" type="number" id="estatura" name="estatura"
@@ -51,15 +60,17 @@
                         <input class="InputsAñadirPerro" type="number" id="peso" name="peso" class="form-control"
                             placeholder="Peso (Kg)" required>
                     </div>
-                    <%# Vacunas %>
+                    <%# Comportamiento %>
                     <div class="form-group">
-                        <input class="InputsAñadirPerro" type="text" id="vacunas" name="vacunas" class="form-control"
-                            placeholder="Vacunas" required>
+                        <input class="InputsAñadirPerro" type="text" id="comportamiento" name="comportamiento"
+                            class="form-control" placeholder="Comportamiento" required>
                     </div>
-                </div>
+                    
+                    </div>
+                <%# Descripción %>
                 <div class="form-group">
                     <input type="text" id="descripcion" name="descripcion" class="form-control"
-                        placeholder="Descripción del perro" required>
+                        placeholder="Descripción del perro">
                 </div>
             </div>
             <div class="row ">

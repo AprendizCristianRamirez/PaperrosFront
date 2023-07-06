@@ -10,26 +10,22 @@
         <div class="col-lg-4 col-md-6 col-sm-12">
             <div class="card">
                 <!--ACA VA A IR UN INCLUDE DE LA FOTO DEL PERRO-->
-                <img class="card-img-top" src="/v1/img/logo.png" height="300px" alt="Imagen 1">
+                <img class="card-img-top" src="<%= element.imagen!=undefined ? element.imagen : '/v1/img/logo.png ' %>" height="300px" alt="Perro <%= element.nombre %>">
                 <div class="card-body">
                     <!--Nombre del perro-->
                     <p class="aBarra"><b><%= element.nombre %></b></p>
-                    <input type="hidden" id="nombre<%= perroId %>" name="nombre" class="form-control" value="<%= element.nombre %>">
                     <!--Raza del perro-->
                     <p class="card-text"><b>Raza: </b><%= element.raza %></p>
-                    <input type="hidden" id="raza<%= perroId %>" name="raza" class="form-control" value="<%= element.raza %>">
                     <!--Comportamiento del perro-->
                     <p class="card-text"><b>Comportamiento: </b><%= element.comportamiento %></p>
-                    <input type="hidden" id="comportamiento<%= perroId %>" name="comportamiento" class="form-control" value="<%= element.comportamiento %>">
-                    <!--Estatura del perro-->
+                     <!--Estatura del perro-->
                     <p class="card-text"><b>Estatura: </b><%= element.estatura %> Cm</p>
-                    <input type="hidden" id="estatura<%= perroId %>" name="estatura" class="form-control" value="<%= element.estatura %>">
                     <!--Peso del perro-->
                     <p class="card-text"><b>Peso: </b><%= element.peso %> Kg</p>
-                    <input type="hidden" id="peso<%= perroId %>" name="peso" class="form-control" value="<%= element.peso %>">
                     <!--Vacunas del perro-->
                     <p class="card-text"><b>Vacunas: </b><%= element.vacunas %></p>
-                    <input type="hidden" id="vacunas<%= perroId %>" name="vacunas" class="form-control" value="<%= element.vacunas %>">
+                    <!--Datos del perro-->
+                    <input type="hidden" id="perro<%= perroId %>" name="perro" class="form-control" value="<%= JSON.stringify(element) %>">
                     
                     <!--Botón de editar perro-->
                     <!--<a href="#" class="btn btn-primary aBotonCarta1">EDITAR</a>-->

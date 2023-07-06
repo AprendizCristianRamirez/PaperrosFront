@@ -22,22 +22,30 @@ form.addEventListener('submit', async (e) => {
     // Datos del formulario
     const id = document.querySelector('#id').value;
     const nombre = document.querySelector('#nombre').value;
-    const raza = document.querySelector('#raza').value;
     const comportamiento = document.querySelector('#comportamiento').value;
-    const vacunas = document.querySelector('#vacunas').value;
     const estatura = document.querySelector('#estatura').value;
     const peso = document.querySelector('#peso').value;
     const descripcion = document.querySelector('#descripcion').value;
+    // Nombre e imagen de la raza del perro
+    const razaSelect = document.querySelector('#raza');
+    const selectedOption = razaSelect.options[razaSelect.selectedIndex];
+    const selectedRaza = selectedOption.value;
+    const selectedImagen = selectedOption.dataset.imagen;
+    //CheckList de vacunas
+    const checkVacunas = document.querySelectorAll('input[name="vacunas"]:checked');
+    const vacunas = Array.from(checkVacunas).map((checkbox) => checkbox.value);
+
 
     // Objeto con los datos del perro
     const perros = {
         "nombre": nombre,
-        "raza": raza,
         "comportamiento": comportamiento,
-        "vacunas": vacunas,
         "estatura": estatura,
         "peso": peso,
-        "descripcion": descripcion
+        "descripcion": descripcion,
+        "raza": selectedRaza,
+        "imagen": selectedImagen,
+        "vacunas": vacunas
     };
 
     // Inserción del perro en el array de perros del usuario

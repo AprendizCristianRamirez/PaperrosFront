@@ -19,32 +19,16 @@ async function eliminarPerro(idPerro) {
 
     // Datos del formulario
     const id = document.querySelector('#id').value;
-    const nombre = document.querySelector('#nombre' + idPerro).value;
-    const raza = document.querySelector('#raza' + idPerro).value;
-    const comportamiento = document.querySelector('#comportamiento' + idPerro).value;
-    const vacunas = document.querySelector('#vacunas' + idPerro).value;
-    const estatura = document.querySelector('#estatura' + idPerro).value;
-    const peso = document.querySelector('#peso' + idPerro).value;
-
-    // Objeto con los datos del perro
-    const perros = {
-        "nombre": nombre,
-        "raza": raza,
-        "comportamiento": comportamiento,
-        "vacunas": vacunas,
-        "estatura": estatura,
-        "peso": peso
-    };
+    const perro = JSON.parse(document.querySelector('#perro' + idPerro).value);
 
     // Inserción del perro en el array de perros del usuario
     try {
         await db.collection('usuario').doc(id).update({
             // arrayUnion() funciona insertando el dato dentro del parametro al array indicado (perros)
-            perros: firebase.firestore.FieldValue.arrayRemove(perros)
+            perros: firebase.firestore.FieldValue.arrayRemove(perro)
         });
-
         window.location.href = "/v1/dueno/MisPerros";
     } catch (error) {
-        console.error('Error al insertar perro:', error);
+        console.error('Error al eliminar:', error);
     }
 };
