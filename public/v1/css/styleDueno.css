@@ -164,6 +164,21 @@ p {
     justify-content: center;
 }
 
+.InputDescripcion{
+    margin-top: 38px;
+    width: auto;
+    border: none;
+    display: flex;
+    height: 44px;
+    min-width: 350px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-family: 'CormorantLight';
+    color: #927167;
+    font-size: 20px;
+    text-align: center;
+}
+
 .BotonSubirPerro {
     align-items: center;
     margin-top: 10px;
@@ -1129,3 +1144,53 @@ p {
 .dropdown:hover .dropdown-content {
     display: block;
 }
+
+/* SELECT */
+
+.custom-select {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .selected-option {
+    margin-top: 52.7px;
+    width: auto;
+    border: none;
+    display: flex;
+    height: 44px;
+    min-width: 350px;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    font-family: 'CormorantLight';
+    color: #927167;
+    font-size: 20px;
+    text-align: center;
+    padding: 10px;
+    background-color: #ffffff;
+    cursor: pointer;
+  }
+  
+  .options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: none;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  }
+  
+  .options.open {
+    display: block;
+  }
+  
+  .options li {
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .options li:hover {
+    background-color: #f0f0f0;
+  }
