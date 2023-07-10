@@ -1,0 +1,80 @@
+[
+    {
+        "nombre": "Reserva El trianon",
+        "latitud": 6.159414197701596,
+        "longitud": -75.58786869049074
+    },
+    {
+        "nombre": "Cancha de la Paz",
+        "latitud": 6.1647796216907995,
+        "longitud": -75.59134483337404
+    },
+    {
+        "nombre": "Cancha la Merced",
+        "latitud": 6.164827622256976,
+        "longitud": -75.5889791250229
+    },
+    {
+        "nombre": "Parque el dorado",
+        "latitud": 6.165606297501518,
+        "longitud": -75.58713376522066
+    },
+    {
+        "nombre": "Parque recreativo Envigado",
+        "latitud": 6.168064983748694,
+        "longitud": -75.58921515941621
+    },
+    {
+        "nombre": "Parque otra parte",
+        "latitud": 6.179363593731544,
+        "longitud": -75.58385342359544
+    },
+    {
+        "nombre": "Parque ambiental La frontera",
+        "latitud": 6.1855047950889315,
+        "longitud": -75.57589530944826
+    },
+    {
+        "nombre": "Parque inflexión",
+        "latitud": 6.191285938995618,
+        "longitud": -75.57776212692262
+    },
+    {
+        "nombre": "Parque de la bailarina",
+        "latitud": 6.210266205160399,
+        "longitud": -75.574409365654
+    },
+    {
+        "nombre": "Estadio Atanasio Girardot",
+        "latitud":  6.2567513638331995,
+        "longitud": -75.59003591537477
+    },{
+        "nombre": "Cerro El volador",
+        "latitud":  6.267458843576817,
+        "longitud": -75.5816674232483
+    },{
+        "nombre": "Polideportivo Itagüi",
+        "latitud":  6.169760990610272,
+        "longitud": -75.605206489563
+    },{
+        "nombre": "Cancha intermunicipal",
+        "latitud":  6.16799031665525,
+        "longitud": -75.6172925233841
+    },{
+        "nombre": "Centro de convenciones Daitares",
+        "latitud":  6.168320985132103,
+        "longitud": -75.62799453735353
+    },{
+        "nombre": "Cancha de la triana",
+        "latitud":  6.171776991706819,
+        "longitud": -75.63642740249635
+    },{
+        "nombre": "UVA El Poblado",
+        "latitud":  6.196853696740866,
+        "longitud": -75.56173324584962
+    },{
+        "nombre": "Parque de Belén",
+        "latitud":  6.2325200823408045,
+        "longitud": -75.59666633605958
+    }
+]

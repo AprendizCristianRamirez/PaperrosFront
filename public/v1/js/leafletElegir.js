@@ -46,3 +46,26 @@ popup2
 }
 
 map.on('click', onMapClick);
+
+// Mostrar lugares recomendados
+if (lugaresRecomendados != undefined){
+
+    // Creación de icono
+    var hojaVerde = L.icon({
+        iconUrl: '../img/leaf-green.png',
+        shadowUrl: '../img/leaf-shadow.png',
+
+        iconSize:     [19, 47], // Tamaño del icono
+        shadowSize:   [25, 32], // Tamaño de la sombra
+        iconAnchor:   [11, 47], // Punto del icono que se corresponde con el punto del marcador
+        shadowAnchor: [2, 31],  // Lo mismo para la sombra
+        popupAnchor:  [-3, -76] // Punto donde el popup se abre en relación al punto del marcador
+    });
+
+    // Renderización de marcadores de lugares recomendados
+    lugaresRecomendados.forEach((lugar) => {
+        L.marker([lugar.latitud, lugar.longitud], {icon: hojaVerde}).addTo(map);
+    }) 
+}else{
+    console.log("No hay que renderizar lugares recomendados")
+}
