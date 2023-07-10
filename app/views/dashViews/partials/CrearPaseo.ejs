@@ -66,9 +66,16 @@
                                 name="nombreDestinoPaseo" class="form-control" placeholder="Lugar del paseo" required>
                         </div> 
                         <div class="form-group">
-                            <input class="InputsAñadirPerro" type="text" id="precioPaseo" name="precioPaseo"
-                                class="form-control" placeholder="Precio del paseo" required>
-                        </div>
+                            <div class="input-group">
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-secondary" onclick="disminuirPrecio()">-</button>
+                              </span>
+                              <input class="form-control" type="text" id="precioPaseo" name="precioPaseo" value="2000" readonly>
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-secondary" onclick="aumentarPrecio()">+</button>
+                              </span>
+                            </div>
+                          </div>
                         <!-- INPUT METODO DE PAGO -->
                         <div class="form-group">
                             <input class="InputsAñadirPerro" type="text" id="medioPagoPaseo" name="medioPagoPaseo"
@@ -196,3 +203,22 @@
 <script>
     const lugaresRecomendados = <%- JSON.stringify(lugaresRecomendados) %>;
 </script>
+<script>
+    function aumentarPrecio() {
+      const input = document.getElementById("precioPaseo");
+      let precio = parseInt(input.value);
+      if (precio < 100000) {
+        precio += 2000;
+        input.value = precio;
+      }
+    }
+  
+    function disminuirPrecio() {
+      const input = document.getElementById("precioPaseo");
+      let precio = parseInt(input.value);
+      if (precio > 2000) {
+        precio -= 2000;
+        input.value = precio;
+      }
+    }
+  </script>
