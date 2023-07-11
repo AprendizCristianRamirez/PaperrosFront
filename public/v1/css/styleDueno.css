@@ -1147,50 +1147,65 @@ p {
 
 /* SELECT */
 
-.custom-select {
+/* Estilos para el select personalizado */
+.custom-select-wrapper {
     position: relative;
-    display: inline-block;
+    width: 200px; /* Ajusta el ancho según tus necesidades */
+  }
+  
+  .custom-select {
+    position: relative;
+    cursor: pointer;
+    user-select: none;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px;
+    display: flex;
+    align-items: center;
   }
   
   .selected-option {
-    margin-top: 52.7px;
-    width: auto;
-    border: none;
-    display: flex;
-    height: 44px;
-    min-width: 350px;
-    margin-bottom: 15px;
-    border-radius: 5px;
-    font-family: 'CormorantLight';
-    color: #927167;
-    font-size: 20px;
-    text-align: center;
-    padding: 10px;
-    background-color: #ffffff;
-    cursor: pointer;
+    flex-grow: 1;
+  }
+  
+  .arrow {
+    width: 10px;
+    height: 10px;
+    border: solid #999;
+    border-width: 0 1px 1px 0;
+    transform: rotate(45deg);
+    margin-left: 8px;
   }
   
   .options {
     position: absolute;
     top: 100%;
     left: 0;
-    display: none;
-    max-height: 150px;
-    overflow-y: auto;
+    right: 0;
+    z-index: 1;
     background-color: #fff;
     border: 1px solid #ccc;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: none; /* Ocultamos las opciones inicialmente */
   }
   
-  .options.open {
-    display: block;
-  }
-  
-  .options li {
-    padding: 5px 10px;
+  .option {
+    padding: 8px;
     cursor: pointer;
   }
   
-  .options li:hover {
+  .option:hover {
     background-color: #f0f0f0;
   }
+  
+  .selected {
+    background-color: #f0f0f0;
+  }
+  

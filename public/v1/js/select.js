@@ -1,18 +1,19 @@
-const select = document.querySelector('.custom-select');
-const selectedOption = select.querySelector('.selected-option');
-const options = select.querySelector('.options');
+document.addEventListener("DOMContentLoaded", function () {
+  const selectWrapper = document.querySelector(".custom-select-wrapper");
+  const select = selectWrapper.querySelector(".custom-select");
+  const selectedOption = selectWrapper.querySelector(".selected-option");
+  const optionsList = selectWrapper.querySelector(".options");
+  const options = Array.from(optionsList.querySelectorAll(".option"));
 
-selectedOption.addEventListener('click', () => {
-  options.classList.toggle('open');
-});
+  select.addEventListener("click", function () {
+    optionsList.style.display = optionsList.style.display === "none" ? "block" : "none";
+  });
 
-options.addEventListener('click', (event) => {
-  const clickedOption = event.target;
-  const value = clickedOption.dataset.value;
-  const imagen = clickedOption.dataset.imagen;
-  
-  selectedOption.textContent = value;
-  options.classList.remove('open');
-  
-  // Aquí puedes realizar las acciones necesarias con el valor y la imagen seleccionados
+  options.forEach(function (option) {
+    option.addEventListener("click", function () {
+      selectedOption.textContent = option.textContent;
+      document.getElementById("raza").value = option.dataset.value;
+      optionsList.style.display = "none";
+    });
+  });
 });
