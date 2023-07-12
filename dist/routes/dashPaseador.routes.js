@@ -11,6 +11,7 @@ var _express = require("express");
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 var _nodeFetch = _interopRequireDefault(require("node-fetch"));
+var _lugaresRecomendados = _interopRequireDefault(require("../config/lugaresRecomendados.json"));
 var dash = (0, _express.Router)();
 
 //MIS PASEOS
@@ -212,7 +213,8 @@ dash.get("/CrearPaseo", /*#__PURE__*/function () {
             "nombre": nombre,
             "foto": foto,
             "email": email,
-            "usuario": usuario
+            "usuario": usuario,
+            "lugaresRecomendados": _lugaresRecomendados["default"]
           });
           _context4.next = 19;
           break;
@@ -414,25 +416,58 @@ dash.get("/BuscarPaseo", /*#__PURE__*/function () {
     return _ref6.apply(this, arguments);
   };
 }());
-dash.get("/Configuracion", function (req, res) {
-  if (req.cookies.token) {
-    try {
-      var token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
-      var nombre = token.nombre;
-      var foto = token.foto;
-      res.render("dashViews/Configuracion", {
-        "rol": "paseador",
-        "nombre": nombre,
-        "foto": foto,
-        "mnu": 0
-      });
-    } catch (error) {
-      res.redirect("/Ingresa");
-    }
-  } else {
-    res.redirect("/Ingresa");
-  }
-});
+dash.get("/Configuracion", /*#__PURE__*/function () {
+  var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
+    var token, nombre, foto, email, rutaUsuario, resultUsuario, usuario;
+    return _regenerator["default"].wrap(function _callee7$(_context7) {
+      while (1) switch (_context7.prev = _context7.next) {
+        case 0:
+          if (!req.cookies.token) {
+            _context7.next = 21;
+            break;
+          }
+          _context7.prev = 1;
+          token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
+          nombre = token.nombre;
+          foto = token.foto;
+          email = token.email; // Fetch del usuario
+          rutaUsuario = process.env.API + "usuarios/" + email;
+          _context7.next = 9;
+          return (0, _nodeFetch["default"])(rutaUsuario);
+        case 9:
+          resultUsuario = _context7.sent;
+          _context7.next = 12;
+          return resultUsuario.json();
+        case 12:
+          usuario = _context7.sent;
+          res.render("dashViews/Configuracion", {
+            "rol": "paseador",
+            "nombre": nombre,
+            "foto": foto,
+            "email": email,
+            "usuario": usuario
+          });
+          _context7.next = 19;
+          break;
+        case 16:
+          _context7.prev = 16;
+          _context7.t0 = _context7["catch"](1);
+          res.redirect("/Ingresa");
+        case 19:
+          _context7.next = 22;
+          break;
+        case 21:
+          res.redirect("/Ingresa");
+        case 22:
+        case "end":
+          return _context7.stop();
+      }
+    }, _callee7, null, [[1, 16]]);
+  }));
+  return function (_x13, _x14) {
+    return _ref7.apply(this, arguments);
+  };
+}());
 dash.get("/Terminos", function (req, res) {
   if (req.cookies.token) {
     try {
@@ -474,49 +509,49 @@ dash.get("/Perfil", function (req, res) {
 
 //VER PERFIL ESPECIFICO
 dash.get("/Perfil/:id", /*#__PURE__*/function () {
-  var _ref7 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee7(req, res) {
+  var _ref8 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee8(req, res) {
     var token, nombre, foto, email, rutaUsuario, resultUsuario, usuario, rutaPerfil, resultPerfil, perfil, rutaPaseo, resultPaseo, paseo;
-    return _regenerator["default"].wrap(function _callee7$(_context7) {
-      while (1) switch (_context7.prev = _context7.next) {
+    return _regenerator["default"].wrap(function _callee8$(_context8) {
+      while (1) switch (_context8.prev = _context8.next) {
         case 0:
           if (!req.cookies.token) {
-            _context7.next = 35;
+            _context8.next = 35;
             break;
           }
-          _context7.prev = 1;
+          _context8.prev = 1;
           token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY); // Información de las cookies
           nombre = token.nombre;
           foto = token.foto;
           email = token.email; // Fetch del usuario
           rutaUsuario = process.env.API + "usuarios/" + email;
-          _context7.next = 9;
+          _context8.next = 9;
           return (0, _nodeFetch["default"])(rutaUsuario);
         case 9:
-          resultUsuario = _context7.sent;
-          _context7.next = 12;
+          resultUsuario = _context8.sent;
+          _context8.next = 12;
           return resultUsuario.json();
         case 12:
-          usuario = _context7.sent;
+          usuario = _context8.sent;
           // Fetch del Perfil
           rutaPerfil = process.env.API + "usuarios/" + req.params.id;
-          _context7.next = 16;
+          _context8.next = 16;
           return (0, _nodeFetch["default"])(rutaPerfil);
         case 16:
-          resultPerfil = _context7.sent;
-          _context7.next = 19;
+          resultPerfil = _context8.sent;
+          _context8.next = 19;
           return resultPerfil.json();
         case 19:
-          perfil = _context7.sent;
+          perfil = _context8.sent;
           // Fetch de los paseos
           rutaPaseo = process.env.API + "paseo/";
-          _context7.next = 23;
+          _context8.next = 23;
           return (0, _nodeFetch["default"])(rutaPaseo);
         case 23:
-          resultPaseo = _context7.sent;
-          _context7.next = 26;
+          resultPaseo = _context8.sent;
+          _context8.next = 26;
           return resultPaseo.json();
         case 26:
-          paseo = _context7.sent;
+          paseo = _context8.sent;
           res.render("dashViews/Perfil", {
             "rol": "paseador",
             "nombre": nombre,
@@ -527,25 +562,25 @@ dash.get("/Perfil/:id", /*#__PURE__*/function () {
             "perfil": perfil,
             "idPerfil": req.params.id
           });
-          _context7.next = 33;
+          _context8.next = 33;
           break;
         case 30:
-          _context7.prev = 30;
-          _context7.t0 = _context7["catch"](1);
+          _context8.prev = 30;
+          _context8.t0 = _context8["catch"](1);
           res.redirect("/Salir");
         case 33:
-          _context7.next = 36;
+          _context8.next = 36;
           break;
         case 35:
           res.redirect("/Salir");
         case 36:
         case "end":
-          return _context7.stop();
+          return _context8.stop();
       }
-    }, _callee7, null, [[1, 30]]);
+    }, _callee8, null, [[1, 30]]);
   }));
-  return function (_x13, _x14) {
-    return _ref7.apply(this, arguments);
+  return function (_x15, _x16) {
+    return _ref8.apply(this, arguments);
   };
 }());
 dash.get("/Chat", function (req, res) {

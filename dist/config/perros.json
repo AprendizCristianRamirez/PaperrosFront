@@ -1,0 +1,690 @@
+[
+    {
+        "nombre": "Affenpinscher",
+        "imagen": "https://cdn2.thedogapi.com/images/BJa4kxc4X.jpg"
+    },
+    {
+        "nombre": "Aguilucho",
+        "imagen": "https://cdn2.thedogapi.com/images/B1IcfgqE7.jpg"
+    },
+    {
+        "nombre": "Airedale Terrier",
+        "imagen": "https://cdn2.thedogapi.com/images/1-7cgoZSh.jpg"
+    },
+    {
+        "nombre": "Akita",
+        "imagen": "https://cdn2.thedogapi.com/images/BFRYBufpm.jpg"
+    },
+    {
+        "nombre": "American Bully",
+        "imagen": "https://cdn2.thedogapi.com/images/sqQJDtbpY.jpg"
+    },
+    {
+        "nombre": "Azawaj",
+        "imagen": "https://cdn2.thedogapi.com/images/SkvZgx94m.jpg"
+    },
+    {
+        "nombre": "Barbudo",
+        "imagen": "https://cdn2.thedogapi.com/images/HyWGexcVQ.jpg"
+    },
+    {
+        "nombre": "Basenji",
+        "imagen": "https://cdn2.thedogapi.com/images/H1dGlxqNQ.jpg"
+    },
+    {
+        "nombre": "Basset Bleu de Gascuña",
+        "imagen": "https://cdn2.thedogapi.com/images/BkMQll94X.jpg"
+    },
+    {
+        "nombre": "Basset Hound",
+        "imagen": "https://cdn2.thedogapi.com/images/Sy57xx9EX.jpg"
+    },
+    {
+        "nombre": "Beagle",
+        "imagen": "https://cdn2.thedogapi.com/images/Syd4xxqEm.jpg"
+    },
+    {
+        "nombre": "Beauceron",
+        "imagen": "https://cdn2.thedogapi.com/images/HJQ8ge5V7.jpg"
+    },
+    {
+        "nombre": "Bichón Frisé",
+        "imagen": "https://cdn2.thedogapi.com/images/HkuYlxqEQ.jpg"
+    },
+    {
+        "nombre": "Bluetick Coonhound",
+        "imagen": "https://cdn2.thedogapi.com/images/rJxieg9VQ.jpg"
+    },
+    {
+        "nombre": "Boerboel",
+        "imagen": "https://cdn2.thedogapi.com/images/HyOjge5Vm.jpg"
+    },
+    {
+        "nombre": "Border Collie",
+        "imagen": "https://cdn2.thedogapi.com/images/sGQvQUpsp.jpg"
+    },
+    {
+        "nombre": "Bouvier des Flandres",
+        "imagen": "https://cdn2.thedogapi.com/images/Byd0xl5VX.jpg"
+    },
+    {
+        "nombre": "Boxxer",
+        "imagen": "https://cdn2.thedogapi.com/images/ry1kWe5VQ.jpg"
+    },
+    {
+        "nombre": "Bracco Italiano",
+        "imagen": "https://cdn2.thedogapi.com/images/S13yZg5VQ.jpg"
+    },
+    {
+        "nombre": "Braco alemán de pelo corto",
+        "imagen": "https://cdn2.thedogapi.com/images/SJqBMg5Nm.jpg"
+    },
+    {
+        "nombre": "Bretaña",
+        "imagen": "https://cdn2.thedogapi.com/images/HJWZZxc4X.jpg"
+    },
+    {
+        "nombre": "Briard",
+        "imagen": "https://cdn2.thedogapi.com/images/rkVlblcEQ.jpg"
+    },
+    {
+        "nombre": "Bull Terrier (Miniatura)",
+        "imagen": "https://cdn2.thedogapi.com/images/BkKZWlcVX.jpg"
+    },
+    {
+        "nombre": "Bulldog Alapaha de sangre azul",
+        "imagen": "https://cdn2.thedogapi.com/images/33mJ-V3RX.jpg"
+    },
+    {
+        "nombre": "Bulldog Americano",
+        "imagen": "https://cdn2.thedogapi.com/images/pk1AAdloG.jpg"
+    },
+    {
+        "nombre": "Bulldog francés",
+        "imagen": "https://external-content.duckduckgo.com/iu/?u=http%3A%2F%2Fwww.lovethispic.com%2Fuploaded_images%2F174334-French-Bulldog-In-A-Swing.jpg%3F2&f=1&nofb=1&ipt=b7891b79e0efdb31dd82b028123cc2727c5d6808c0aa0d874f20afce39e7bca9&ipo=images"
+    },
+    {
+        "nombre": "Bulldog inglés antiguo",
+        "imagen": "https://cdn2.thedogapi.com/images/B1d5me547.jpg"
+    },
+    {
+        "nombre": "Bullmastiff",
+        "imagen": "https://cdn2.thedogapi.com/images/r1ifZl5E7.jpg"
+    },
+    {
+        "nombre": "Cane Corso",
+        "imagen": "https://cdn2.thedogapi.com/images/r15m-lc4m.jpg"
+    },
+    {
+        "nombre": "Caniche (Juguete)",
+        "imagen": "https://cdn2.thedogapi.com/images/rJFJVxc4m.jpg"
+    },
+    {
+        "nombre": "Caniche (Miniatura)",
+        "imagen": "https://cdn2.thedogapi.com/images/Hkxk4ecVX.jpg"
+    },
+    {
+        "nombre": "Cardigan Welsh Corgi",
+        "imagen": "https://cdn2.thedogapi.com/images/SyXN-e9NX.jpg"
+    },
+    {
+        "nombre": "Cavalier King Charles Spaniel",
+        "imagen": "https://cdn2.thedogapi.com/images/HJRBbe94Q.jpg"
+    },
+    {
+        "nombre": "Cañada de Imaal Terrier",
+        "imagen": "https://cdn2.thedogapi.com/images/H1oLMe94m.jpg"
+    },
+    {
+        "nombre": "Chino Crestado",
+        "imagen": "https://cdn2.thedogapi.com/images/B1pDZx9Nm.jpg"
+    },
+    {
+        "nombre": "Chinook",
+        "imagen": "https://cdn2.thedogapi.com/images/Sypubg54Q.jpg"
+    },
+    {
+        "nombre": "Chow Chow",
+        "imagen": "https://cdn2.thedogapi.com/images/ry8KWgqEQ.jpg"
+    },
+    {
+        "nombre": "Clumber Spaniel",
+        "imagen": "https://cdn2.thedogapi.com/images/rkeqWgq4Q.jpg"
+    },
+    {
+        "nombre": "Cocker Spaniel",
+        "imagen": "https://cdn2.thedogapi.com/images/1lFmrzECl.jpg"
+    },
+    {
+        "nombre": "Cocker Spaniel (Americano)",
+        "imagen": "https://cdn2.thedogapi.com/images/HkRcZe547.jpg"
+    },
+    {
+        "nombre": "Collie barbudo",
+        "imagen": "https://cdn2.thedogapi.com/images/A09F4c1qP.jpg"
+    },
+    {
+        "nombre": "Coonhound de hueso rojo",
+        "imagen": "https://cdn2.thedogapi.com/images/HJMzEl5N7.jpg"
+    },
+    {
+        "nombre": "Coonhound negro y fuego",
+        "imagen": "https://cdn2.thedogapi.com/images/HJAFgxcNQ.jpg"
+    },
+    {
+        "nombre": "Corgi Galés de Pembroke",
+        "imagen": "https://cdn2.thedogapi.com/images/rJ6iQeqEm.jpg"
+    },
+    {
+        "nombre": "Cotón de Tulear",
+        "imagen": "https://cdn2.thedogapi.com/images/SyviZlqNm.jpg"
+    },
+    {
+        "nombre": "Doberman Pinscher",
+        "imagen": "https://cdn2.thedogapi.com/images/HyL3bl94Q.jpg"
+    },
+    {
+        "nombre": "Dogo Argentino",
+        "imagen": "https://cdn2.thedogapi.com/images/S1nhWx94Q.jpg"
+    },
+    {
+        "nombre": "Doguillo",
+        "imagen": "https://cdn2.thedogapi.com/images/HyJvcl9N7.jpg"
+    },
+    {
+        "nombre": "Eurasier",
+        "imagen": "https://cdn2.thedogapi.com/images/S1VWGx9Nm.jpg"
+    },
+    {
+        "nombre": "Fox terrier liso",
+        "imagen": "https://cdn2.thedogapi.com/images/Syszjx9Em.jpg"
+    },
+    {
+        "nombre": "Foxterrier de alambre",
+        "imagen": "https://cdn2.thedogapi.com/images/SJ6f2g9EQ.jpg"
+    },
+    {
+        "nombre": "Foxterrier de juguete",
+        "imagen": "https://cdn2.thedogapi.com/images/B17ase9V7.jpg"
+    },
+    {
+        "nombre": "Galgo Italiano",
+        "imagen": "https://cdn2.thedogapi.com/images/SJAnzg9NX.jpg"
+    },
+    {
+        "nombre": "Golden Retriever",
+        "imagen": "https://cdn2.thedogapi.com/images/HJ7Pzg5EQ.jpg"
+    },
+    {
+        "nombre": "Gordon Setter",
+        "imagen": "https://cdn2.thedogapi.com/images/SJ5vzx5NX.jpg"
+    },
+    {
+        "nombre": "Gran danés",
+        "imagen": "https://cdn2.thedogapi.com/images/B1Edfl9NX.jpg"
+    },
+    {
+        "nombre": "Grandes Pirineos",
+        "imagen": "https://cdn2.thedogapi.com/images/B12uzg9V7.png"
+    },
+    {
+        "nombre": "Grifón de Bruselas",
+        "imagen": "https://cdn2.thedogapi.com/images/ryoYGec4Q.jpg"
+    },
+    {
+        "nombre": "Grifón punteagudo de pelo duro",
+        "imagen": "https://cdn2.thedogapi.com/images/Bkam2l9Vm.jpg"
+    },
+    {
+        "nombre": "Habanero",
+        "imagen": "https://cdn2.thedogapi.com/images/rkXiGl9V7.jpg"
+    },
+    {
+        "nombre": "Husky de Alaska",
+        "imagen": "https://cdn2.thedogapi.com/images/-HgpNnGXl.jpg"
+    },
+    {
+        "nombre": "Husky siberiano",
+        "imagen": "https://cdn2.thedogapi.com/images/S17ZilqNm.jpg"
+    },
+    {
+        "nombre": "Juguete Ruso",
+        "imagen": "https://cdn2.thedogapi.com/images/HkP7Vxc4Q.jpg"
+    },
+    {
+        "nombre": "Keeshond",
+        "imagen": "https://cdn2.thedogapi.com/images/S1GAGg9Vm.jpg"
+    },
+    {
+        "nombre": "Kelpie australiano",
+        "imagen": "https://cdn2.thedogapi.com/images/Hyq1ge9VQ.jpg"
+    },
+    {
+        "nombre": "Komondor",
+        "imagen": "https://cdn2.thedogapi.com/images/Bko0fl547.jpg"
+    },
+    {
+        "nombre": "Kooikerhondje",
+        "imagen": "https://cdn2.thedogapi.com/images/kOMy84GQE.jpg"
+    },
+    {
+        "nombre": "Kuvasz",
+        "imagen": "https://cdn2.thedogapi.com/images/BykZ7ecVX.jpg"
+    },
+    {
+        "nombre": "Labrador Retriever",
+        "imagen": "https://cdn2.thedogapi.com/images/B1uW7l5VX.jpg"
+    },
+    {
+        "nombre": "Lagotto Romagnolo",
+        "imagen": "https://cdn2.thedogapi.com/images/ryzzmgqE7.jpg"
+    },
+    {
+        "nombre": "Lancashire Heeler",
+        "imagen": "https://cdn2.thedogapi.com/images/S1RGml5Em.jpg"
+    },
+    {
+        "nombre": "Lapphund finlandés",
+        "imagen": "https://cdn2.thedogapi.com/images/S1KMGg5Vm.jpg"
+    },
+    {
+        "nombre": "Lebrel Afgano",
+        "imagen": "https://cdn2.thedogapi.com/images/hMyT4CDXR.jpg"
+    },
+    {
+        "nombre": "Lebrel escocés",
+        "imagen": "https://cdn2.thedogapi.com/images/SkNjqx9NQ.jpg"
+    },
+    {
+        "nombre": "Leonberger",
+        "imagen": "https://cdn2.thedogapi.com/images/ByrmQlqVm.jpg"
+    },
+    {
+        "nombre": "Lhasa Apso",
+        "imagen": "https://cdn2.thedogapi.com/images/SJp7Qe5EX.jpg"
+    },
+    {
+        "nombre": "Lobero Irlandés",
+        "imagen": "https://cdn2.thedogapi.com/images/Hyd2zgcEX.jpg"
+    },
+    {
+        "nombre": "Malamute de Alaska",
+        "imagen": "https://cdn2.thedogapi.com/images/dW5UucTIW.jpg"
+    },
+    {
+        "nombre": "Mastín tibetano",
+        "imagen": "https://cdn2.thedogapi.com/images/SkM9sec47.jpg"
+    },
+    {
+        "nombre": "Papillón",
+        "imagen": "https://cdn2.thedogapi.com/images/SkJj7e547.jpg"
+    },
+    {
+        "nombre": "Pastor Alemán",
+        "imagen": "https://cdn2.thedogapi.com/images/SJyBfg5NX.jpg"
+    },
+    {
+        "nombre": "Pastor Americano Miniatura",
+        "imagen": "https://cdn2.thedogapi.com/images/BkHHQgcN7.jpg"
+    },
+    {
+        "nombre": "Pastor Australiano",
+        "imagen": "https://cdn2.thedogapi.com/images/B1-llgq4m.jpg"
+    },
+    {
+        "nombre": "Pastor Blanco",
+        "imagen": "https://cdn2.thedogapi.com/images/r14M3e9E7.jpg"
+    },
+    {
+        "nombre": "Pastor Caucásico (Ovcharka)",
+        "imagen": "https://cdn2.thedogapi.com/images/r1rrWe5Em.jpg"
+    },
+    {
+        "nombre": "Pastor Holandés",
+        "imagen": "https://cdn2.thedogapi.com/images/BkE6Wg5E7.jpg"
+    },
+    {
+        "nombre": "Pastor Inglés",
+        "imagen": "https://cdn2.thedogapi.com/images/H1QyMe5EQ.jpg"
+    },
+    {
+        "nombre": "Pastor Shiloh",
+        "imagen": "https://cdn2.thedogapi.com/images/SJJxjecEX.jpg"
+    },
+    {
+        "nombre": "Pastor de Anatolia",
+        "imagen": "https://cdn2.thedogapi.com/images/BJT0Jx5Nm.jpg"
+    },
+    {
+        "nombre": "Pastor de Shetland",
+        "imagen": "https://cdn2.thedogapi.com/images/rJa29l9E7.jpg"
+    },
+    {
+        "nombre": "Perro Akbash",
+        "imagen": "https://cdn2.thedogapi.com/images/26pHT3Qk7.jpg"
+    },
+    {
+        "nombre": "Perro Leopardo Catahoula",
+        "imagen": "https://cdn2.thedogapi.com/images/BJcNbec4X.jpg"
+    },
+    {
+        "nombre": "Perro boyero australiano",
+        "imagen": "https://cdn2.thedogapi.com/images/IBkYVm4v1.jpg"
+    },
+    {
+        "nombre": "Perro de Agua Español",
+        "imagen": "https://cdn2.thedogapi.com/images/HJf4jl9VX.jpg"
+    },
+    {
+        "nombre": "Perro de Presa Canario",
+        "imagen": "https://cdn2.thedogapi.com/images/S1V3Qeq4X.jpg"
+    },
+    {
+        "nombre": "Perro de aguas de Boykin",
+        "imagen": "https://cdn2.thedogapi.com/images/ryHJZlcNX.jpg"
+    },
+    {
+        "nombre": "Perro de aguas de juguete inglés",
+        "imagen": "https://cdn2.thedogapi.com/images/SkIgzxqNQ.jpg"
+    },
+    {
+        "nombre": "Perro de caza africano",
+        "imagen": "https://cdn2.thedogapi.com/images/rkiBnec47.jpg"
+    },
+    {
+        "nombre": "Perro de montaña bernés",
+        "imagen": "https://cdn2.thedogapi.com/images/S1fFlx5Em.jpg"
+    },
+    {
+        "nombre": "Perro esquimal americano",
+        "imagen": "https://cdn2.thedogapi.com/images/Bymjyec4m.jpg"
+    },
+    {
+        "nombre": "Perro esquimal americano (miniatura)",
+        "imagen": "https://cdn2.thedogapi.com/images/_gn8GLrE6.jpg"
+    },
+    {
+        "nombre": "Perro pastor inglés antiguo",
+        "imagen": "https://cdn2.thedogapi.com/images/HkZ57lq4m.jpg"
+    },
+    {
+        "nombre": "Perro perdiguero de bahía de Chesapeake",
+        "imagen": "https://cdn2.thedogapi.com/images/9BXwUeCc2.jpg"
+    },
+    {
+        "nombre": "Perro perdiguero de pato de Nueva Escocia",
+        "imagen": "https://cdn2.thedogapi.com/images/SyYtQe5V7.jpg"
+    },
+    {
+        "nombre": "Perro sennenhund de Appenzell",
+        "imagen": "https://cdn2.thedogapi.com/images/HkNkxlqEX.jpg"
+    },
+    {
+        "nombre": "Pinscher miniatura",
+        "imagen": "https://cdn2.thedogapi.com/images/Hy3H7g94X.jpg"
+    },
+    {
+        "nombre": "Plott",
+        "imagen": "https://cdn2.thedogapi.com/images/B1i67l5VQ.jpg"
+    },
+    {
+        "nombre": "Pomerania",
+        "imagen": "https://cdn2.thedogapi.com/images/HJd0XecNX.jpg"
+    },
+    {
+        "nombre": "Puli",
+        "imagen": "https://cdn2.thedogapi.com/images/ryPgVl5N7.jpg"
+    },
+    {
+        "nombre": "Pumi",
+        "imagen": "https://cdn2.thedogapi.com/images/SyRe4xcN7.jpg"
+    },
+    {
+        "nombre": "Raposero Americano",
+        "imagen": "https://cdn2.thedogapi.com/images/S14n1x9NQ.jpg"
+    },
+    {
+        "nombre": "Ridgeback de Rodesia",
+        "imagen": "https://cdn2.thedogapi.com/images/By9zNgqE7.jpg"
+    },
+    {
+        "nombre": "Ridgeback tailandés",
+        "imagen": "https://cdn2.thedogapi.com/images/zv89hR-O8.jpg"
+    },
+    {
+        "nombre": "Rottweiler",
+        "imagen": "https://cdn2.thedogapi.com/images/r1xXEgcNX.jpg"
+    },
+    {
+        "nombre": "Sabueso",
+        "imagen": "https://cdn2.thedogapi.com/images/Skdcgx9VX.jpg"
+    },
+    {
+        "nombre": "Sabueso del Faraón",
+        "imagen": "https://cdn2.thedogapi.com/images/Byz6mgqEQ.jpg"
+    },
+    {
+        "nombre": "Saluki",
+        "imagen": "https://cdn2.thedogapi.com/images/fjFIuehNo.jpg"
+    },
+    {
+        "nombre": "Samoyedo",
+        "imagen": "https://cdn2.thedogapi.com/images/S1T8Ee9Nm.jpg"
+    },
+    {
+        "nombre": "San Bernardo",
+        "imagen": "https://cdn2.thedogapi.com/images/_Qf9nfRzL.png"
+    },
+    {
+        "nombre": "Schipperke",
+        "imagen": "https://cdn2.thedogapi.com/images/SyBvVgc47.jpg"
+    },
+    {
+        "nombre": "Schnauzer estándar",
+        "imagen": "https://cdn2.thedogapi.com/images/tmzeu6ID_.jpg"
+    },
+    {
+        "nombre": "Schnauzer gigante",
+        "imagen": "https://cdn2.thedogapi.com/images/H1NIzlcV7.jpg"
+    },
+    {
+        "nombre": "Schnauzer miniatura",
+        "imagen": "https://cdn2.thedogapi.com/images/SJIUQl9NX.jpg"
+    },
+    {
+        "nombre": "Setter Irlandés",
+        "imagen": "https://cdn2.thedogapi.com/images/S1osGeqVm.jpg"
+    },
+    {
+        "nombre": "Setter inglés",
+        "imagen": "https://cdn2.thedogapi.com/images/By4A-eqVX.jpg"
+    },
+    {
+        "nombre": "Shar-Pei chino",
+        "imagen": "https://cdn2.thedogapi.com/images/B1ruWl94Q.jpg"
+    },
+    {
+        "nombre": "Shiba Inu",
+        "imagen": "https://cdn2.thedogapi.com/images/Zn3IjPX3f.jpg"
+    },
+    {
+        "nombre": "Shih Tse",
+        "imagen": "https://cdn2.thedogapi.com/images/BkrJjgcV7.jpg"
+    },
+    {
+        "nombre": "Spinone Italiano",
+        "imagen": "https://cdn2.thedogapi.com/images/rk5Eoe5Nm.jpg"
+    },
+    {
+        "nombre": "Spitz Japonés",
+        "imagen": "https://cdn2.thedogapi.com/images/HksaMxqNX.jpg"
+    },
+    {
+        "nombre": "Spitz finlandés",
+        "imagen": "https://cdn2.thedogapi.com/images/3PjHlQbkV.jpg"
+    },
+    {
+        "nombre": "Springer Spaniel Inglés",
+        "imagen": "https://cdn2.thedogapi.com/images/Hk0Jfe5VQ.jpg"
+    },
+    {
+        "nombre": "Sspringer spaniel galés",
+        "imagen": "https://cdn2.thedogapi.com/images/BJ1gnx5Vm.jpg"
+    },
+    {
+        "nombre": "Staffordshire bull terrier",
+        "imagen": "https://cdn2.thedogapi.com/images/H1zSie9V7.jpg"
+    },
+    {
+        "nombre": "Staffordshire terrier americano",
+        "imagen": "https://cdn2.thedogapi.com/images/rJIakgc4m.jpg"
+    },
+    {
+        "nombre": "Terranova",
+        "imagen": "https://cdn2.thedogapi.com/images/Sk4DXl54m.jpg"
+    },
+    {
+        "nombre": "Terrier Australiano",
+        "imagen": "https://cdn2.thedogapi.com/images/r1Ylge5Vm.jpg"
+    },
+    {
+        "nombre": "Terrier Rata",
+        "imagen": "https://cdn2.thedogapi.com/images/HkXWNl9E7.jpg"
+    },
+    {
+        "nombre": "Terrier blanco de las tierras altas del oeste",
+        "imagen": "https://cdn2.thedogapi.com/images/Bkdx2g5Em.jpg"
+    },
+    {
+        "nombre": "Terrier de Bedlington",
+        "imagen": "https://cdn2.thedogapi.com/images/ByK8gx947.jpg"
+    },
+    {
+        "nombre": "Terrier de Boston",
+        "imagen": "https://cdn2.thedogapi.com/images/rkZRggqVX.jpg"
+    },
+    {
+        "nombre": "Terrier de Cairn",
+        "imagen": "https://cdn2.thedogapi.com/images/Sk7Qbg9E7.jpg"
+    },
+    {
+        "nombre": "Terrier de Norfolk",
+        "imagen": "https://cdn2.thedogapi.com/images/B1ADQg94X.jpg"
+    },
+    {
+        "nombre": "Terrier de Norwich",
+        "imagen": "https://cdn2.thedogapi.com/images/BkgKXlqE7.jpg"
+    },
+    {
+        "nombre": "Terrier de juguete inglés",
+        "imagen": "https://cdn2.thedogapi.com/images/SJ6eMxqEQ.jpg"
+    },
+    {
+        "nombre": "Terrier de trigo de pelo blando",
+        "imagen": "https://cdn2.thedogapi.com/images/HJHmix5NQ.jpg"
+    },
+    {
+        "nombre": "Terrier escocés",
+        "imagen": "https://cdn2.thedogapi.com/images/Bklnce5NX.jpg"
+    },
+    {
+        "nombre": "Terrier fronterizo",
+        "imagen": "https://cdn2.thedogapi.com/images/HJOpge9Em.jpg"
+    },
+    {
+        "nombre": "Terrier irlandés",
+        "imagen": "https://cdn2.thedogapi.com/images/By-hGecVX.jpg"
+    },
+    {
+        "nombre": "Terrier sedoso",
+        "imagen": "https://cdn2.thedogapi.com/images/ByzGsl5Nm.jpg"
+    },
+    {
+        "nombre": "Terrier tibetano",
+        "imagen": "https://cdn2.thedogapi.com/images/6f5n_42mB.jpg"
+    },
+    {
+        "nombre": "Tervuren belga",
+        "imagen": "https://cdn2.thedogapi.com/images/B1KdxlcNX.jpg"
+    },
+    {
+        "nombre": "Treeing Walker Coonhound",
+        "imagen": "https://cdn2.thedogapi.com/images/SkRpsgc47.jpg"
+    },
+    {
+        "nombre": "Vallhund sueco",
+        "imagen": "https://cdn2.thedogapi.com/images/HJ-Dix94Q.jpg"
+    },
+    {
+        "nombre": "Vizsla",
+        "imagen": "https://cdn2.thedogapi.com/images/r1o0jx9Em.jpg"
+    },
+    {
+        "nombre": "Vizsla de pelo duro",
+        "imagen": "https://cdn2.thedogapi.com/images/r1I4hl5Em.jpg"
+    },
+    {
+        "nombre": "Weimaraner",
+        "imagen": "https://cdn2.thedogapi.com/images/SyU12l9V7.jpg"
+    },
+    {
+        "nombre": "Whippet",
+        "imagen": "https://cdn2.thedogapi.com/images/Hyv-ne94m.jpg"
+    },
+    {
+        "nombre": "Xoloitzcuintli",
+        "imagen": "https://cdn2.thedogapi.com/images/HkNS3gqEm.jpg"
+    },
+    {
+        "nombre": "barbilla japonesa",
+        "imagen": "https://cdn2.thedogapi.com/images/r1H6feqEm.jpg"
+    },
+    {
+        "nombre": "bull terrier",
+        "imagen": "https://cdn2.thedogapi.com/images/VSraIEQGd.jpg"
+    },
+    {
+        "nombre": "dálmata",
+        "imagen": "https://cdn2.thedogapi.com/images/SkJ3blcN7.jpg"
+    },
+    {
+        "nombre": "galgo",
+        "imagen": "https://cdn2.thedogapi.com/images/ryNYMx94X.jpg"
+    },
+    {
+        "nombre": "malinois belga",
+        "imagen": "https://cdn2.thedogapi.com/images/r1f_ll5VX.jpg"
+    },
+    {
+        "nombre": "maltés",
+        "imagen": "https://cdn2.thedogapi.com/images/B1SV7gqN7.jpg"
+    },
+    {
+        "nombre": "pequinés",
+        "imagen": "https://cdn2.thedogapi.com/images/ByIiml9Nm.jpg"
+    },
+    {
+        "nombre": "perro de aguas americano",
+        "imagen": "https://cdn2.thedogapi.com/images/SkmRJl9VQ.jpg"
+    },
+    {
+        "nombre": "perro de aguas de campo",
+        "imagen": "https://cdn2.thedogapi.com/images/SkJfGecE7.jpg"
+    },
+    {
+        "nombre": "perro de aguas tibetano",
+        "imagen": "https://cdn2.thedogapi.com/images/Hyjcol947.jpg"
+    },
+    {
+        "nombre": "pinscher alemán",
+        "imagen": "https://cdn2.thedogapi.com/images/B1u4zgqE7.jpg"
+    },
+    {
+        "nombre": "pitbull terrier americano",
+        "imagen": "https://cdn2.thedogapi.com/images/HkC31gcNm.png"
+    },
+    {
+        "nombre": "yorkshire terrier",
+        "imagen": "https://cdn2.thedogapi.com/images/B12BnxcVQ.jpg"
+    }
+]

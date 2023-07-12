@@ -28,5 +28,5 @@ loginRouter.get("/google", function (req, res) {
 
   res.cookie("token", token /*, {"maxAge": timeExpireCookie }*/);
 
-  res.redirect("/v1/dueno/MisPaseos");
+  res.redirect("/v1/dueno/MisPerros");
 });

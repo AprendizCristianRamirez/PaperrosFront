@@ -11,6 +11,8 @@ var _express = require("express");
 var _cookieParser = _interopRequireDefault(require("cookie-parser"));
 var _jsonwebtoken = _interopRequireDefault(require("jsonwebtoken"));
 var _nodeFetch = _interopRequireDefault(require("node-fetch"));
+var _perros = _interopRequireDefault(require("../config/perros.json"));
+var _lugaresRecomendados = _interopRequireDefault(require("../config/lugaresRecomendados.json"));
 var dash = (0, _express.Router)();
 
 //MIS PASEOS
@@ -69,13 +71,13 @@ dash.get("/MisPaseos", /*#__PURE__*/function () {
           _context.prev = 24;
           _context.t0 = _context["catch"](1);
           console.log(_context.t0 + "Error de cookies/fetch");
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 28:
           _context.next = 32;
           break;
         case 30:
           console.log("Error de token");
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 32:
         case "end":
           return _context.stop();
@@ -166,19 +168,20 @@ dash.get("/CrearPaseo", /*#__PURE__*/function () {
             "nombre": nombre,
             "foto": foto,
             "email": email,
-            "usuario": usuario
+            "usuario": usuario,
+            "lugaresRecomendados": _lugaresRecomendados["default"]
           });
           _context3.next = 26;
           break;
         case 23:
           _context3.prev = 23;
           _context3.t0 = _context3["catch"](1);
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 26:
           _context3.next = 29;
           break;
         case 28:
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 29:
         case "end":
           return _context3.stop();
@@ -245,6 +248,7 @@ dash.post("/CrearPaseo", /*#__PURE__*/function () {
               _longitude: req.body.paseoLongitude
             },
             nombre_destino: req.body.nombreDestinoPaseo,
+            fechaPaseo: req.body.fechaPaseo,
             hora_fin: req.body.horaFinPaseo,
             hora_inicio: req.body.horaInicioPaseo,
             precio: req.body.precioPaseo,
@@ -270,6 +274,7 @@ dash.post("/CrearPaseo", /*#__PURE__*/function () {
             tipo: "personalizado",
             estado: "confirmado",
             nombre_destino: paseo.nombre_destino,
+            fechaPaseo: paseo.fechaPaseo,
             hora_fin: paseo.hora_fin,
             hora_inicio: paseo.hora_inicio,
             precio: paseo.precio,
@@ -369,12 +374,12 @@ dash.get("/BuscarPaseo", /*#__PURE__*/function () {
         case 23:
           _context5.prev = 23;
           _context5.t0 = _context5["catch"](1);
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 26:
           _context5.next = 29;
           break;
         case 28:
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 29:
         case "end":
           return _context5.stop();
@@ -389,27 +394,28 @@ dash.get("/BuscarPaseo", /*#__PURE__*/function () {
 //AÑADIRPERRO
 dash.get("/AnadirPerro", /*#__PURE__*/function () {
   var _ref6 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee6(req, res) {
-    var token, nombre, foto, email, rutaUsuario, resultUsuario, usuario;
+    var token, nombre, foto, email, vacunas, rutaUsuario, resultUsuario, usuario;
     return _regenerator["default"].wrap(function _callee6$(_context6) {
       while (1) switch (_context6.prev = _context6.next) {
         case 0:
           if (!req.cookies.token) {
-            _context6.next = 21;
+            _context6.next = 22;
             break;
           }
           _context6.prev = 1;
           token = _jsonwebtoken["default"].verify(req.cookies.token, process.env.SECRET_KEY);
           nombre = token.nombre;
           foto = token.foto;
-          email = token.email; // Fetch del usuario
+          email = token.email; // array de vacunas
+          vacunas = ["Rabia", "Moquillo canino", "Parvovirus", "Adenovirus canino tipo 2", "Leptospirosis", "Tos de las perreras"]; // Fetch del usuario
           rutaUsuario = process.env.API + "usuarios/" + email;
-          _context6.next = 9;
+          _context6.next = 10;
           return (0, _nodeFetch["default"])(rutaUsuario);
-        case 9:
+        case 10:
           resultUsuario = _context6.sent;
-          _context6.next = 12;
+          _context6.next = 13;
           return resultUsuario.json();
-        case 12:
+        case 13:
           usuario = _context6.sent;
           res.render("dashViews/AnadirPerro", {
             "rol": "dueno",
@@ -417,24 +423,27 @@ dash.get("/AnadirPerro", /*#__PURE__*/function () {
             "foto": foto,
             "mnu": 0,
             "email": email,
-            "usuario": usuario
+            "usuario": usuario,
+            "perros": _perros["default"],
+            //Importado desde perros.json
+            "vacunas": vacunas
           });
-          _context6.next = 19;
+          _context6.next = 20;
           break;
-        case 16:
-          _context6.prev = 16;
+        case 17:
+          _context6.prev = 17;
           _context6.t0 = _context6["catch"](1);
-          res.redirect("/Salir");
-        case 19:
-          _context6.next = 22;
+          res.redirect("/v1/dueno/salir");
+        case 20:
+          _context6.next = 23;
           break;
-        case 21:
-          res.redirect("/Salir");
         case 22:
+          res.redirect("/v1/dueno/salir");
+        case 23:
         case "end":
           return _context6.stop();
       }
-    }, _callee6, null, [[1, 16]]);
+    }, _callee6, null, [[1, 17]]);
   }));
   return function (_x11, _x12) {
     return _ref6.apply(this, arguments);
@@ -466,24 +475,29 @@ dash.get("/MisPerros", /*#__PURE__*/function () {
           return resultUsuario.json();
         case 12:
           usuario = _context7.sent;
-          res.render("dashViews/MisPerros", {
-            "rol": "dueno",
-            "nombre": nombre,
-            "foto": foto,
-            "email": email,
-            "usuario": usuario
-          });
+          //Si no tiene cuenta, será redirigido para crear una
+          if (usuario == false) {
+            res.redirect("Configuracion");
+          } else {
+            res.render("dashViews/MisPerros", {
+              "rol": "dueno",
+              "nombre": nombre,
+              "foto": foto,
+              "email": email,
+              "usuario": usuario
+            });
+          }
           _context7.next = 19;
           break;
         case 16:
           _context7.prev = 16;
           _context7.t0 = _context7["catch"](1);
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 19:
           _context7.next = 22;
           break;
         case 21:
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 22:
         case "end":
           return _context7.stop();
@@ -527,19 +541,20 @@ dash.get("/Configuracion", /*#__PURE__*/function () {
             "foto": foto,
             "mnu": 0,
             "email": email,
-            "usuario": usuario
+            "usuario": usuario,
+            "lugaresRecomendados": _lugaresRecomendados["default"]
           });
           _context8.next = 19;
           break;
         case 16:
           _context8.prev = 16;
           _context8.t0 = _context8["catch"](1);
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 19:
           _context8.next = 22;
           break;
         case 21:
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 22:
         case "end":
           return _context8.stop();
@@ -702,10 +717,10 @@ dash.get("/Reportes", /*#__PURE__*/function () {
                 "email": email
               });
             } catch (error) {
-              res.redirect("/Salir");
+              res.redirect("/v1/dueno/salir");
             }
           } else {
-            res.redirect("/Salir");
+            res.redirect("/v1/dueno/salir");
           }
         case 1:
         case "end":
@@ -766,12 +781,12 @@ dash.get("/Perfil", /*#__PURE__*/function () {
         case 23:
           _context12.prev = 23;
           _context12.t0 = _context12["catch"](1);
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 26:
           _context12.next = 29;
           break;
         case 28:
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 29:
         case "end":
           return _context12.stop();
@@ -843,12 +858,12 @@ dash.get("/Perfil/:id", /*#__PURE__*/function () {
         case 30:
           _context13.prev = 30;
           _context13.t0 = _context13["catch"](1);
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 33:
           _context13.next = 36;
           break;
         case 35:
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 36:
         case "end":
           return _context13.stop();
@@ -910,12 +925,12 @@ dash.get("/Reporte", /*#__PURE__*/function () {
         case 23:
           _context14.prev = 23;
           _context14.t0 = _context14["catch"](1);
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 26:
           _context14.next = 29;
           break;
         case 28:
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 29:
         case "end":
           return _context14.stop();
@@ -964,12 +979,12 @@ dash.get("/Chat", /*#__PURE__*/function () {
         case 16:
           _context15.prev = 16;
           _context15.t0 = _context15["catch"](1);
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 19:
           _context15.next = 22;
           break;
         case 21:
-          res.redirect("/Salir");
+          res.redirect("/v1/dueno/salir");
         case 22:
         case "end":
           return _context15.stop();
@@ -981,7 +996,7 @@ dash.get("/Chat", /*#__PURE__*/function () {
   };
 }());
 
-//SALIR
+//v1/dueno/salir
 dash.get("/salir", function (req, res) {
   res.clearCookie("token");
   res.redirect("/");
@@ -1006,103 +1021,11 @@ dash.get("/salir", function (req, res) {
 
             });
         } catch (error){
-            res.redirect("/Salir")
+            res.redirect("/v1/dueno/salir")
         }
     }else{
-        res.redirect("/Salir")
+        res.redirect("/v1/dueno/salir")
     }
 });*/
-
-/*Ejemplo de rutas del crud
-dash.post("/save",async (req, res)=>{
-    const name = req.body.name;
-    
-    try {
-        const url = "http://localhost:5000/api/users";
-        let metodo = "post";
-        let datos = {
-            name : name 
-        };
-        if (req.body.id){
-            const id = req.body.id;
-            metodo = "put";
-            datos = {
-                id:id,
-                name:name
-            }
-        }
-        const option = {
-            method : metodo,
-            body : JSON.stringify(datos),
-            headers : {
-                'Content-Type':'application/json'
-            }
-        }
-
-
-        const result = await fetch(url, option)
-        .then(response=>response.json())
-        .then(data=>{
-            console.log(data);
-            if (data[0].affectedRows>0){
-                console.log("Los datos fueron insertados");
-            }else{
-                console.log("Labase datos no inserto");
-            }
-        })
-        .then(error=>{console.log("Ha habido un error: "+ error);})
-    } catch (error) {
-        console.log("Informacion no insertada: "+error);
-    }
-    
-    res.redirect("/v1/usuario")
-})
-dash.get("/usuario-edit", async(req, res)=>{
-    if(req.cookies.eib_per){
-        try {
-            const data = {
-                id : req.query.id,
-                name : req.query.name
-            }
-            
-            const token = jwt.verify(
-                req.cookies.eib_per, 
-                process.env.SECRET_KEY
-                )
-            let nombre = token.nombre;
-            let foto = token.foto;
-            res.render("dashboard",{
-                "nombre": nombre,
-                "foto": foto,
-                "mnu" : 3,
-                "data" : data
-            });
-        }catch(error){
-            console.log("Token no valido");
-        }
-
-    }else{
-        res.redirect("/login")
-    }
-})
-dash.get("/borrar", async (req, res)=>{
-    const id = req.query.id;
-    const url = "http://localhost:5000/api/users/"+id;
-    const option = {
-        method : "delete",
-        headers : {
-            'Content-Type':'application/json'
-        }
-    }
-
-    const result = await fetch(url, option)
-    .then(response=>response.json())
-    .then(data=>{
-        if(data.affectedRows > 0){
-            console.log("registro borrado");
-        }
-    })
-    res.redirect("/v1/usuario")
-})*/
 var _default = dash;
 exports["default"] = _default;
