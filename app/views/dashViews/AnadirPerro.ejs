@@ -36,7 +36,7 @@
                             placeholder="Descripción del perro"></textarea>
                         </div>
                         <%# Vacunas %>
-                        <label class="TextoMapa">Seleccione las vacunas que tiene su mascota:</label>
+                        <label class="TextoMapa">Seleccione las vacunas de su mascota</label>
                         <% vacunas.sort().forEach((vacuna) => { %>
                             <div class="form-group">
                                 <div class="form-check">
@@ -93,8 +93,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
 
     <script src="/v1/js/anadirPerros.js"></script>
-
-    <script src="/v1/js/select.js"></script>
 
     <%- include("./partials/footer.ejs"); %>
 </body>
