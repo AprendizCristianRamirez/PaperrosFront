@@ -2,6 +2,7 @@ import {Router} from "express";
 import cookieparser from "cookie-parser";
 import jwt from "jsonwebtoken";
 import fetch from 'node-fetch';
+import lugaresRecomendados from "../config/lugaresRecomendados.json";
 
 const dash = Router();
 
@@ -134,7 +135,8 @@ dash.get("/CrearPaseo", async (req, res) => {
                 "nombre": nombre,
                 "foto": foto,
                 "email": email,
-                "usuario": usuario
+                "usuario": usuario,
+                "lugaresRecomendados": lugaresRecomendados
             })
         } catch (error) {
             res.redirect("/Salir")
@@ -280,7 +282,7 @@ dash.get("/BuscarPaseo", async (req, res)=>{
     }
 });
 
-dash.get("/Configuracion", (req, res)=>{
+dash.get("/Configuracion", async(req, res)=>{
     if(req.cookies.token){
         try{
             const token = jwt.verify(
@@ -289,12 +291,19 @@ dash.get("/Configuracion", (req, res)=>{
                 )
                 let nombre = token.nombre;
                 let foto = token.foto;
+                let email = token.email;
+                
+                // Fetch del usuario
+                let rutaUsuario = process.env.API + "usuarios/" + email;
+                const resultUsuario = await fetch(rutaUsuario)
+                const usuario = await resultUsuario.json();
                 
                 res.render("dashViews/Configuracion",{
                 "rol": "paseador",
                 "nombre": nombre,
                 "foto": foto,
-                "mnu":0
+                "email": email,
+                "usuario": usuario
 
             });
         } catch (error){

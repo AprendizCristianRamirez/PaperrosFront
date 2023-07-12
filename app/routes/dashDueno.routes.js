@@ -171,6 +171,7 @@ dash.post("/CrearPaseo", async (req, res) => {
             _longitude: req.body.paseoLongitude
         },
         nombre_destino: req.body.nombreDestinoPaseo,
+        fechaPaseo: req.body.fechaPaseo,
         hora_fin: req.body.horaFinPaseo,
         hora_inicio: req.body.horaInicioPaseo,
         precio: req.body.precioPaseo,
@@ -197,6 +198,7 @@ dash.post("/CrearPaseo", async (req, res) => {
             tipo: "personalizado",
             estado: "confirmado",
             nombre_destino: paseo.nombre_destino,
+            fechaPaseo: paseo.fechaPaseo,
             hora_fin: paseo.hora_fin,
             hora_inicio: paseo.hora_inicio,
             precio: paseo.precio,
