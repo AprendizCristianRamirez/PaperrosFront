@@ -2,7 +2,7 @@
 <html lang="en">
 
 <%- include("./partials/head.ejs"); %>
-<link href="/admin/css/style.css" rel="stylesheet">
+
 <body>
 
     <button id="download-button">Generate PDF</button>
@@ -58,82 +58,52 @@
                     <p class="misperrostitle">MIS PERROS: </p>
 
                     <%# Perros %>
-                    <table id="userTable">
-                        <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Peso</th>
-                            <th>Estarura</th>
-                            <th>Raza</th>
-                            <th>Comportamiento</th>
-                            <th>Vacunas</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <% perfil.perros.forEach((element)=>{ %>
-                            <tr>
-                                <td><%= element.nombre %></td>
-                                <td><%= element.peso %></td>
-                                <td><%= element.estatura %></td>
-                                <td><%= element.raza %></td>
-                                <td><%= element.comportamiento %></td>
-                                <td><%= element.vacunas %></td>
-                            </tr>
-                        <% }) %>
-                        </tbody>
-                    </table>
+                    <div class="container">
+                        <div class="row-profile">
+                            <br>
+                            <%# Renderización de perros %>
+                            <% perfil.perros.forEach((element)=>{ %>
+                            <div class="small-container">
+                                <img class="profile-image-dog" src="/v1/img/bulldog1.jpeg" alt="Imagen">
+                                <p class="misperrostitle">
+                                <%= element.nombre %>
+                                </p>
+                                <p class="descriptiontext"><strong>Comportamiento:</strong> <%= element.comportamiento %></p>
+
+                                <p class="descriptiontext"><strong>Estatura:</strong> <%= element.estatura %> Cm</p>
+
+                                <p class="descriptiontext"><strong>Peso:</strong> <%= element.peso %> Kg</p>
+
+                                <p class="descriptiontext"><strong>Raza:</strong> <%= element.raza %></p>
+
+                                <p class="descriptiontext"><strong>Vacunas:</strong> <%= element.vacunas %></p>
+                            </div>
+                            <% }); %>
+                        </div>
+                    </div>
                     </div>
                     <br>
-
-
                     <p class="historialtitle">HISTORIAL DE PASEOS: </p>
                     <%# Paseos %>
-                     <table id="userTableReportePaseo">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Autor</th>
-                            <th>Descripción</th>
-                            <th>Nombre destino</th>
-                            <th>Destino</th>
-                            <th>Estado</th>
-                            <th>Horario</th>
-                            <th>Metodo de pago</th>
-                            <th>Paseador</th>
-                            <th>Perros</th>
-                            <th>Precio</th>
-                            <th>Tipo</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                            <% paseo.forEach((element)=>{ %>
-                                <%# Mostrar solo los paseos personalizados que creó el usuario%>
-                                <% if((element.autor == email) && (element.tipo == "personalizado")){ %>
-                                    <tr>
-                                        <td><%= element.id %></td>
-                                        <td><%= element.autor %></td>
-                                        <td><%= element.descripcion %></td>
-                                        <td><%= element.nombre_destino %></td>
-                                        <td><%= element.destino._latitude %>, <%= element.destino._latitude %></td>
-                                        <td><%= element.estado %></td>
-                                        <td><%= element.hora_inicio %> - <%= element.hora_fin %></td>
-                                        <td><%= element.medio_de_pago %></td>
-                                        <td>
-                                            <%= element.paseador.nombre!=undefined ? element.paseador.nombre : '(Aún no hay paseador)' %>
-                                        </td>
-                                        <td>
-                                            <% element.perro.forEach((element)=>{ %>
-                                                <%= element.nombre %>
-                                            </br>
-                                            <% }) %>
-                                        </td>
-                                        <td>$<%= element.precio %></td>
-                                        <td><%= element.tipo %></td>
-                                    </tr>
-                                <% } %>
-                            <% }) %>
-                        </tbody>
-                    </table>
+                    <div class="container">
+                    <div class="row-profile">
+                        <%# Renderización de paseos %>
+                        <% paseo.forEach((element)=>{ %>
+                        <div class="col-lg-4 col-md-6 col-sm-12">
+                            <div class="card1">
+                            <div class="card-body">
+                                <p class="card-text"><%= element.titulo %></p>
+                                <p class="card-text">Precio del servicio: $<%= element.precio %>
+                                </p>
+                                <p class="card-text">Estado del servicio: <%= element.estado %>
+                                </p>
+                                <a href="#" class="boton-profile">Detalles</a>
+                            </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    </div>
                 </div>
             </div>
     <p class="card-text" id="footerPdf">Generado por <%= perfil.nombre %> (<%= email %>) el dia </p>
@@ -168,8 +138,6 @@
             // Designar nombre del archivo y guardarlo en el dispositivo
             html2pdf().set({
                 filename: `<%= perfil.nombre %>Reporte${day}-${month}-${year}_${hours}-${minutes}-${seconds}.pdf`,
-                pagebreak: { mode: 'avoid-all' }, // Opcional: Evitar saltos de página no deseados
-                jsPDF: { orientation: 'landscape' } // Establecer la orientación en horizontal
             }).from(element).save();
         }
 

@@ -64,21 +64,11 @@
                         <div class="form-group">
                             <input class="InputsAñadirPerro" type="text" id="nombreDestinoPaseo"
                                 name="nombreDestinoPaseo" class="form-control" placeholder="Lugar del paseo" required>
-                        </div>
-                        <br>
-                        <br>
-                        <!-- INPUT PRECIO --> 
+                        </div> 
                         <div class="form-group">
-                            <div class="input-group">
-                              <span class="input-group-btn">
-                                <button type="button" class="btn btn-light" onclick="disminuirPrecio()">-</button>
-                              </span>
-                              <input class="form-control" type="text" id="precioPaseo" name="precioPaseo" value="10000" readonly>
-                              <span class="input-group-btn">
-                                <button type="button" class="btn btn-light" onclick="aumentarPrecio()">+</button>
-                              </span>
-                            </div>
-                          </div>
+                            <input class="InputsAñadirPerro" type="text" id="precioPaseo" name="precioPaseo"
+                                class="form-control" placeholder="Precio del paseo" required>
+                        </div>
                         <!-- INPUT METODO DE PAGO -->
                         <div class="form-group">
                             <input class="InputsAñadirPerro" type="text" id="medioPagoPaseo" name="medioPagoPaseo"
@@ -86,8 +76,8 @@
                         </div>
                         
                         <div class="form-group ">
-                            <label class="TextoMapa">Selecciona una fecha para el paseo</label>
-                            <input class="InputsAñadirPerro" type="date" id="fechaPaseo" name="fechaPaseo"
+                            <label class="TextoMapa">Selecciona una hora de inicio</label>
+                            <input class="InputsAñadirPerro" type="date" id="fechaPaseo " name="fechaPaseo"
                                 class="form-control " placeholder="Fecha" required>
                             <label class="TextoMapa">Selecciona una hora de inicio</label>
                             <input class="InputsAñadirPerro" type="time" id="horaInicioPaseo" name="horaInicioPaseo"
@@ -203,26 +193,6 @@
         </div>
     </form>
 <% } %>
-
 <script>
     const lugaresRecomendados = <%- JSON.stringify(lugaresRecomendados) %>;
 </script>
-<script>
-    function aumentarPrecio() {
-      const input = document.getElementById("precioPaseo");
-      let precio = parseInt(input.value);
-      if (precio < 100000) {
-        precio += 2000;
-        input.value = precio;
-      }
-    }
-  
-    function disminuirPrecio() {
-      const input = document.getElementById("precioPaseo");
-      let precio = parseInt(input.value);
-      if (precio > 2000) {
-        precio -= 2000;
-        input.value = precio;
-      }
-    }
-  </script>
