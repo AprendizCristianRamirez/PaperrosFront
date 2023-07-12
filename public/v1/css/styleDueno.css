@@ -1124,10 +1124,10 @@ p {
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
-    padding: 20px;
+    margin: 25% auto;
+    padding: 50px;
     border: 1px solid #888;
-    width: 80%;
+    width: 50%;
 }
 
 /* Estilos para mostrar la ventana emergente debajo del input */

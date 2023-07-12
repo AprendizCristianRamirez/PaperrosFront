@@ -23,7 +23,7 @@ circle.bindPopup(mapaData.nombre_destino);
 
 // Creación de icono
 var perrito = L.icon({
-    iconUrl: '../img/leaf-green.png',
+    iconUrl: '../img/perrito.png',
     shadowUrl: '../img/leaf-shadow.png',
 
     iconSize:     [19, 47], // Tamaño del icono
@@ -35,5 +35,6 @@ var perrito = L.icon({
 
 mapaData.perro.forEach((element) => {
     let marker = L.marker([element.localizacion._latitude, element.localizacion._longitude]/*, {icon: perrito}*/).addTo(map);
-    marker.bindPopup(`<b>${element.nombre_dueno}:</b><br>${element.nombre}`).openPopup();
+    //L.marker([lugar.latitud, lugar.longitud], {icon: hojaVerde}).addTo(map);
+    marker.bindPopup(`<b>${element.nombre_dueno}:</b><br>${element.nombre}<br>${element.nombre}`).openPopup();
 })

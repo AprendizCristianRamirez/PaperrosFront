@@ -23,25 +23,18 @@
                     <%# Imagen %>
                     <div class="form-group"> 
                         <%# Raza %>
+                        <div class="form-group ">
+                            <select class="" id="raza" name="raza" multiple>
+                                <% perros.forEach((element => { %>
+                                    <option value="<%= element.nombre %>" data-imagen="<%= element.imagen %>"><%= element.nombre %></option>   
+                                <% })) %>
+                            </select>
+                        </div>                       
+                        <%# Descripción %>
                         <div class="form-group">
-                          <div class="custom-select-wrapper">
-                            <div class="custom-select">
-                              <div class="selected-option"></div>
-                              <div class="arrow"></div>
-                            </div>
-                            <ul class="options">
-                              <% perros.forEach((element) => { %>
-                                <li class="option" data-value="<%= element.nombre %>" data-imagen="<%= element.imagen %>"><%= element.nombre %></li>
-                              <% }) %>
-                            </ul>
-                          </div>
-                          <input type="hidden" id="raza" name="raza">
-                        </div>                        
-                          <%# Descripción %>
-                          <div class="form-group">
-                              <textarea id="descripcion" name="descripcion" class="InputDescripcion" 
-                              placeholder="Descripción del perro"></textarea>
-                          </div>
+                            <textarea id="descripcion" name="descripcion" class="InputDescripcion" 
+                            placeholder="Descripción del perro"></textarea>
+                        </div>
                         <%# Vacunas %>
                         <label class="TextoMapa">Seleccione las vacunas que tiene su mascota:</label>
                         <% vacunas.sort().forEach((vacuna) => { %>
@@ -85,6 +78,7 @@
                 <div class="col-lg-12">
                     <div class="form-group a-center">
                         <button class="BotonCancelarPerro"><a class="aBotonHref" href="/v1/dueno/MisPerros">Cancelar</a></button>
+                        <%# Submit %>
                         <%# Submit %>
                         <button class="BotonSubirPerro">Subir</button>
                     </div>

@@ -36,30 +36,34 @@
                     <%# Modal (detalles del paseo) %>
                     <div id="modalPaseo<%= paseoId %>" class="modal">
                         <div class="modal-content">
-                        <h8>Descripcion:</h8>
-                        <h4><%= element.descripcion %></h4>
-                        <h8>Estado:</h8>
-                        <h4><%= element.estado %></h4>
-                        <h8>Fecha:</h8>
-                        <h4><%= element.fecha %></h4>
-                        <h8>Duración:</h8>
-                        <h4><%= element.hora_inicio %> a <%= element.hora_inicio %></h4>
-                        <h8>Medio de pago:</h8>
-                        <h4><%= element.medio_de_pago %></h4>
-                        <h8>Precio:</h8>
-                        <h4>$<%= element.precio %></h4>
-                        <% if(element.paseador != null) { %>
-                            <h8>Paseador:</h8>
-                            <h4><%= element.precio %></h4>
-                        <% } %>
-
-                        <h8>Tipo:</h8>
-                        <h4><%= element.tipo %></h4>
+                            <div class="row">
+                            <div class="col-lg-6">
+                                <h8>Descripcion:</h8>
+                                <h4><%= element.descripcion %></h4>
+                                <h8>Estado:</h8>
+                                <h4><%= element.estado %></h4>
+                                <!--<h8>Fecha:</h8>
+                                <h4><%# element.fecha %></h4>-->
+                                <h8>Duración:</h8>
+                                <h4><%= element.hora_inicio %> a <%= element.hora_inicio %></h4>
+                                <% if(element.paseador.nombre != null) { %>
+                                    <h8>Paseador:</h8>
+                                    <h4><%= element.paseador.nombre %></h4>
+                                <% } %> 
+                            </div>
+                            <div class="col-lg-6">
+                                <h8>Medio de pago:</h8>
+                                <h4><%= element.medio_de_pago %></h4>
+                                <h8>Precio:</h8>
+                                <h4>$<%= element.precio %></h4>
+                                <h8>Tipo:</h8>
+                                <h4><%= element.tipo %></h4>
+                            </div>
 
                         <a href="/v1/dueno/Perfil/<%= element.autor %>"><button id="btnAbrirPerro<%= perroId %>" class="btn btn-primary aBotonCarta1">
                             Ir al perfil del paseador
                         </button></a>
-
+                    </div>
                         <%# Renderización de perros %>
                         <p class="misperrostitle">PERROS: </p>
                         <div class="container">

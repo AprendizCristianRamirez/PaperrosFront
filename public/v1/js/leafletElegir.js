@@ -52,14 +52,14 @@ if (lugaresRecomendados != undefined){
 
     // Creación de icono
     var hojaVerde = L.icon({
-        iconUrl: '../img/leaf-green.png',
-        shadowUrl: '../img/leaf-shadow.png',
+        iconUrl: '../img/arbol.png',
+        shadowUrl: '../img/sombraArbol.png',
 
-        iconSize:     [19, 47], // Tamaño del icono
-        shadowSize:   [25, 32], // Tamaño de la sombra
+        iconSize:     [50, 47], // Tamaño del icono
+        shadowSize:   [40, 38], // Tamaño de la sombra
         iconAnchor:   [11, 47], // Punto del icono que se corresponde con el punto del marcador
-        shadowAnchor: [2, 31],  // Lo mismo para la sombra
-        popupAnchor:  [-3, -76] // Punto donde el popup se abre en relación al punto del marcador
+        shadowAnchor: [0, 40],  // Lo mismo para la sombra
+        popupAnchor:  [0, -76] // Punto donde el popup se abre en relación al punto del marcador
     });
 
     // Renderización de marcadores de lugares recomendados
